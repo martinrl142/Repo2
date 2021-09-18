@@ -1,41 +1,52 @@
-const usersCtrl = {};
+import User from "../models/User";
+import passport from "passport";
 
-const User = require('../models/user');
+export const renderSignUpForm = (req, res) => res.render("users/signup");
 
-usersCtrl.getUsers = async (req, res) => {
-    const users = await User.find();
-    res.json(users);
+export const singup = async (req, res) => {
+  let errors = [];
+  const { name, email, password, confirm_password } = req.body;
+  if (password != confirm_password) {
+    errors.push({ text: "Passwords do not match." });
+  }
+  if (password.length < 4) {
+    errors.push({ text: "Passwords must be at least 4 characters." });
+  }
+  if (errors.length > 0) {
+    res.render("users/signup", {
+      errors,
+      name,
+      email,
+      password,
+      confirm_password,
+    });
+  } else {
+    // Look for email coincidence
+    const emailUser = await User.findOne({ email: email });
+    if (emailUser) {
+      req.flash("error_msg", "The Email is already in use.");
+      res.redirect("/users/signup");
+    } else {
+      // Saving a New User
+      const newUser = new User({ name, email, password });
+      newUser.password = await newUser.encryptPassword(password);
+      await newUser.save();
+      req.flash("success_msg", "You are registered.");
+      res.redirect("/users/signin");
+    }
+  }
 };
 
-usersCtrl.createUser = async (req, res) => {
-    const { username, email, password } = req.body;
-    const newUser = new User({
-        username,
-        email,
-        password
-    });
-    await newUser.save();
-    res.json('Nuevo usuario agregado');
+export const renderSigninForm = (req, res) => res.render("users/signin");
+
+export const signin = passport.authenticate("local", {
+  successRedirect: "/notes",
+  failureRedirect: "/users/signin",
+  failureFlash: true,
+});
+
+export const logout = (req, res) => {
+  req.logout();
+  req.flash("success_msg", "You are logged out now.");
+  res.redirect("/users/signin");
 };
-
-usersCtrl.getUser = async (req, res) => {
-    const user = await User.findById(req.params.id);
-    res.json(user);
-}
-
-usersCtrl.deleteUser = async (req, res) => {
-    await User.findOneAndDelete(req.params.id)
-    res.json('Usuario eliminado');
-}
-
-usersCtrl.updateUser = async (req, res) => {
-    const { username, email, password } = req.body;
-    await User.findByIdAndUpdate(req.params.id, {
-        username,
-        email,
-        password
-    });
-    res.json('usuario actualizado');
-}
-
-module.exports = usersCtrl;
