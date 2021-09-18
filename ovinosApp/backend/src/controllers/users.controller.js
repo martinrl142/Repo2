@@ -1,36 +1,41 @@
-const userCtrl = {};
+const usersCtrl = {};
 
-const User = require('../models/User');
+const User = require('../models/user');
 
-userCtrl.getUsers = async (req, res) => {
-    try {
-        const users = await User.find();
-        res.json(users);
-    }
-    catch (err) {
-        res.status(400).json({
-            error: err
-        });
-    }
+usersCtrl.getUsers = async (req, res) => {
+    const users = await User.find();
+    res.json(users);
 };
 
-userCtrl.createUser = async (req, res) => {
-    try {
-        const { username } = req.body;
-
-        const newUser = new User({ username });
-        await newUser.save();
-        res.json('Usuario creado');
-    } catch (e) {
-        console.log(e)
-        res.json(e.errmsg);
-    }
+usersCtrl.createUser = async (req, res) => {
+    const { username, email, password } = req.body;
+    const newUser = new User({
+        username,
+        email,
+        password
+    });
+    await newUser.save();
+    res.json('Nuevo usuario agregado');
 };
 
-userCtrl.deleteUser = async (req, res) => {
-    const { id } = req.params;
-    await User.findByIdAndDelete(id);
+usersCtrl.getUser = async (req, res) => {
+    const user = await User.findById(req.params.id);
+    res.json(user);
+}
+
+usersCtrl.deleteUser = async (req, res) => {
+    await User.findOneAndDelete(req.params.id)
     res.json('Usuario eliminado');
 }
 
-module.exports = userCtrl;
+usersCtrl.updateUser = async (req, res) => {
+    const { username, email, password } = req.body;
+    await User.findByIdAndUpdate(req.params.id, {
+        username,
+        email,
+        password
+    });
+    res.json('usuario actualizado');
+}
+
+module.exports = usersCtrl;

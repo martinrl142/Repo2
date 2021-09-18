@@ -4,7 +4,9 @@ import axios from 'axios'
 export default class CreateUser extends Component {
 
     state = {
-        username: '',
+        username : '',
+        email : '',
+        password : '',
         users: []
     }
 
@@ -24,18 +26,35 @@ export default class CreateUser extends Component {
             username: e.target.value
         })
     }
+    onChangeEmail = e => {
+        this.setState({
+            email: e.target.value
+        })
+    }
+    onChangePassword = e => {
+        this.setState({
+            password: e.target.value
+        })
+    }
 
     onSubmit = async (e) => {
         e.preventDefault();
         await axios.post('http://localhost:4000/api/users', {
-            username: this.state.username
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
+        
         });
-        this.setState({ username: '' });
+        this.setState({ 
+            username: '', 
+            email: '',
+            password: ''
+        });
         this.getUsers();
     }
 
     deleteUser = async (userId) => {
-        const response = window.confirm('are you sure you want to delete it?');
+        const response = window.confirm('Seguro que quiere eliminar este usuario?');
         if (response) {
             await axios.delete('http://localhost:4000/api/users/' + userId);
             this.getUsers();
@@ -54,7 +73,22 @@ export default class CreateUser extends Component {
                                     className="form-control"
                                     value={this.state.username}
                                     type="text"
+                                    placeholder="Usuario"
                                     onChange={this.onChangeUsername}
+                                />
+                                <input
+                                    className="form-control"
+                                    value={this.state.email}
+                                    type="email"
+                                    placeholder="Email"
+                                    onChange={this.onChangeEmail}
+                                />
+                                <input
+                                    className="form-control"
+                                    value={this.state.password}
+                                    type="password"
+                                    placeholder="Password"
+                                    onChange={this.onChangePassword}
                                 />
                             </div>
                             <button type="submit" className="btn btn-primary">
@@ -69,6 +103,8 @@ export default class CreateUser extends Component {
                             this.state.users.map(user => (
                                 <li className="list-group-item list-group-item-action" key={user._id} onDoubleClick={() => this.deleteUser(user._id)}>
                                     {user.username}
+                                    {user.email}
+                                    {user.password}
                                 </li>
                             ))
                         }
