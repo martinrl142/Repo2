@@ -1,13 +1,12 @@
-import { Router } from "express";
-import {
+const { Router } = require('express');
+const router = Router();
+const {
   renderSignUpForm,
   singup,
   renderSigninForm,
   signin,
   logout,
-} from "../controllers/users.controller";
-
-const router = Router();
+} =  require('../controllers/users.controller');
 
 // Routes
 router.get("/users/signup", renderSignUpForm);
@@ -20,4 +19,4 @@ router.post("/users/signin", signin);
 
 router.get("/users/logout", logout);
 
-export default router;
+module.exports = router;
