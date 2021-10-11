@@ -3,41 +3,27 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
 
-export default class createEstable extends Component {
+export default class createProduct extends Component {
 
     state = {
-        nombre: '',
-        email: '',
-        direccion: '',
-        sociedad: '',
-        fechaInauguracion: new Date(),
-        userSelected: '',
-        users: [],
-        editing: false,
-        _id: ''
+        name: '',
+        category: '',
+        price: 0,
+        imgURL: ''
     }
 
     async componentDidMount() {
-        const res = await axios.get('http://localhost:4000/api/users');
-        if (res.data.length > 0) {
-            this.setState({
-                users: res.data.map(user => user.username),
-                userSelected: res.data[0].username
-            })
-        }
+        const res = await axios.get('http://localhost:4000/api/products');
+
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id);
+            const res = await axios.get('http://localhost:4000/api/products/' + this.props.match.params.id);
             console.log(res.data)
             this.setState({
-                nombre: res.data.nombre,
-                email: res.data.email,
-                direccion: res.data.direccion,
-                sociedad: res.data.sociedad,
-                fechaInauguracion: new Date(res.data.fechaInauguracion),
-                userSelected: res.data.user,
-                _id: res.data._id,
-                editing: true
+                name: res.data.name,
+                category: res.data.category,
+                price: res.data.price,
+                imgURL: res.data.imgURL
             });
         }
     }
@@ -45,25 +31,21 @@ export default class createEstable extends Component {
     onSubmit = async (e) => {
         e.preventDefault();
         if (this.state.editing) {
-            const updatedEstable = {
-                nombre: this.state.nombre,
-                email: this.state.email,
-                direccion: this.state.direccion,
-                sociedad: this.state.sociedad,
-                user: this.state.userSelected,
-                fechaInauguracion: this.state.fechaInauguracion
+            const updatedProduct = {
+                name: this.state.name,
+                category: this.state.category,
+                price: this.state.price,
+                imgURL: this.state.imgURL
             };
-            await axios.put('http://localhost:4000/api/establecimientos/' + this.state._id, updatedEstable);
+            await axios.put('http://localhost:4000/api/products/' + this.state._id, updatedProduct);
         } else {
-            const newEstable = {
-                nombre: this.state.nombre,
-                email: this.state.email,
-                direccion: this.state.direccion,
-                sociedad: this.state.sociedad,
-                user: this.state.userSelected,
-                fechaInauguracion: this.state.fechaInauguracion
+            const newProduct = {
+                name: this.state.name,
+                category: this.state.category,
+                price: this.state.price,
+                imgURL: this.state.imgURL
             };
-            axios.post('http://localhost:4000/api/establecimientos', newEstable);
+            axios.post('http://localhost:4000/api/products', newProduct);
         }
         window.location.href = '/';
 
@@ -75,82 +57,55 @@ export default class createEstable extends Component {
         })
     }
 
-    onChangeDate = fechaInauguracion => {
-        this.setState({ fechaInauguracion });
-    }
-
     render() {
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
-                    <h4>Registrar establecimiento</h4>
+                    <h4>Ingresar producto</h4>
                     <form onSubmit={this.onSubmit}>
-                        {/* Seleccionar usuario */}
-                        <div className="form-group">
-                            <p></p>
-                            <p>Usuario propietario:</p>
-                            <select
-                                className="form-control"
-                                value={this.state.userSelected}
-                                onChange={this.onInputChange}
-                                name="userSelected"
-                                required>
-                                {
-                                    this.state.users.map(user => (
-                                        <option key={user} value={user}>
-                                            {user}
-                                        </option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-                        {/* Establecimiento Nombre */}
+                        {/* Nombre de producto */}
                         <div className="form-group">
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Nombre del establecimiento"
+                                placeholder="Nombre de Producto"
                                 onChange={this.onInputChange}
-                                name="nombre"
-                                value={this.state.nombre}
+                                name="name"
+                                value={this.state.name}
                                 required />
                         </div>
-                        {/* Establecimiento Email */}
+                        {/* Categoría */}
                         <div className="form-group">
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Email"
+                                placeholder="Categoría"
                                 onChange={this.onInputChange}
-                                name="email"
-                                value={this.state.email}
+                                name="category"
+                                value={this.state.category}
                             />
                         </div>
-                        {/* Establecimiento Dirección */}
+                        {/* Precio */}
                         <div className="form-group">
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Dirección"
+                                placeholder="Precio"
                                 onChange={this.onInputChange}
-                                name="direccion"
-                                value={this.state.direccion}
+                                name="price"
+                                value={this.state.price}
                             />
                         </div>
-                        {/* Establecimiento Sociedad */}
+                        {/* URL de Imagen */}
                         <div className="form-group">
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Sociedad"
+                                placeholder="URL de Imagen"
                                 onChange={this.onInputChange}
-                                name="sociedad"
-                                value={this.state.sociedad}
+                                name="imgURL"
+                                value={this.state.imgURL}
                             />
-                        </div>
-                        {/* Fecha de Inauguración del establecimiento */}
-                        <div className="form-group">
-                            <DatePicker className="form-control" selected={this.state.fechaInauguracion} onChange={this.onChangeDate} />
                         </div>
                         <button className="btn btn-primary">
                             Guardar
