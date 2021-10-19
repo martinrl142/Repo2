@@ -7,7 +7,7 @@ export default class CreateUser extends Component {
         username : '',
         email : '',
         password : '',
-        users: []
+        roles: ''
     }
 
     async componentDidMount() {

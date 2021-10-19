@@ -11,20 +11,20 @@ export default class createEstable extends Component {
         direccion: '',
         sociedad: '',
         fechaInauguracion: new Date(),
-        userSelected: '',
-        users: [],
+        //userSelected: '',
+        //users: [],
         editing: false,
         _id: ''
     }
 
     async componentDidMount() {
-        const res = await axios.get('http://localhost:4000/api/users');
+        /*const res = await axios.get('http://localhost:4000/api/users');
         if (res.data.length > 0) {
             this.setState({
                 users: res.data.map(user => user.username),
                 userSelected: res.data[0].username
             })
-        }
+        }*/
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
             const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id);
@@ -35,7 +35,7 @@ export default class createEstable extends Component {
                 direccion: res.data.direccion,
                 sociedad: res.data.sociedad,
                 fechaInauguracion: new Date(res.data.fechaInauguracion),
-                userSelected: res.data.user,
+                //userSelected: res.data.user,
                 _id: res.data._id,
                 editing: true
             });
@@ -50,7 +50,7 @@ export default class createEstable extends Component {
                 email: this.state.email,
                 direccion: this.state.direccion,
                 sociedad: this.state.sociedad,
-                user: this.state.userSelected,
+                //user: this.state.userSelected,
                 fechaInauguracion: this.state.fechaInauguracion
             };
             await axios.put('http://localhost:4000/api/establecimientos/' + this.state._id, updatedEstable);
@@ -60,12 +60,12 @@ export default class createEstable extends Component {
                 email: this.state.email,
                 direccion: this.state.direccion,
                 sociedad: this.state.sociedad,
-                user: this.state.userSelected,
+                //user: this.state.userSelected,
                 fechaInauguracion: this.state.fechaInauguracion
             };
             axios.post('http://localhost:4000/api/establecimientos', newEstable);
         }
-        window.location.href = '/';
+        //window.location.href = '/';
 
     }
 
@@ -86,7 +86,7 @@ export default class createEstable extends Component {
                     <h4>Registrar establecimiento</h4>
                     <form onSubmit={this.onSubmit}>
                         {/* Seleccionar usuario */}
-                        <div className="form-group">
+                        {/*<div className="form-group">
                             <p></p>
                             <p>Usuario propietario:</p>
                             <select
@@ -94,7 +94,7 @@ export default class createEstable extends Component {
                                 value={this.state.userSelected}
                                 onChange={this.onInputChange}
                                 name="userSelected"
-                                required>
+                                >
                                 {
                                     this.state.users.map(user => (
                                         <option key={user} value={user}>
@@ -103,7 +103,7 @@ export default class createEstable extends Component {
                                     ))
                                 }
                             </select>
-                        </div>
+                        </div>*/}
                         {/* Establecimiento Nombre */}
                         <div className="form-group">
                             <input

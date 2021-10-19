@@ -54,18 +54,16 @@ export const signin = async (req, res) => {
     );
 
     if (!matchPassword)
-      return res.json({ redirect:"/login", error:"Contraseña incorrecta" }  
-      /*return res.status(401).json({
-          token: null,
-          message: "Invalid Password",
-      }*/
-    );
+      return res.status(401).json({
+        token: "null",
+        message: "Contraseña incorrecta"
+      });
 
     const token = jwt.sign({ id: userFound._id }, config.SECRET, {
       expiresIn: 86400, // 24 hours
     });
 
-    res.json({ redirect:"/", error:"Correcto"});
+    res.json({ token, redirect: "/" });
   } catch (error) {
     console.log(error);
   }

@@ -6,7 +6,8 @@ export default class Login extends Component {
     state = {
         email : '',
         password : '',
-        error: ''
+        token: '',
+        message: ''
     }
 
     onChangeEmail = e => {
@@ -25,12 +26,17 @@ export default class Login extends Component {
         await axios
                 .post('http://localhost:4000/api/auth/signin', {
                     email: this.state.email,
-                    password: this.state.password,        
+                    password: this.state.password        
                 })
                 .then(response => {
-                    window.location.href = response.data.redirect;
                     this.setState({
-                        error: response.data.error
+                        token: response.data.token, 
+                    })
+                    window.location.href = response.data.redirect
+                }).catch((err) => {
+                    this.setState({
+                        token: err.response.data.token,
+                        message: err.response.data.message   
                     })
                 });
     }
@@ -61,7 +67,8 @@ export default class Login extends Component {
                             <button type="submit" className="btn btn-primary">
                                 Guardar
                             </button>
-                            <h3>{this.state.error}</h3>
+                            <h3>{this.state.token}</h3>
+                            <h3>{this.state.message}</h3>
                         </form>
                     </div>
                 </div>
