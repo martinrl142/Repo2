@@ -1,7 +1,7 @@
 import Establecimiento from "../models/Establecimiento";
 
 export const createEstable = async (req, res) => {
-    const { nombre, email, direccion, sociedad, fechaInauguracion, user } = req.body;
+    const { nombre, email, direccion, sociedad, fechaInauguracion } = req.body;
 
   try {
     const newEstable = new Establecimiento({
@@ -35,7 +35,7 @@ export const getEstables = async (req, res) => {
 };
 
 export const updateEstable = async (req, res) => {
-    const { nombre, email, direccion, sociedad, fechaInauguracion, user } = req.body;
+    const { nombre, email, direccion, sociedad, fechaInauguracion } = req.body;
     const updatedEstable = await Establecimiento.findByIdAndUpdate(
     req.params.EstableId,
     {
@@ -43,8 +43,7 @@ export const updateEstable = async (req, res) => {
         email,
         direccion,
         sociedad,
-        fechaInauguracion,
-        user
+        fechaInauguracion
     },
     {
       new: true,

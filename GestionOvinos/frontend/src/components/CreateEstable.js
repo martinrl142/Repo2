@@ -13,6 +13,7 @@ export default class createEstable extends Component {
         fechaInauguracion: new Date(),
         //userSelected: '',
         //users: [],
+        token: '',
         editing: false,
         _id: ''
     }
@@ -36,6 +37,7 @@ export default class createEstable extends Component {
                 sociedad: res.data.sociedad,
                 fechaInauguracion: new Date(res.data.fechaInauguracion),
                 //userSelected: res.data.user,
+                token: null,
                 _id: res.data._id,
                 editing: true
             });
@@ -55,6 +57,20 @@ export default class createEstable extends Component {
             };
             await axios.put('http://localhost:4000/api/establecimientos/' + this.state._id, updatedEstable);
         } else {
+            const loggedUserJSON = window.localStorage.getItem('loggedAppUser')
+            console.log(loggedUserJSON);
+            if (loggedUserJSON) {
+                this.setState({
+                    token: JSON.parse(loggedUserJSON) 
+                })
+            };
+            console.log(this.state.token)
+            const config = {
+                headers: {
+                    "Authorization": 'Bearer ' + this.state.token
+                }
+            };
+            console.log(config);
             const newEstable = {
                 nombre: this.state.nombre,
                 email: this.state.email,
@@ -63,7 +79,7 @@ export default class createEstable extends Component {
                 //user: this.state.userSelected,
                 fechaInauguracion: this.state.fechaInauguracion
             };
-            axios.post('http://localhost:4000/api/establecimientos', newEstable);
+            axios.post('http://localhost:4000/api/establecimientos', newEstable, { headers: {"Authorization" : `${this.state.token}`}});
         }
         //window.location.href = '/';
 

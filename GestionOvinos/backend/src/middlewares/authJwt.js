@@ -4,14 +4,14 @@ import User from "../models/User";
 import Role from "../models/Role";
 
 export const verifyToken = async (req, res, next) => {
-  let token = req.headers["x-access-token"];
+  let token = req.get('Authorization');
 
   if (!token) return res.status(403).json({ message: "No token provided" });
 
   try {
     const decoded = jwt.verify(token, config.SECRET);
     req.userId = decoded.id;
-
+    console.log(req.userId);
     const user = await User.findById(req.userId, { password: 0 });
     if (!user) return res.status(404).json({ message: "No user found" });
 
@@ -33,7 +33,7 @@ export const isModerator = async (req, res, next) => {
       }
     }
 
-    return res.status(403).json({ message: "Require Moderator Role!" });
+    return res.status(409).json({ message: "Require Moderator Role!" });
   } catch (error) {
     console.log(error)
     return res.status(500).send({ message: error });
@@ -52,7 +52,7 @@ export const isAdmin = async (req, res, next) => {
       }
     }
 
-    return res.status(403).json({ message: "Require Admin Role!" });
+    return res.status(408).json({ message: "Require Admin Role!" });
   } catch (error) {
     console.log(error)
     return res.status(500).send({ message: error });
