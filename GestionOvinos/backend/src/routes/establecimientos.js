@@ -4,9 +4,15 @@ const router = Router();
 import * as establesCtrl from "../controllers/establecimientos.controller";
 import { authJwt } from "../middlewares";
 
-router.get("/", establesCtrl.getEstables);
+router.get(
+  "/", 
+  [authJwt.verifyToken, authJwt.isModerator],
+  establesCtrl.getEstables);
 
-router.get("/:estableId", establesCtrl.getEstable);
+router.get(
+  "/:estableId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  establesCtrl.getEstable);
 
 router.post(
   "/",
@@ -18,6 +24,12 @@ router.put(
   "/:estableId",
   [authJwt.verifyToken, authJwt.isModerator],
   establesCtrl.updateEstable
+);
+
+router.put(
+  "/:estableId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  establesCtrl.addOvinoEstable
 );
 
 router.delete(

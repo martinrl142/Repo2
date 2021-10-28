@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
+import theToken from './Token';
 
 export default class CreateOvino extends Component {
     state = {
@@ -28,10 +29,10 @@ export default class CreateOvino extends Component {
 
 
     async componentDidMount() {
-        const res = await axios.get('http://localhost:4000/api/establecimientos');
+        const res = await axios.get('http://localhost:4000/api/establecimientos', theToken());
         if (res.data.length > 0) {
             this.setState({
-                estables: res.data.map(estable => estable.nombre),
+                estables: res.data.map(estable => [estable.nombre, estable._id]),
             })
         }
         if (this.props.match.params.id) {
@@ -118,8 +119,8 @@ export default class CreateOvino extends Component {
                                 >
                                 {
                                     this.state.estables.map(estable => (
-                                        <option key={estable} value={estable}>
-                                            {estable}
+                                        <option key={estable[1]} value={estable[1]}>
+                                            {estable[0]}
                                         </option>
                                     ))
                                 }

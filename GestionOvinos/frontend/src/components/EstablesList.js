@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Moment from 'react-moment';
 import Dropdown from 'react-bootstrap/Dropdown'
 import { AiFillPlusCircle } from "react-icons/ai";
+import theToken from './Token'
 
 
 
@@ -19,14 +20,14 @@ export default class EstablesList extends Component {
     }
 
     getEstables = async () => {
-        const res = await axios.get('http://localhost:4000/api/establecimientos')
+        const res = await axios.get('http://localhost:4000/api/establecimientos', theToken())
         this.setState({
             estables: res.data
         });
     }
 
     deleteEstable = async (estableId) => {
-        await axios.delete('http://localhost:4000/api/establecimientos/' + estableId);
+        await axios.delete('http://localhost:4000/api/establecimientos/' + estableId, theToken());
         this.getEstables();
     }
 

@@ -11,19 +11,28 @@ export default class createEstable extends Component {
         direccion: '',
         sociedad: '',
         fechaInauguracion: new Date(),
-        //userSelected: '',
-        //users: [],
+        ovinoSelected: '',
+        ovinos: [],
+        estableSelected: '',
+        estables: [],
         editing: false,
         _id: ''
     }
     async componentDidMount() {
-        /*const res = await axios.get('http://localhost:4000/api/users');
+        const res = await axios.get('http://localhost:4000/api/ovinos');
+        const res = await axios.get('http://localhost:4000/api/establecimientos', theToken());
         if (res.data.length > 0) {
             this.setState({
-                users: res.data.map(user => user.username),
-                userSelected: res.data[0].username
+                estables: res.data.map(estable => [estable.nombre, estable._id]),
+                estableSelected: res.data[0]._id
             })
-        }*/
+        }
+        if (res.data.length > 0) {
+            this.setState({
+                ovinos: res.data.map(ovino => ovino._id),
+                ovinoSelected: res.data[0]._id
+            })
+        }
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
             const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());

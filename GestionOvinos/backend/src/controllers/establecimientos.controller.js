@@ -1,4 +1,5 @@
 import Establecimiento from "../models/Establecimiento";
+//import Ovino from "../models/Ovino";
 
 export const createEstable = async (req, res) => {
     const { nombre, email, direccion, sociedad, fechaInauguracion } = req.body;
@@ -35,21 +36,34 @@ export const getEstables = async (req, res) => {
 };
 
 export const updateEstable = async (req, res) => {
-    const { nombre, email, direccion, sociedad, fechaInauguracion } = req.body;
     const updatedEstable = await Establecimiento.findByIdAndUpdate(
-    req.params.EstableId,
-    {
-        nombre,
-        email,
-        direccion,
-        sociedad,
-        fechaInauguracion
-    },
+    req.params.estableId,
+    req.body,
     {
       new: true,
     }
   );
   res.status(204).json(updatedEstable);
+};
+
+
+export const addOvinoEstable = async (req, res) => {
+  const { nombre, email, direccion, sociedad, fechaInauguracion, ovino } = req.body;
+  const ovinos = Ovino.ovinos;
+  ovinos.push(ovino)
+  const updatedEstable = await Establecimiento.findByIdAndUpdate(
+  req.params.estableId,
+  nombre,
+  email,
+  direccion,
+  sociedad,
+  fechaInauguracion,
+  ovinos,
+  {
+    new: true,
+  }
+);
+res.status(204).json(updatedEstable);
 };
 
 export const deleteEstable = async (req, res) => {

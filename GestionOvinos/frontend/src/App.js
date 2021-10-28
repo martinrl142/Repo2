@@ -19,9 +19,9 @@ function App() {
     <Router>
       <Navigation />
       <div className="container p-4">
-        <Route path="/" exact component={EstablesList} />
-        <Route path="/login" component={Login} />
-        <Route path="/ovinos" exact component={OvinosList} />
+        <Route path="/establecimientos" exact component={EstablesList} />
+        <Route path="/" exact component={Login} />
+        <Route path="/ovinos" component={OvinosList} />
         <Route path="/editEstable/:id" component={CreateEstable} />
         <Route path="/createEstable" component={CreateEstable} />
         <Route path="/createOvino" component={CreateOvino} />
