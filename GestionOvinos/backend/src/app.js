@@ -5,8 +5,9 @@ import helmet from "helmet";
 
 import pkg from "../package.json";
 
-import establecimientoRoutes from "./routes/establecimientos";
+import establecimientoRoutes from "./routes/establecimientos.routes";
 import productRoutes from "./routes/products.routes";
+import ovinoRoutes from "./routes/ovinos.routes";
 import usersRoutes from "./routes/user.routes";
 import authRoutes from "./routes/auth.routes";
 
@@ -45,6 +46,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/establecimientos", establecimientoRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/ovinos", ovinoRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/auth", authRoutes);
 

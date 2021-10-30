@@ -11,19 +11,20 @@ export default class createEstable extends Component {
         direccion: '',
         sociedad: '',
         fechaInauguracion: new Date(),
-        //userSelected: '',
-        //users: [],
+        ovinoSelected: '',
+        ovino:'',
+        ovinos: [],
         editing: false,
         _id: ''
     }
     async componentDidMount() {
-        /*const res = await axios.get('http://localhost:4000/api/users');
+        const res = await axios.get('http://localhost:4000/api/ovinos', theToken());
         if (res.data.length > 0) {
             this.setState({
-                users: res.data.map(user => user.username),
-                userSelected: res.data[0].username
+                ovinos: res.data.map(ovino => [ovino.nombre, ovino._id]),
+                ovinoSelected: res.data[0]._id
             })
-        }*/
+        }
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
             const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
@@ -34,7 +35,7 @@ export default class createEstable extends Component {
                 direccion: res.data.direccion,
                 sociedad: res.data.sociedad,
                 fechaInauguracion: new Date(res.data.fechaInauguracion),
-                //userSelected: res.data.user,
+                ovinoSelected: res.data.ovinos,
                 _id: res.data._id,
                 editing: true
             });
@@ -50,9 +51,11 @@ export default class createEstable extends Component {
                 email: this.state.email,
                 direccion: this.state.direccion,
                 sociedad: this.state.sociedad,
-                //user: this.state.userSelected,
+                ovinos: this.state.ovinoSelected,
                 fechaInauguracion: this.state.fechaInauguracion
             };
+            console.log("Actualizando: ", updatedEstable);
+            console.log(this.state.ovinoSelected);
             await axios.put('http://localhost:4000/api/establecimientos/' + this.state._id, updatedEstable, theToken());
         } else {
             const newEstable = {
@@ -60,10 +63,11 @@ export default class createEstable extends Component {
                 email: this.state.email,
                 direccion: this.state.direccion,
                 sociedad: this.state.sociedad,
-                //user: this.state.userSelected,
+                ovinos: this.state.ovinoSelected,
                 fechaInauguracion: this.state.fechaInauguracion
             };
             console.log(theToken());
+            console.log(newEstable);
             axios.post('http://localhost:4000/api/establecimientos', newEstable, theToken());
         }
         //window.location.href = '/establecimientos';
@@ -87,24 +91,25 @@ export default class createEstable extends Component {
                     <h4>Registrar establecimiento</h4>
                     <form onSubmit={this.onSubmit}>
                         {/* Seleccionar usuario */}
-                        {/*<div className="form-group">
+                        <div className="form-group">
                             <p></p>
-                            <p>Usuario propietario:</p>
+                            <p>Ovinos</p>
                             <select
                                 className="form-control"
-                                value={this.state.userSelected}
+                                value={this.state.ovinoSelected}
                                 onChange={this.onInputChange}
-                                name="userSelected"
-                                >
+                                name="ovinoSelected"
+                                required>
                                 {
-                                    this.state.users.map(user => (
-                                        <option key={user} value={user}>
-                                            {user}
+                                    this.state.ovinos.map(ovino => (
+                                        <option key={ovino} value={ovino}>
+                                            {ovino[0]}
+                                            {console.log(ovino)}
                                         </option>
                                     ))
                                 }
                             </select>
-                        </div>*/}
+                        </div>
                         {/* Establecimiento Nombre */}
                         <div className="form-group">
                             <input

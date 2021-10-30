@@ -35,7 +35,7 @@ export default class Login extends Component {
                     window.localStorage.setItem(
                         'loggedAppUser', JSON.stringify(this.state.token)
                     );
-                    window.location.href = response.data.redirect
+                    window.location.href = response.data.redirect;
                 }).catch((err) => {
                     this.setState({
                         token: err.response.data.token,

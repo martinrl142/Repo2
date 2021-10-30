@@ -2,8 +2,8 @@ import Establecimiento from "../models/Establecimiento";
 //import Ovino from "../models/Ovino";
 
 export const createEstable = async (req, res) => {
-    const { nombre, email, direccion, sociedad, fechaInauguracion } = req.body;
-
+    const { nombre, email, direccion, sociedad, fechaInauguracion, ovinos } = req.body;
+    const ovinosFound = await Ovino.find({ name: { $in: ovinos } });
   try {
     const newEstable = new Establecimiento({
         nombre,
@@ -11,7 +11,7 @@ export const createEstable = async (req, res) => {
         direccion,
         sociedad,
         fechaInauguracion,
-        //user
+        ovinos: ovinosFound.map((ovino) => ovino._id),
     });
 
     const estableSaved = await newEstable.save();
@@ -44,26 +44,6 @@ export const updateEstable = async (req, res) => {
     }
   );
   res.status(204).json(updatedEstable);
-};
-
-
-export const addOvinoEstable = async (req, res) => {
-  const { nombre, email, direccion, sociedad, fechaInauguracion, ovino } = req.body;
-  const ovinos = Ovino.ovinos;
-  ovinos.push(ovino)
-  const updatedEstable = await Establecimiento.findByIdAndUpdate(
-  req.params.estableId,
-  nombre,
-  email,
-  direccion,
-  sociedad,
-  fechaInauguracion,
-  ovinos,
-  {
-    new: true,
-  }
-);
-res.status(204).json(updatedEstable);
 };
 
 export const deleteEstable = async (req, res) => {

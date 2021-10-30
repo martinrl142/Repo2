@@ -1,60 +1,61 @@
-const ovinosCtrl = {};
+import Ovino from "../models/Ovino";
+//import Ovino from "../models/Ovino";
 
-const Ovino = require('../models/Ovino');
+export const createOvino = async (req, res) => {
 
-ovinosCtrl.getOvinos = async (req, res) => {
-    const ovinos = await Ovino.find();
-    res.json(ovinos);
-};
-
-ovinosCtrl.createOvino = async (req, res) => {
-    const { nombre, numCaravana, colorCaravana, sexo, raza, pedigreeMO, madre, padre, nacimiento, estable } = req.body;
+    const { nombre, numCaravana, nacimiento } = req.body;
     const newOvino = new Ovino({
         nombre,
         numCaravana,
-        colorCaravana,
-        sexo,
-        raza,
-        pedigreeMO,
-        madre,
-        padre,
-        nacimiento,
-        estable
+        nacimiento
     });
-    await newOvino.save();
-    res.json('Nuevo ovino agregado');
-};
 
-ovinosCtrl.getOvino = async (req, res) => {
-    const ovino = await Ovino.findById(req.params.id);
-    res.json(ovino);
-}
-
-ovinosCtrl.deleteOvino = async (req, res) => {
-    await Ovino.findOneAndDelete(req.params.id)
-    res.json('Ovino eliminado');
-}
-
-ovinosCtrl.updateOvino = async (req, res) => {
-    const { nombre, numCaravana, colorCaravana, sexo, raza, pedigreeMO, madre, padre, nacimiento, estable } = req.body;
-    await Ovino.findByIdAndUpdate(req.params.id, {
+    //const ovinosFound = await Ovino.find({ name: { $in: ovinos } });
+  try {
+    const newOvino = new Ovino({
         nombre,
         numCaravana,
-        colorCaravana,
-        sexo,
-        raza,
-        pedigreeMO,
-        madre,
-        padre,
-        nacimiento,
-        estable
+        nacimiento
+        //ovinos: ovinosFound.map((ovino) => ovino._id),
     });
-    res.json('Ovino actualizado');
-}
 
-ovinosCtrl.getOvinosEstable = async (req, res) => {
-    const ovinos = await Ovino.findById(req.params.estableId);
-    res.json(ovinos);
-}
+    const ovinoSaved = await newOvino.save();
 
-module.exports = ovinosCtrl;
+    res.status(201).json(ovinoSaved);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+};
+
+export const getOvino = async (req, res) => {
+  const { ovinoId } = req.params;
+
+  const ovino = await Ovino.findById(ovinoId);
+  res.status(200).json(ovino);
+};
+
+export const getOvinos = async (req, res) => {
+  const ovinos = await Ovino.find();
+  return res.json(ovinos);
+};
+
+export const updateOvino = async (req, res) => {
+    const updatedOvino = await Ovino.findByIdAndUpdate(
+    req.params.ovinoId,
+    req.body,
+    {
+      new: true,
+    }
+  );
+  res.status(204).json(updatedOvino);
+};
+
+export const deleteOvino = async (req, res) => {
+  const { ovinoId } = req.params;
+
+  await Ovino.findByIdAndDelete(ovinoId);
+
+  // code 200 is ok too
+  res.status(204).json();
+};

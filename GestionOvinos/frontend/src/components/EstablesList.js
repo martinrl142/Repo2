@@ -63,6 +63,9 @@ export default class EstablesList extends Component {
                                         Sociedad: {estable.sociedad}
                                     </p>
                                     <p>
+                                        Ovinos: {estable.ovinos.nombre}
+                                    </p>
+                                    <p>
                                         Fecha de inauguración: <Moment format="DD/MM/YYYY">{estable.fechaInauguacion}</Moment>
                                     </p>
                                     <p>

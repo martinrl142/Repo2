@@ -13,7 +13,7 @@ const establecimientoSchema = new Schema(
               type: Schema.Types.ObjectId,
               ref: "Ovino",
             },
-          ],
+        ],
     }, {
         timestamps: true,
         versionKey: false
