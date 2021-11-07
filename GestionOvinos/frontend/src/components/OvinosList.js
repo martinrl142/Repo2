@@ -5,6 +5,7 @@ import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { AiFillPlusCircle } from "react-icons/ai"
+import theToken from './Token'
 
 export default class OvinosList extends Component {
 
@@ -17,14 +18,14 @@ export default class OvinosList extends Component {
     }
 
     getOvinos = async () => {
-        const res = await axios.get('http://localhost:4000/api/ovinos')
+        const res = await axios.get('http://localhost:4000/api/ovinos', theToken())
         this.setState({
             ovinos: res.data
         });
     }
 
     deleteOvino = async (ovinoId) => {
-        await axios.delete('http://localhost:4000/api/ovinos/' + ovinoId);
+        await axios.delete('http://localhost:4000/api/ovinos/' + ovinoId, theToken());
         this.getOvinos();
     }
 

@@ -8,6 +8,7 @@ import Login from './components/Login'
 import OvinosList from './components/OvinosList'
 import CreateEstable from './components/CreateEstable'
 import CreateOvino from './components/CreateOvino'
+import CreateOvEs from './components/CreateOvEs'
 import CreateServicio from './components/CreateServicio'
 import CreatePatologia from './components/CreatePatologia'
 import CreateUser from './components/CreateUser'
@@ -23,8 +24,10 @@ function App() {
         <Route path="/" exact component={Login} />
         <Route path="/ovinos" component={OvinosList} />
         <Route path="/editEstable/:id" component={CreateEstable} />
+        <Route path="/editOvEs/:id" component={CreateOvEs} />
         <Route path="/createEstable" component={CreateEstable} />
         <Route path="/createOvino" component={CreateOvino} />
+        <Route path="/createOvEs" component={CreateOvEs} />
         <Route path="/createServicio" component={CreateServicio} />
         <Route path="/editOvino/:id" component={CreateOvino} />
         <Route path="/createPatologia" component={CreatePatologia} />
