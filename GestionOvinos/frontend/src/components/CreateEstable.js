@@ -18,8 +18,8 @@ export default class createEstable extends Component {
         const res = await axios.get('http://localhost:4000/api/ovinos', theToken());
         if (res.data.length > 0) {
             this.setState({
-                ovinos: res.data.map(ovino => [ovino.nombre, ovino._id]),
-                ovinoSelected: res.data[0]._id
+                //ovinos: res.data.map(ovino => [ovino.nombre, ovino._id]),
+                //ovinoSelected: res.data[0]._id
             })
         }
         if (this.props.match.params.id) {
@@ -32,7 +32,7 @@ export default class createEstable extends Component {
                 direccion: res.data.direccion,
                 sociedad: res.data.sociedad,
                 fechaInauguracion: new Date(res.data.fechaInauguracion),
-                ovinoSelected: res.data.ovinos,
+                //ovinoSelected: res.data.ovinos,
                 _id: res.data._id,
                 editing: true
             });
@@ -48,11 +48,11 @@ export default class createEstable extends Component {
                 email: this.state.email,
                 direccion: this.state.direccion,
                 sociedad: this.state.sociedad,
-                ovinos: this.state.ovinoSelected,
+                //ovinos: this.state.ovinoSelected,
                 fechaInauguracion: this.state.fechaInauguracion
             };
             console.log("Actualizando: ", updatedEstable);
-            console.log(this.state.ovinoSelected);
+            //console.log(this.state.ovinoSelected);
             await axios.put('http://localhost:4000/api/establecimientos/' + this.state._id, updatedEstable, theToken());
         } else {
             const newEstable = {
@@ -60,7 +60,7 @@ export default class createEstable extends Component {
                 email: this.state.email,
                 direccion: this.state.direccion,
                 sociedad: this.state.sociedad,
-                ovinos: this.state.ovinoSelected,
+                //ovinos: this.state.ovinoSelected,
                 fechaInauguracion: this.state.fechaInauguracion
             };
             console.log(theToken());
@@ -90,8 +90,8 @@ export default class createEstable extends Component {
                         {/* Seleccionar usuario */}
                         <div className="form-group">
                             <p></p>
-                            <p>Ovinos</p>
-                            {/*<select
+                            {/*<p>Ovinos</p>
+                            <select
                                 className="form-control"
                                 value={this.state.ovinoSelected}
                                 onChange={this.onInputChange}

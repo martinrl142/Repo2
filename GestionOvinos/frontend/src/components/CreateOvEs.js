@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
 import theToken from './Token';
@@ -9,7 +8,6 @@ export default class CreateOvEs extends Component {
     state = {
         ovinoSelected: '',
         ovinos: [],
-        ovinosNuevo: [],
         nombre: '',
         email: '',
         direccion: '',
@@ -38,8 +36,6 @@ export default class CreateOvEs extends Component {
                 direccion: res.data.direccion,
                 sociedad: res.data.sociedad,
                 fechaInauguracion: new Date(res.data.fechaInauguracion),
-                ovinoSelected: res.data.ovinos,
-                ovinosNuevo: res.data.ovinos, 
                 _id: res.data._id,
                 editing: true
             });
@@ -52,18 +48,11 @@ export default class CreateOvEs extends Component {
         
         if (this.state.editing) {
             console.log(this.state.ovinoSelected);
-            console.log(this.state.ovinoNuevo);
-            //Agregar al array ovinoNuevo ovinoSelect
-            const updatedEstable = {
-                nombre: this.state.nombre,
-                email: this.state.email,
-                direccion: this.state.direccion,
-                sociedad: this.state.sociedad,
-                ovinos: this.state.ovinosNuevo,
-                fechaInauguracion: this.state.fechaInauguracion
+            const addOvinoEstable = {
+                ovinos: this.state.ovinoSelected,
             };
-            await axios.put('http://localhost:4000/api/establecimientos/' + this.state._id, updatedEstable, theToken());
-            console.log(updatedEstable);
+            await axios.put('http://localhost:4000/api/establecimientos/addOvino/' + this.state._id, addOvinoEstable, theToken());
+            console.log(addOvinoEstable);
             //window.location.href = '/';
         }
     }
@@ -82,10 +71,21 @@ export default class CreateOvEs extends Component {
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
-                    <h4>Agregar Ovino a establecimiento</h4>
+                    <h4>Agregar Ovino a Establecimiento</h4>
                     <form onSubmit={this.onSubmit}>
+                        {/* Establecimiento Nombre */}
+                        <br/>
+                        <br/>
+                        <h4>
+                            Establecimiento:
+                        </h4>
+                        <h1>{this.state.nombre}</h1>
                         {/* SELECT THE USER */}
                         <div className="form-group">
+                            <br/>
+                            <h4>
+                                Seleccionar Ovino:
+                            </h4>
                             <select
                                 className="form-control"
                                 value={this.state.ovinoSelected}
@@ -100,54 +100,6 @@ export default class CreateOvEs extends Component {
                                     ))
                                 }
                             </select>
-                        </div>
-                        {/* Establecimiento Nombre */}
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Nombre del establecimiento"
-                                onChange={this.onInputChange}
-                                name="nombre"
-                                value={this.state.nombre}
-                                required />
-                        </div>
-                        {/* Establecimiento Email */}
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Email"
-                                onChange={this.onInputChange}
-                                name="email"
-                                value={this.state.email}
-                            />
-                        </div>
-                        {/* Establecimiento Dirección */}
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Dirección"
-                                onChange={this.onInputChange}
-                                name="direccion"
-                                value={this.state.direccion}
-                            />
-                        </div>
-                        {/* Establecimiento Sociedad */}
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Sociedad"
-                                onChange={this.onInputChange}
-                                name="sociedad"
-                                value={this.state.sociedad}
-                            />
-                        </div>
-                        {/* Fecha de Inauguración del establecimiento */}
-                        <div className="form-group">
-                            <DatePicker className="form-control" selected={this.state.fechaInauguracion} onChange={this.onChangeDate} />
                         </div>
                         <button className="btn btn-primary">
                             Guardar

@@ -33,7 +33,7 @@ export const isModerator = async (req, res, next) => {
       }
     }
 
-    return res.status(409).json({ message: "Require Moderator Role!" });
+    return res.status(405).json({ message: "Require Moderator Role!" });
   } catch (error) {
     console.log(error)
     return res.status(500).send({ message: error });

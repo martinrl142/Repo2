@@ -26,6 +26,12 @@ router.put(
   establesCtrl.updateEstable
 );
 
+router.put(
+  "/addOvino/:estableId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  establesCtrl.addOvinoEstable
+);
+
 router.delete(
   "/:estableId",
   [authJwt.verifyToken, authJwt.isAdmin],
