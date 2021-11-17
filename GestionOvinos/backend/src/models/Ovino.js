@@ -4,7 +4,13 @@ const ovinoSchema = new Schema(
     {   
         nombre: String,
         numCaravana: String,
-        nacimiento: Date
+        nacimiento: Date,
+        establecimientos: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: "Establecimiento",
+            },
+        ],
     }, {
         timestamps: true
     });

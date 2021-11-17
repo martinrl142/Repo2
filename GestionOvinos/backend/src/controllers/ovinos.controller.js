@@ -59,3 +59,15 @@ export const deleteOvino = async (req, res) => {
   // code 200 is ok too
   res.status(204).json();
 };
+
+export const addEstableOvino = async (req, res) => {
+  const { establecimientos } = req.body;
+  const updatedOvino = await Ovino.findByIdAndUpdate(
+  req.params.ovinoId,
+  { $push: { establecimientos: establecimientos } },
+  {
+    new: true,
+  }
+);
+res.status(204).json(updatedOvino);
+};

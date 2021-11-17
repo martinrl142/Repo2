@@ -8,7 +8,10 @@ export default class CreateOvEs extends Component {
     state = {
         ovinoSelected: '',
         ovinos: [],
-        nombre: '',
+        estableSelected: '',
+        establecimientos: [],
+        nombreEstable: '',
+        nombreOvino: '',
         email: '',
         direccion: '',
         sociedad: '',
@@ -18,11 +21,18 @@ export default class CreateOvEs extends Component {
     }
 
     async componentDidMount() {
-        const res = await axios.get('http://localhost:4000/api/ovinos', theToken());
-        if (res.data.length > 0) {
+        const resOv = await axios.get('http://localhost:4000/api/ovinos', theToken());
+        if (resOv.data.length > 0) {
             this.setState({
-                ovinos: res.data.map(ovino => [ovino._id, ovino.nombre]),
-                ovinoSelected: res.data[0]._id
+                ovinos: resOv.data.map(ovino => [ovino._id, ovino.nombre]),
+                ovinoSelected: resOv.data[0]._id
+            })
+        }
+        const resEs = await axios.get('http://localhost:4000/api/esteblecimientos', theToken());
+        if (resEs.data.length > 0) {
+            this.setState({
+                establecimientos: resEs.data.map(establecimiento => [establecimiento._id, establecimiento.nombre]),
+                estableSelected: resEs.data[0]._id
             })
         }
         if (this.props.match.params.id) {
@@ -31,7 +41,7 @@ export default class CreateOvEs extends Component {
             console.log(res.data)
             console.log(this.state.ovinoSelected);
             this.setState({
-                nombre: res.data.nombre,
+                nombreEstable: res.data.nombre,
                 email: res.data.email,
                 direccion: res.data.direccion,
                 sociedad: res.data.sociedad,
@@ -40,6 +50,18 @@ export default class CreateOvEs extends Component {
                 editing: true
             });
             console.log(this.state.ovinoSelected);
+        }
+        if (this.props.match.params.id) {
+            console.log(this.props.match.params.id)
+            const res = await axios.get('http://localhost:4000/api/ovinos/' + this.props.match.params.id, theToken());
+            console.log(res.data)
+            console.log(this.state.estableSelected);
+            this.setState({
+                nombreOvino: res.data.nombre,
+                _id: res.data._id,
+                editing: true
+            });
+            console.log(this.state.estableSelected);
         }
     }
 
@@ -53,6 +75,15 @@ export default class CreateOvEs extends Component {
             };
             await axios.put('http://localhost:4000/api/establecimientos/addOvino/' + this.state._id, addOvinoEstable, theToken());
             console.log(addOvinoEstable);
+            //window.location.href = '/';
+        }
+        if (this.state.editing) {
+            console.log(this.state.estableSelected);
+            const addEstableOvino = {
+                ovinos: this.state.estableSelected,
+            };
+            await axios.put('http://localhost:4000/api/ovinos/addEstable/' + this.state._id, addEstableOvino, theToken());
+            console.log(addEstableOvino);
             //window.location.href = '/';
         }
     }
@@ -73,14 +104,30 @@ export default class CreateOvEs extends Component {
                 <div className="card card-body">
                     <h4>Agregar Ovino a Establecimiento</h4>
                     <form onSubmit={this.onSubmit}>
-                        {/* Establecimiento Nombre */}
+                        {/* SELECT ESTABLE */}
                         <br/>
                         <br/>
-                        <h4>
-                            Establecimiento:
-                        </h4>
-                        <h1>{this.state.nombre}</h1>
-                        {/* SELECT THE USER */}
+                        <div className="form-group">
+                            <br/>
+                            <h4>
+                                Seleccionar Establecimiento:
+                            </h4>
+                            <select
+                                className="form-control"
+                                value={this.state.estableSelected}
+                                onChange={this.onInputChange}
+                                name="estableSelected"
+                                required>
+                                {
+                                    this.state.establecimientos.map(estable => (
+                                        <option key={estable} value={estable[0]}>
+                                            {estable[1]}
+                                        </option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        {/* SELECT OVINO */}
                         <div className="form-group">
                             <br/>
                             <h4>
