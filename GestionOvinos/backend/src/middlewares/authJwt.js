@@ -5,7 +5,6 @@ import Role from "../models/Role";
 
 export const verifyToken = async (req, res, next) => {
   let token = req.get('Authorization');
-  const idPropietario = req.userId;
   if (!token) return res.status(409).json({ message: "No token provided" });
 
   try {
@@ -56,4 +55,13 @@ export const isAdmin = async (req, res, next) => {
     console.log(error)
     return res.status(500).send({ message: error });
   }
+};
+
+export const isUserId = async (req, res) => {
+  let token = req.get('Authorization');
+  const decoded = jwt.verify(token, config.SECRET);
+  req.userId = decoded.id;
+  console.log(req.userId);
+  userId = req.userId;
+  return userId;
 };
