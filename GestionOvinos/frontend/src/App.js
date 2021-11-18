@@ -9,6 +9,7 @@ import OvinosList from './components/OvinosList'
 import CreateEstable from './components/CreateEstable'
 import CreateOvino from './components/CreateOvino'
 import CreateOvEs from './components/CreateOvEs'
+import CreateUsEs from './components/CreateUsEs'
 import CreateServicio from './components/CreateServicio'
 import CreatePatologia from './components/CreatePatologia'
 import CreateUser from './components/CreateUser'
@@ -28,6 +29,7 @@ function App() {
         <Route path="/createEstable" component={CreateEstable} />
         <Route path="/createOvino" component={CreateOvino} />
         <Route path="/createOvEs" component={CreateOvEs} />
+        <Route path="/createUsEs" component={CreateUsEs} />
         <Route path="/createServicio" component={CreateServicio} />
         <Route path="/editOvino/:id" component={CreateOvino} />
         <Route path="/createPatologia" component={CreatePatologia} />

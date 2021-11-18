@@ -8,6 +8,7 @@ const establecimientoSchema = new Schema(
         sociedad: String,
         //user: { type: String },
         fechaInauguracion: Date,
+        idPropietario: String,
         ovinos: [
             {
               type: Schema.Types.ObjectId,

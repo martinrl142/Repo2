@@ -1,6 +1,8 @@
 import Establecimiento from "../models/Establecimiento";
 import Ovino from "../models/Ovino";
+import { idPropietario } from "../middlewares/authJwt";
 
+console.log(idPropietario);
 export const createEstable = async (req, res) => {
     const { nombre, email, direccion, sociedad, fechaInauguracion, ovinos } = req.body;
     const ovinosFound = await Ovino.find({ name: { $in: ovinos } });
@@ -11,6 +13,7 @@ export const createEstable = async (req, res) => {
         direccion,
         sociedad,
         fechaInauguracion,
+        idPropietario,
         ovinos: ovinosFound.map((ovino) => ovino._id),
     });
     const estableSaved = await newEstable.save();

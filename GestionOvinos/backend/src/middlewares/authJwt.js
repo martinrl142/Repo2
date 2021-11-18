@@ -5,13 +5,12 @@ import Role from "../models/Role";
 
 export const verifyToken = async (req, res, next) => {
   let token = req.get('Authorization');
-
+  const idPropietario = req.userId;
   if (!token) return res.status(409).json({ message: "No token provided" });
 
   try {
     const decoded = jwt.verify(token, config.SECRET);
     req.userId = decoded.id;
-    console.log(req.userId);
     const user = await User.findById(req.userId, { password: 0 });
     if (!user) return res.status(404).json({ message: "No user found" });
 

@@ -15,13 +15,6 @@ export default class createEstable extends Component {
         _id: ''
     }
     async componentDidMount() {
-        const res = await axios.get('http://localhost:4000/api/ovinos', theToken());
-        if (res.data.length > 0) {
-            this.setState({
-                //ovinos: res.data.map(ovino => [ovino.nombre, ovino._id]),
-                //ovinoSelected: res.data[0]._id
-            })
-        }
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
             const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
