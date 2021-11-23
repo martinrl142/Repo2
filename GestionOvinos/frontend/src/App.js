@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       <Navigation />
-      <div className="container p-4">
+      <div className="container p-4 fondo">
         <Route path="/establecimientos" exact component={EstablesList} />
         <Route path="/" exact component={Login} />
         <Route path="/ovinos" component={OvinosList} />
