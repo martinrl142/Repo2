@@ -3,7 +3,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
 import theToken from './Token';
 
-export default class CreateUsEs extends Component {
+export default class CreateOvEs extends Component {
 
     state = {
         userSelected: '',
@@ -11,11 +11,9 @@ export default class CreateUsEs extends Component {
         estableSelected: '',
         establecimientos: [],
         nombreEstable: '',
-        email: '',
-        direccion: '',
-        sociedad: '',
-        fechaInauguracion: new Date(),
+        nombreUser: '',
         editing: false,
+        _idUser: '',
         _idEstable: ''
     }
 
@@ -39,26 +37,22 @@ export default class CreateUsEs extends Component {
             console.log(this.props.match.params.id)
             const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
             console.log(res.data)
-            console.log(this.state.ovinoSelected);
+            console.log(this.state.userSelected);
             this.setState({
                 nombreEstable: res.data.nombre,
-                email: res.data.email,
-                direccion: res.data.direccion,
-                sociedad: res.data.sociedad,
-                fechaInauguracion: new Date(res.data.fechaInauguracion),
                 _idEstable: res.data._id,
                 editing: true
             });
-            console.log(this.state.ovinoSelected);
+            console.log(this.state.userSelected);
         }
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const res = await axios.get('http://localhost:4000/api/users/' + this.props.match.params.id, theToken());
+            const res = await axios.get('http://localhost:4000/api/ovinos/' + this.props.match.params.id, theToken());
             console.log(res.data)
             console.log(this.state.estableSelected);
             this.setState({
-                username: res.data.username,
-                _idOvino: res.data._id,
+                nombreUser: res.data.nombre,
+                _idUser: res.data._id,
                 editing: true
             });
             console.log(this.state.estableSelected);
@@ -67,9 +61,9 @@ export default class CreateUsEs extends Component {
 
     onSubmit = async (e) => {
         e.preventDefault();
-        if (this.state.userSelected && this.state.estableSelected) {
+        if (this.state.userSelected && this.state.userSelected) {
             console.log(this.state.userSelected);
-            const addUserEstable = {
+            const addOvinoEstable = {
                 ovinos: this.state.userSelected,
             };
             console.log(addUserEstable);
