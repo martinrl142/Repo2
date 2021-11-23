@@ -1,11 +1,13 @@
 import Establecimiento from "../models/Establecimiento";
 import Ovino from "../models/Ovino";
+import User from "../models/User";
 import { authJwt } from "../middlewares";
 
 console.log(authJwt.isUserId);
 export const createEstable = async (req, res) => {
-    const { nombre, email, direccion, sociedad, fechaInauguracion, ovinos } = req.body;
+    const { nombre, email, direccion, sociedad, fechaInauguracion, ovinos, users } = req.body;
     const ovinosFound = await Ovino.find({ name: { $in: ovinos } });
+    const usersFound = await User.find({ name: { $in: users } });
     const idPropietario = authJwt.isUserId;
     console.log(idPropietario);
   try {
@@ -17,6 +19,7 @@ export const createEstable = async (req, res) => {
         fechaInauguracion,
         idPropietario,
         ovinos: ovinosFound.map((ovino) => ovino._id),
+        users: usersFound.map((user) => user._id),
     });
     const estableSaved = await newEstable.save();
 
@@ -60,6 +63,18 @@ export const addOvinoEstable = async (req, res) => {
     }
   );
   res.status(204).json(updatedEstable);
+};
+
+export const addUserEstable = async (req, res) => {
+  const { usuarios } = req.body;
+  const updatedEstable = await Establecimiento.findByIdAndUpdate(
+  req.params.estableId,
+  { $push: { users: users } },
+  {
+    new: true,
+  }
+);
+res.status(204).json(updatedEstable);
 };
 
 export const deleteEstable = async (req, res) => {

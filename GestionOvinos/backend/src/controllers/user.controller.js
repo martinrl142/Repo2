@@ -1,10 +1,12 @@
 import User from "../models/User";
 import Role from "../models/Role";
+import Establecimiento from "../models/Establecimiento";
 
+console.log(authJwt.isUserId);
 export const createUser = async (req, res) => {
   try {
-    const { username, email, password, roles } = req.body;
-
+    const { username, email, password, roles, establecimientos } = req.body;
+    const establesFound = await Establecimiento.find({ name: { $in: establecimientos } });
     const rolesFound = await Role.find({ name: { $in: roles } });
 
     // creating a new User
@@ -13,6 +15,7 @@ export const createUser = async (req, res) => {
       email,
       password,
       roles: rolesFound.map((role) => role._id),
+      establecimientos: establesFound.map((estable) => estable._id),
     });
 
     // encrypting password
