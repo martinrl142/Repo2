@@ -15,6 +15,12 @@ const establecimientoSchema = new Schema(
               ref: "Ovino",
             },
         ],
+        users: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: "Users",
+            },
+        ],
     }, {
         timestamps: true,
         versionKey: false

@@ -46,7 +46,7 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div className="row">
+            <div className="row centrar">
                 <div className="col-md-4">
                     <div className="card card-body">
                         <h3>Login</h3>

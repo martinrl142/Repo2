@@ -27,7 +27,7 @@ router.put(
 );
 
 router.put(
-  "/addEstable/:ovinoId",
+  "/addEstableOvino/:ovinoId",
   [authJwt.verifyToken, authJwt.isModerator],
   ovinosCtrl.addEstableOvino
 );

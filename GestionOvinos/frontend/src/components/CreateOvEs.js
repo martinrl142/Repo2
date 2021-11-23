@@ -75,7 +75,7 @@ export default class CreateOvEs extends Component {
                 ovinos: this.state.ovinoSelected,
             };
             console.log(addOvinoEstable);
-            await axios.put('http://localhost:4000/api/establecimientos/addOvino/' + this.state.estableSelected, addOvinoEstable, theToken());
+            await axios.put('http://localhost:4000/api/establecimientos/addOvinoEstable/' + this.state.estableSelected, addOvinoEstable, theToken());
             console.log(addOvinoEstable);
             //window.location.href = '/';
             console.log(this.state.estableSelected);
@@ -83,7 +83,7 @@ export default class CreateOvEs extends Component {
                 establecimientos: this.state.estableSelected,
             };
             console.log(addEstableOvino);
-            await axios.put('http://localhost:4000/api/ovinos/addEstable/' + this.state.ovinoSelected, addEstableOvino, theToken());
+            await axios.put('http://localhost:4000/api/ovinos/addEstableOvino/' + this.state.ovinoSelected, addEstableOvino, theToken());
             console.log(addEstableOvino);
             //window.location.href = '/';
         }

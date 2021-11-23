@@ -18,3 +18,8 @@ background: linear-gradient(to right, #243B55, #141E30);
 .logo{
     color: #61290f;
 }
+
+.centrar{
+    justify-content: center;
+    align-items: center;
+}

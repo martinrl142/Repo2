@@ -21,6 +21,12 @@ const productSchema = new Schema(
         ref: "Role",
       },
     ],
+    establecimientos: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Establecimiento",
+      },
+    ],
   },
   {
     timestamps: true,
