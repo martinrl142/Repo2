@@ -22,6 +22,7 @@
 # Pendiente
 *Un ovino puede estar solo una vez ingresado en el establecimiento*
 *Boton para ir a asignar un ovino a un establecimiento*
+*Mejorar agregar ovino*
 
 ## 3.0.0
 #
