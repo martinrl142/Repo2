@@ -81,6 +81,7 @@ export default class EstablesList extends Component {
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
                                             <Dropdown.Item href="/ovinos">Ovinos</Dropdown.Item>
+                                            <Dropdown.Item href="/createOvEs">Agregar ovino</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                     <Link to={"/editEstable/" + estable._id} className="btn btn-primary">
