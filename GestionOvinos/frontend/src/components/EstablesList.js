@@ -71,7 +71,7 @@ export default class EstablesList extends Component {
                                         Fecha de inauguración: <Moment format="DD/MM/YYYY">{estable.fechaInauguacion}</Moment>
                                     </p>
                                     <p>
-                                        Ingresado a OvinosApp: {format(estable.createdAt)}
+                                        Ingresado a Equiipo: {format(estable.createdAt)}
                                     </p>
                                 </div>
                                 <div className="card-footer d-flex justify-content-between">

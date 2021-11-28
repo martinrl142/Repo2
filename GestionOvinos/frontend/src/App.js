@@ -2,7 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import Navigation from './components/Navigation'
+import NavigationLogin from './components/NavigationLogin'
+import Home from './components/Home'
 import EstablesList from './components/EstablesList'
 import Login from './components/Login'
 import OvinosList from './components/OvinosList'
@@ -19,10 +20,11 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <Navigation />
-      <div className="container p-4 fondo">
+      <NavigationLogin />
+      <div className="container p-4">
         <Route path="/establecimientos" exact component={EstablesList} />
-        <Route path="/" exact component={Login} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/" exact component={Home} />
         <Route path="/ovinos" component={OvinosList} />
         <Route path="/editEstable/:id" component={CreateEstable} />
         <Route path="/editOvEs/:id" component={CreateOvEs} />

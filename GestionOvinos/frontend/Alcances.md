@@ -17,6 +17,7 @@
 *Agregar una patología a un Ovino*
 *Mostrar las patologías por Ovino*
 *Al logearse no mostrar el login*
+*Opción no disponible https://react-bootstrap.github.io/components/toasts/*
 
 ## 2.1.0
 # Pendiente
