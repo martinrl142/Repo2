@@ -63,7 +63,7 @@ export const signin = async (req, res) => {
       expiresIn: 86400, // 24 hours
     });
 
-    res.json({ token, redirect: "/establecimientos" });
+    res.json({ token, message: "Ingresando", redirect: "/establecimientos" });
   } catch (error) {
     console.log(error);
   }

@@ -5,14 +5,27 @@
     line-height: 80px;
     color: rgb(255, 255, 255);
     font-size: 4em;
-    font-weight: 700;
+    font-weight: 650;
     letter-spacing: -0.05em;
     will-change: transform, opacity;
-    /*overflow: hidden;*/
-  }
+    overflow: hidden;
+}
+  
+span {
+  font-size: 1.4em;
+  font-weight: 700;
+  
+} 
+
+.pclass {
+  font-size: 50%;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}  
   
   .trailsText > div {
     padding-right: 0.05em;
+    white-space: nowrap;
     overflow: hidden;
   }
   

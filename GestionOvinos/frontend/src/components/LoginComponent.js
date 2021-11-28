@@ -72,7 +72,6 @@ export default class LoginComponent extends Component {
                         <button type="submit" className="btn btn-success">
                             Ingresar
                         </button>
-                        <h3>{this.state.token}</h3>
                         <h3>{this.state.message}</h3>
                     </form>
                 </div>

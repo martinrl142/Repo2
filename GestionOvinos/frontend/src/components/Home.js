@@ -15,13 +15,8 @@ export default class Home extends Component {
             <div className="homeContenedor">
                 <Container>
                     <Row>
-                        <Col></Col>
-                    </Row>
-                    <Row xs={4} md={4} className="centrar">
-                    <Col xs={12}><br/><HomeComponent /><br/></Col>
-                    </Row>
-                    <Row xs={4} md={4} className="centrar">
-                    <Col xs={12}><LoginButtonHome className="center" /></Col>
+                    <Col xs={12}><LoginButtonHome />
+                    </Col>
                     </Row>
                 </Container>
             </div>

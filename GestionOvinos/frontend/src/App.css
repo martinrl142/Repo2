@@ -30,6 +30,7 @@ background: linear-gradient(to right, #243B55, #141E30);
     justify-content: center;
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 .backHomeText{
@@ -42,10 +43,18 @@ background: linear-gradient(to right, #243B55, #141E30);
     text-align: left;
 }
 
+.textBlanco{
+    color: rgb(255, 255, 255);
+}
+
 .container{
     height: 100%;
 }
 
 .fondoBlanco{
     background: #ffffff;
+}
+
+.textLeft{
+    text-align: left;
 }

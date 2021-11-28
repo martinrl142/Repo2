@@ -33,7 +33,7 @@ export default class OvinosList extends Component {
         return (
             <div className="row">
                 <div className="col-md-12 p-12">
-                    <h1>Ovinos</h1>
+                    <h1 className="textBlanco">Ovinos</h1>
                 </div>
                 <div className="col-md-11 p-11">
                 </div> 
@@ -42,7 +42,7 @@ export default class OvinosList extends Component {
                 </div> 
                 {
                     this.state.ovinos.map(ovino => (
-                        <div className="col-md-4 p-2" key={ovino._id}>
+                        <div className="col-md-3 p-2" key={ovino._id}>
                             <div className="card">
                                 <div className="card-header d-flex justify-content-between">
                                     <h5>Nombre: {ovino.nombre}</h5>

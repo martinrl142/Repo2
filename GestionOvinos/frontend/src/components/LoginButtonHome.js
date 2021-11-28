@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Tab from 'react-bootstrap/Tab'
 import LoginComponent from './LoginComponent'
+import HomeComponent from './HomeComponent'
 
 export default class LoginButtonHome extends Component {
 
@@ -48,8 +49,34 @@ export default class LoginButtonHome extends Component {
             </OverlayTrigger>
           );
         return (
-          <div className="centrar">
-            <div className="col-sm-12 col-md-3">
+          <div className="row centrar">
+            <div className="col-sm-12 col-md-7">
+                    <Row>
+                        <Col xs={12}>
+                            <br/>
+                            <HomeComponent />
+                            <br/>
+                        </Col>
+                    </Row>
+            </div>
+            <div className="col-sm-12 col-md-5">
+                    <Row>
+                        <Col xs={12}>
+                            <br/>
+                            <h2 className="textLeft">Herramienta colaborativa para la gestión de Ovino</h2>
+                            <br/>
+                        </Col>
+                    </Row>
+            </div>
+            <div className="col-sm-12 col-md-7">
+                    <Row>
+                        <Col xs={12}>
+                            <br/>
+                            <br/>
+                        </Col>
+                    </Row>
+            </div>
+            <div className="col-sm-12 col-md-4">
               <div className="card card-body">
                 <Tab.Container id="left-tabs-example" defaultActiveKey="login">
                   <Row>
@@ -75,6 +102,12 @@ export default class LoginButtonHome extends Component {
                   </Row>
                 </Tab.Container>
               </div>
+            </div>
+            <div className="col-sm-12 col-md-4">
+                    <Row>
+                        <Col xs={12}>
+                        </Col>
+                    </Row>
             </div>
             <br/>
             <br/>

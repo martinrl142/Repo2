@@ -34,8 +34,8 @@ export default class EstablesList extends Component {
     render() {
         return (
             <div className="row">
-                <div className="col-md-12 p-12">
-                    <h1>Establecimientos</h1>
+                <div className="col-md-12 p-9">
+                    <h1 className="textBlanco">Establecimientos</h1>
                 </div>
                 <div className="col-md-11 p-11">
                 </div> 
@@ -44,53 +44,53 @@ export default class EstablesList extends Component {
                 </div> 
                 {
                     this.state.estables.map(estable => (
-                        <div className="col-md-4 p-2" key={estable._id}>
-                            <div className="card">
-                                <div className="card-header d-flex justify-content-between">
-                                    <h5>Nombre: {estable.nombre}</h5>
-                                </div>
-                                <div className="card-body">
-                                    <p>
-                                        Dueño: {estable.user}
-                                    </p>
-                                    <p>
-                                        Email: {estable.email}
-                                    </p>
-                                    <p>
-                                        Dirección: {estable.direccion}
-                                    </p>
-                                    <p>
-                                        Sociedad: {estable.sociedad}
-                                    </p>
-                                    {/*
-                                    <p>
-                                        Ovinos: {estable.ovinos}
-                                    </p>
-                                    */}
-                                    <p>
-                                        Fecha de inauguración: <Moment format="DD/MM/YYYY">{estable.fechaInauguacion}</Moment>
-                                    </p>
-                                    <p>
-                                        Ingresado a Equiipo: {format(estable.createdAt)}
-                                    </p>
-                                </div>
-                                <div className="card-footer d-flex justify-content-between">
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                                            Opciones
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item href="/ovinos">Ovinos</Dropdown.Item>
-                                            <Dropdown.Item href="/createOvEs">Agregar ovino</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                    <Link to={"/editEstable/" + estable._id} className="btn btn-primary">
-                                        <i className="material-icons">
-                                            border_color</i>
-                                    </Link>
+                            <div className="col-md-3 p-2" key={estable._id}>
+                                <div className="card">
+                                    <div className="card-header d-flex justify-content-between">
+                                        <h5>Nombre: {estable.nombre}</h5>
+                                    </div>
+                                    <div className="card-body">
+                                        <p>
+                                            Dueño: {estable.user}
+                                        </p>
+                                        <p>
+                                            Email: {estable.email}
+                                        </p>
+                                        <p>
+                                            Dirección: {estable.direccion}
+                                        </p>
+                                        <p>
+                                            Sociedad: {estable.sociedad}
+                                        </p>
+                                        {/*
+                                        <p>
+                                            Ovinos: {estable.ovinos}
+                                        </p>
+                                        */}
+                                        <p>
+                                            Fecha de inauguración: <Moment format="DD/MM/YYYY">{estable.fechaInauguacion}</Moment>
+                                        </p>
+                                        <p>
+                                            Ingresado a Equiipo: {format(estable.createdAt)}
+                                        </p>
+                                    </div>
+                                    <div className="card-footer d-flex justify-content-between">
+                                        <Dropdown>
+                                            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                                                Opciones
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item href="/ovinos">Ovinos</Dropdown.Item>
+                                                <Dropdown.Item href="/createOvEs">Agregar ovino</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                        <Link to={"/editEstable/" + estable._id} className="btn btn-primary">
+                                            <i className="material-icons">
+                                                border_color</i>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     ))
                 }               
             </div>
