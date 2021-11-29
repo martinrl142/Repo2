@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
-import theToken from './Token';
+import theToken from '../Token';
 
 export default class createEstable extends Component {
     state = {
         nombre: '',
         email: '',
         direccion: '',
-        sociedad: '',
         fechaInauguracion: new Date(),
         editing: false,
         _id: ''
@@ -23,7 +22,6 @@ export default class createEstable extends Component {
                 nombre: res.data.nombre,
                 email: res.data.email,
                 direccion: res.data.direccion,
-                sociedad: res.data.sociedad,
                 fechaInauguracion: new Date(res.data.fechaInauguracion),
                 //ovinoSelected: res.data.ovinos,
                 _id: res.data._id,
@@ -40,7 +38,6 @@ export default class createEstable extends Component {
                 nombre: this.state.nombre,
                 email: this.state.email,
                 direccion: this.state.direccion,
-                sociedad: this.state.sociedad,
                 //ovinos: this.state.ovinoSelected,
                 fechaInauguracion: this.state.fechaInauguracion
             };
@@ -52,7 +49,6 @@ export default class createEstable extends Component {
                 nombre: this.state.nombre,
                 email: this.state.email,
                 direccion: this.state.direccion,
-                sociedad: this.state.sociedad,
                 //ovinos: this.state.ovinoSelected,
                 fechaInauguracion: this.state.fechaInauguracion
             };
@@ -60,7 +56,7 @@ export default class createEstable extends Component {
             console.log(newEstable);
             axios.post('http://localhost:4000/api/establecimientos', newEstable, theToken());
         }
-        //window.location.href = '/establecimientos';
+        window.location.href = '/establecimientos';
 
     }
 
@@ -133,23 +129,12 @@ export default class createEstable extends Component {
                                 value={this.state.direccion}
                             />
                         </div>
-                        {/* Establecimiento Sociedad */}
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Sociedad"
-                                onChange={this.onInputChange}
-                                name="sociedad"
-                                value={this.state.sociedad}
-                            />
-                        </div>
                         {/* Fecha de Inauguración del establecimiento */}
                         <div className="form-group">
                             <DatePicker className="form-control" selected={this.state.fechaInauguracion} onChange={this.onChangeDate} />
                         </div>
                         <button className="btn btn-primary">
-                            Guardar
+                            Crear
                             <i className="material-icons">
                                 assignment
                             </i>

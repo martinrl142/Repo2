@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
-import Offcanvas from 'react-bootstrap/Offcanvas'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
 import LoginButton from './LoginButton'
 //import SignUpButton from './SignUpButton'
 
@@ -28,7 +22,7 @@ export default class NavigationLogin extends Component {
             </Navbar>*/
             <Navbar bg="dark"  variant="dark" expand={false}>
                 <Container fluid>
-                <Navbar.Brand href="#">Equiipo</Navbar.Brand>
+                <Navbar.Brand href="/">Equiipo</Navbar.Brand>
                 <LoginButton/>
                 { /*<SignUpButton/>*/ }
                 </Container>

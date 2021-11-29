@@ -1,33 +1,29 @@
 import React, { Component } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
-import theToken from './Token';
+import theToken from '../Token';
 
 export default class CreateOvEs extends Component {
 
     state = {
-        ovinoSelected: '',
-        ovinos: [],
+        userSelected: '',
+        users: [],
         estableSelected: '',
         establecimientos: [],
         nombreEstable: '',
-        nombreOvino: '',
-        email: '',
-        direccion: '',
-        sociedad: '',
-        fechaInauguracion: new Date(),
+        nombreUser: '',
         editing: false,
-        _idOvino: '',
+        _idUser: '',
         _idEstable: ''
     }
 
     async componentDidMount() {
-        const resOv = await axios.get('http://localhost:4000/api/ovinos', theToken());
+        const resUs = await axios.get('http://localhost:4000/api/users', theToken());
         
-        if (resOv.data.length > 0) {
+        if (resUs.data.length > 0) {
             this.setState({
-                ovinos: resOv.data.map(ovino => [ovino._id, ovino.nombre]),
-                ovinoSelected: resOv.data[0]._id
+                users: resUs.data.map(user => [user._id, user.nombre]),
+                userSelected: resUs.data[0]._id
             })
         }        
         const resEs = await axios.get('http://localhost:4000/api/establecimientos', theToken());
@@ -41,17 +37,13 @@ export default class CreateOvEs extends Component {
             console.log(this.props.match.params.id)
             const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
             console.log(res.data)
-            console.log(this.state.ovinoSelected);
+            console.log(this.state.userSelected);
             this.setState({
                 nombreEstable: res.data.nombre,
-                email: res.data.email,
-                direccion: res.data.direccion,
-                sociedad: res.data.sociedad,
-                fechaInauguracion: new Date(res.data.fechaInauguracion),
                 _idEstable: res.data._id,
                 editing: true
             });
-            console.log(this.state.ovinoSelected);
+            console.log(this.state.userSelected);
         }
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
@@ -59,8 +51,8 @@ export default class CreateOvEs extends Component {
             console.log(res.data)
             console.log(this.state.estableSelected);
             this.setState({
-                nombreOvino: res.data.nombre,
-                _idOvino: res.data._id,
+                nombreUser: res.data.nombre,
+                _idUser: res.data._id,
                 editing: true
             });
             console.log(this.state.estableSelected);
@@ -69,22 +61,22 @@ export default class CreateOvEs extends Component {
 
     onSubmit = async (e) => {
         e.preventDefault();
-        if (this.state.ovinoSelected && this.state.ovinoSelected) {
-            console.log(this.state.ovinoSelected);
-            const addOvinoEstable = {
-                ovinos: this.state.ovinoSelected,
+        if (this.state.userSelected && this.state.userSelected) {
+            console.log(this.state.userSelected);
+            const addUserEstable = {
+                ovinos: this.state.userSelected,
             };
-            console.log(addOvinoEstable);
-            await axios.put('http://localhost:4000/api/establecimientos/addOvinoEstable/' + this.state.estableSelected, addOvinoEstable, theToken());
-            console.log(addOvinoEstable);
+            console.log(addUserEstable);
+            await axios.put('http://localhost:4000/api/establecimientos/addUserEstable/' + this.state.estableSelected, addUserEstable, theToken());
+            console.log(addUserEstable);
             //window.location.href = '/';
             console.log(this.state.estableSelected);
-            const addEstableOvino = {
+            const addEstableUser = {
                 establecimientos: this.state.estableSelected,
             };
-            console.log(addEstableOvino);
-            await axios.put('http://localhost:4000/api/ovinos/addEstableOvino/' + this.state.ovinoSelected, addEstableOvino, theToken());
-            console.log(addEstableOvino);
+            console.log(addEstableUser);
+            await axios.put('http://localhost:4000/api/ovinos/addEstableUser/' + this.state.userSelected, addEstableUser, theToken());
+            console.log(addEstableUser);
             //window.location.href = '/';
         }
     }
@@ -103,7 +95,7 @@ export default class CreateOvEs extends Component {
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
-                    <h4>Agregar Ovino a Establecimiento</h4>
+                    <h4>Agregar Usuario a Establecimiento</h4>
                     <form onSubmit={this.onSubmit}>
                         {/* SELECT ESTABLE */}
                         <br/>
@@ -132,18 +124,18 @@ export default class CreateOvEs extends Component {
                         <div className="form-group">
                             <br/>
                             <h4>
-                                Seleccionar Ovino:
+                                Seleccionar Usuario:
                             </h4>
                             <select
                                 className="form-control"
-                                value={this.state.ovinoSelected}
+                                value={this.state.userSelected}
                                 onChange={this.onInputChange}
-                                name="ovinoSelected"
+                                name="userSelected"
                                 required>
                                 {
-                                    this.state.ovinos.map(ovino => (
-                                        <option key={ovino} value={ovino[0]}>
-                                            {ovino[1]}
+                                    this.state.users.map(user => (
+                                        <option key={user} value={user[0]}>
+                                            {user[1]}
                                         </option>
                                     ))
                                 }

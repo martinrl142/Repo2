@@ -5,7 +5,7 @@ import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { AiFillPlusCircle } from "react-icons/ai"
-import theToken from './Token'
+import theToken from '../Token'
 
 export default class OvinosList extends Component {
 

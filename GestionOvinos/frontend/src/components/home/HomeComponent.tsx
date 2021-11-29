@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import { useTrail, a } from '@react-spring/web'
 
-import styles from './styles.module.css'
-import LoginButtonHome from './LoginButtonHome'
-import LoginComponent from './LoginComponent'
-import { Container } from 'react-bootstrap'
+import styles from '../styles.module.css'
 
 const Trail: React.FC<{ open: boolean }> = ({ open, children }) => {
   const items = React.Children.toArray(children)

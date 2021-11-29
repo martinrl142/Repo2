@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import LoginButtonHome from './LoginButtonHome'
-import HomeComponent from './HomeComponent'
-import LoginComponent from './LoginComponent'
+import LoginButtonHome from '../login/LoginButtonHome'
 
 export default class Home extends Component {
 

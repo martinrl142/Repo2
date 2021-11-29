@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Moment from 'react-moment';
 import Dropdown from 'react-bootstrap/Dropdown'
 import { AiFillPlusCircle } from "react-icons/ai";
-import theToken from './Token'
+import theToken from '../Token'
 
 
 
@@ -51,16 +51,10 @@ export default class EstablesList extends Component {
                                     </div>
                                     <div className="card-body">
                                         <p>
-                                            Dueño: {estable.user}
-                                        </p>
-                                        <p>
                                             Email: {estable.email}
                                         </p>
                                         <p>
                                             Dirección: {estable.direccion}
-                                        </p>
-                                        <p>
-                                            Sociedad: {estable.sociedad}
                                         </p>
                                         {/*
                                         <p>

@@ -3,10 +3,10 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import Offcanvas from 'react-bootstrap/Offcanvas'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
+//import NavDropdown from 'react-bootstrap/NavDropdown'
+//import Form from 'react-bootstrap/Form'
+//import FormControl from 'react-bootstrap/FormControl'
+//import Button from 'react-bootstrap/Button'
 
 //import { Link } from 'react-router-dom'
 
@@ -25,7 +25,7 @@ export default class Navigation2 extends Component {
             </Navbar>*/
             <Navbar bg="dark"  variant="dark" expand={false}>
                 <Container fluid>
-                <Navbar.Brand href="#">Equiipo</Navbar.Brand>
+                <Navbar.Brand href="/">Equiipo</Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar" />
                     <Navbar.Offcanvas
                         id="offcanvasNavbar"
@@ -33,22 +33,26 @@ export default class Navigation2 extends Component {
                         placement="end"
                     >
                         <Offcanvas.Header closeButton>
-                        <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
+                        <Offcanvas.Title id="offcanvasNavbarLabel">Opciones</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
-                            <Nav.Link href="#action1">Home</Nav.Link>
-                            <Nav.Link href="#action2">Link</Nav.Link>
-                            <NavDropdown title="Dropdown" id="offcanvasNavbarDropdown">
-                            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action5">
-                                Something else here
-                            </NavDropdown.Item>
-                            </NavDropdown>
+                            <Nav.Link href="/establecimientos">Inicio</Nav.Link>
+                            <Nav.Link href="/establecimientos">Establecimientos</Nav.Link>
+                            <Nav.Link href="/createEstable">Crear establecimiento</Nav.Link>
+                            <Nav.Link href="/ovinos">Ovinos</Nav.Link>
+                            <Nav.Link href="/createOvino">Registrar ovino</Nav.Link>
+                            <Nav.Link href="/createOvEs">Llevar ovinos a establecimientos</Nav.Link>
+                            {/*<NavDropdown title="Dropdown" id="offcanvasNavbarDropdown">
+                                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                                <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="#action5">
+                                    Something else here
+                                </NavDropdown.Item>
+                            </NavDropdown>*/}
                         </Nav>
-                        <Form className="d-flex">
+                        {/*<Form className="d-flex">
                             <FormControl
                             type="search"
                             placeholder="Search"
@@ -56,7 +60,7 @@ export default class Navigation2 extends Component {
                             aria-label="Search"
                             />
                             <Button variant="outline-success">Search</Button>
-                        </Form>
+                        </Form>*/}
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
                 </Container>

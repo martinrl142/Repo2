@@ -3,19 +3,35 @@ import Ovino from "../models/Ovino";
 
 export const createOvino = async (req, res) => {
 
-    const { nombre, numCaravana, nacimiento } = req.body;
-    const newOvino = new Ovino({
-        nombre,
-        numCaravana,
-        nacimiento
-    });
-
+    const {
+      nombre,
+      numCaravana,
+      colorCaravana,
+      sexo,
+      raza,
+      cruzamiento,
+      tatuaje,
+      nacimiento,
+      aptoReproduccion,
+      pesoAlNacer,
+      pesoAlDestete,
+      nacio
+    } = req.body;
     //const ovinosFound = await Ovino.find({ name: { $in: ovinos } });
   try {
     const newOvino = new Ovino({
-        nombre,
-        numCaravana,
-        nacimiento
+      nombre,
+      numCaravana,
+      colorCaravana,
+      sexo,
+      raza,
+      cruzamiento,
+      tatuaje,
+      nacimiento,
+      aptoReproduccion,
+      pesoAlNacer,
+      pesoAlDestete,
+      nacio
         //ovinos: ovinosFound.map((ovino) => ovino._id),
     });
 

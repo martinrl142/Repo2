@@ -5,7 +5,7 @@ import { authJwt } from "../middlewares";
 
 console.log(authJwt.isUserId);
 export const createEstable = async (req, res) => {
-    const { nombre, email, direccion, sociedad, fechaInauguracion, ovinos, users } = req.body;
+    const { nombre, email, direccion, fechaInauguracion, ovinos, users } = req.body;
     const ovinosFound = await Ovino.find({ name: { $in: ovinos } });
     const usersFound = await User.find({ name: { $in: users } });
     const idPropietario = authJwt.isUserId;
@@ -15,7 +15,6 @@ export const createEstable = async (req, res) => {
         nombre,
         email,
         direccion,
-        sociedad,
         fechaInauguracion,
         idPropietario,
         ovinos: ovinosFound.map((ovino) => ovino._id),

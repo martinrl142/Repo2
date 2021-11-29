@@ -5,7 +5,6 @@ const establecimientoSchema = new Schema(
         nombre: String,
         email: String,
         direccion: String,
-        sociedad: String,
         //user: { type: String },
         fechaInauguracion: Date,
         idPropietario: String,

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Button from 'react-bootstrap/Button'
@@ -9,7 +8,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Tab from 'react-bootstrap/Tab'
 import LoginComponent from './LoginComponent'
-import HomeComponent from './HomeComponent'
+import HomeComponent from '../home/HomeComponent'
 
 export default class LoginButtonHome extends Component {
 
@@ -50,31 +49,25 @@ export default class LoginButtonHome extends Component {
           );
         return (
           <div className="row centrar">
-            <div className="col-sm-12 col-md-7">
-                    <Row>
-                        <Col xs={12}>
-                            <br/>
-                            <HomeComponent />
-                            <br/>
-                        </Col>
-                    </Row>
+            <div className="col-sm-12 col-md-6">
+              <Row>
+                  <Col xs={12}>
+                      <br/>
+                      <HomeComponent />
+                      <br/>
+                  </Col>
+              </Row>
             </div>
-            <div className="col-sm-12 col-md-5">
-                    <Row>
-                        <Col xs={12}>
-                            <br/>
-                            <h2 className="textLeft">Herramienta colaborativa para la gestión de Ovino</h2>
-                            <br/>
-                        </Col>
-                    </Row>
+            <div className="col-sm-12 col-md-6">
+                <Row>
+                    <Col xs={12}>
+                        <br/>
+                        <h2 className="textLeft">Herramienta colaborativa para la gestión de Ovino</h2>
+                        <br/>
+                    </Col>
+                </Row>
             </div>
-            <div className="col-sm-12 col-md-7">
-                    <Row>
-                        <Col xs={12}>
-                            <br/>
-                            <br/>
-                        </Col>
-                    </Row>
+            <div className="col-sm-12 col-md-6">
             </div>
             <div className="col-sm-12 col-md-4">
               <div className="card card-body">
@@ -103,15 +96,6 @@ export default class LoginButtonHome extends Component {
                 </Tab.Container>
               </div>
             </div>
-            <div className="col-sm-12 col-md-4">
-                    <Row>
-                        <Col xs={12}>
-                        </Col>
-                    </Row>
-            </div>
-            <br/>
-            <br/>
-            { /* */ }
-            </div>)
+          </div>)
     }
 }
