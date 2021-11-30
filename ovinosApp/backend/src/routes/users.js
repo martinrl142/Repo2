@@ -1,28 +1,22 @@
 const { Router } = require('express');
 const router = Router();
-const passport = require('passport');
+const {
+  renderSignUpForm,
+  singup,
+  renderSigninForm,
+  signin,
+  logout,
+} =  require('../controllers/users.controller');
 
+// Routes
+router.get("/users/signup", renderSignUpForm);
 
-const { getUsers, createUser, getUser, deleteUser, updateUser } = require('../controllers/users.controller');
+router.post("/users/signup", singup);
 
-router.route('/').get(getUsers)
-router.route('/').post(passport.authenticate(createUser, {
-    successRedirect: '/profile',
-    failureRedirect: '/signup',
-    failureFlash: true
-  }));
+router.get("/users/signin", renderSigninForm);
 
-router.route('/:id')
-    .get(getUser)
-    .delete(deleteUser)
-    .put(updateUser);
+router.post("/users/signin", signin);
 
-function isAuthenticated(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next();
-    }
-    
-    res.redirect('/')
-    }
-    
+router.get("/users/logout", logout);
+
 module.exports = router;
