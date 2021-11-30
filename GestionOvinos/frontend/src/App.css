@@ -47,6 +47,43 @@ background: linear-gradient(to right, #243B55, #141E30);
     color: rgb(255, 255, 255);
 }
 
+.textNegro{
+    font-weight: bold;  
+}
+
+.btn-verde {
+    background-color: rgb(0, 66, 128);
+    color: white;
+     
+}
+
+.btn-verde:hover {
+    background-color: rgb(0, 128, 17);
+    color: white;
+}
+
+.nav .nav-item.show .nav-link, .nav .nav-link.active {
+    background-color: rgb(0, 128, 17);
+    color: white;
+    border-color: none;
+}
+
+.nav {
+    border-bottom: none;
+}
+
+.nav .nav-link{
+    color:#000000 ;
+}
+
+.nav .nav-link.active:hover{
+    background-color: rgb(0, 128, 17);
+}
+
+.nav .nav-link:hover{
+    background-color: rgba(0, 128, 17, 0.123);
+}
+
 .container{
     height: 100%;
 }

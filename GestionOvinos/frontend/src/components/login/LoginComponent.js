@@ -59,6 +59,7 @@ export default class LoginComponent extends Component {
                                 placeholder="Correo"
                                 onChange={this.onChangeEmail}
                             />
+                            <br/>
                             <h6 className="textGris">Contraseña</h6>
                             <input
                                 className="form-control"
@@ -69,7 +70,7 @@ export default class LoginComponent extends Component {
                             />
                         </div>
                         <br/>
-                        <button type="submit" className="btn btn-success">
+                        <button type="submit" className="btn btn-verde">
                             Ingresar
                         </button>
                         <h3>{this.state.message}</h3>

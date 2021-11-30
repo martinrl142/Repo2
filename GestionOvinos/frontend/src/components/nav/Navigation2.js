@@ -3,7 +3,9 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import Offcanvas from 'react-bootstrap/Offcanvas'
-//import NavDropdown from 'react-bootstrap/NavDropdown'
+import NavDropdown from 'react-bootstrap/NavDropdown'
+import axios from 'axios'
+import theToken from '../Token'
 //import Form from 'react-bootstrap/Form'
 //import FormControl from 'react-bootstrap/FormControl'
 //import Button from 'react-bootstrap/Button'
@@ -11,6 +13,21 @@ import Offcanvas from 'react-bootstrap/Offcanvas'
 //import { Link } from 'react-router-dom'
 
 export default class Navigation2 extends Component {
+    state = {
+        estables: []
+    }
+
+    async componentDidMount() {
+        this.getEstables();
+    }
+
+    getEstables = async () => {
+        const res = await axios.get('http://localhost:4000/api/establecimientos', theToken())
+        this.setState({
+            estables: res.data
+        });
+    }
+
     render() {
         return ( 
             /*<Navbar bg="dark" variant="dark">
@@ -25,7 +42,7 @@ export default class Navigation2 extends Component {
             </Navbar>*/
             <Navbar bg="dark"  variant="dark" expand={false}>
                 <Container fluid>
-                <Navbar.Brand href="/">Equiipo</Navbar.Brand>
+                <Navbar.Brand href="/establecimientos">Equiipo</Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar" />
                     <Navbar.Offcanvas
                         id="offcanvasNavbar"
@@ -37,20 +54,34 @@ export default class Navigation2 extends Component {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
-                            <Nav.Link href="/establecimientos">Inicio</Nav.Link>
-                            <Nav.Link href="/establecimientos">Establecimientos</Nav.Link>
-                            <Nav.Link href="/createEstable">Crear establecimiento</Nav.Link>
-                            <Nav.Link href="/ovinos">Ovinos</Nav.Link>
-                            <Nav.Link href="/createOvino">Registrar ovino</Nav.Link>
-                            <Nav.Link href="/createOvEs">Llevar ovinos a establecimientos</Nav.Link>
-                            {/*<NavDropdown title="Dropdown" id="offcanvasNavbarDropdown">
-                                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+                            <Nav.Link href="/">Inicio</Nav.Link>
+                            <NavDropdown href="/establecimientos" title="Establecimientos" id="offcanvasNavbarDropdown">
+                                <NavDropdown.Item href="/createEstable">Crear establecimiento</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action5">
-                                    Something else here
-                                </NavDropdown.Item>
-                            </NavDropdown>*/}
+                                <NavDropdown.Item href="/establecimientos">Mostrar todos</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                {
+                                    this.state.estables.map(estable => (
+                                        <NavDropdown.Item href={"/establecimiento/" + estable._id}>
+                                            { estable.nombre }
+                                        </NavDropdown.Item>
+                                    ))
+                                }
+                            </NavDropdown>
+                            <NavDropdown title="Ovinos" id="offcanvasNavbarDropdown"> 
+                                <NavDropdown.Item href="/createOvino">Registrar ovino</NavDropdown.Item>
+                                <NavDropdown.Item href="/createOvEs">Ingresar ovinos a establecimientos</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="/ovinos">Mostrar todos</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                {
+                                    this.state.estables.map(estable => (
+                                        <NavDropdown.Item href={"/establecimiento/" + estable._id}>
+                                            Ovinos en Establecimiento { estable.nombre }
+                                        </NavDropdown.Item>
+                                    ))
+                                }
+                            </NavDropdown>
                         </Nav>
                         {/*<Form className="d-flex">
                             <FormControl

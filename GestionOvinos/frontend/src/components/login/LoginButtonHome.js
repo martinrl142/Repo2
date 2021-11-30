@@ -74,12 +74,12 @@ export default class LoginButtonHome extends Component {
                 <Tab.Container id="left-tabs-example" defaultActiveKey="login">
                   <Row>
                     <Col sm={12} md={12}>
-                      <Nav variant="pills" className="flex-column">
+                      <Nav justify variant="pills"  >
                         <Nav.Item>
-                          <Nav.Link eventKey="login"><h7>Entrar</h7></Nav.Link>
+                          <Nav.Link eventKey="login"><h7 className="textNegro">Entrar</h7></Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Nav.Link eventKey="signup"><h7>Registrarme</h7></Nav.Link>
+                          <Nav.Link eventKey="signup"><h7 className="textNegro">Registrarme</h7></Nav.Link>
                         </Nav.Item>
                       </Nav>
                       <br/>

@@ -14,6 +14,11 @@ router.get(
   [authJwt.verifyToken, authJwt.isModerator],
   ovinosCtrl.getOvino);
 
+router.get(
+  "/estable/:estableId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  ovinosCtrl.getOvinosEstable);
+
 router.post(
   "/",
   [authJwt.verifyToken, authJwt.isModerator],

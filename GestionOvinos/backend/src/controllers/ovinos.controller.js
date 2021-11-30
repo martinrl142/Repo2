@@ -51,6 +51,26 @@ export const getOvino = async (req, res) => {
   res.status(200).json(ovino);
 };
 
+export const getOvinosEstable = async (req, res) => {
+  
+  const { estableId } = req.params;
+  const ovinosList = [];
+  const ovinos = await Ovino.find();
+  ovinos.map(ovino => {
+        ovino.establecimientos.map(establecimiento => {
+          
+          if(establecimiento.toString() === estableId){
+            console.log(establecimiento);
+            ovinosList.push(ovino); 
+          }
+      }
+      );
+    }
+  );
+  console.log(ovinosList);
+  return res.json(ovinosList);
+};
+
 export const getOvinos = async (req, res) => {
   const ovinos = await Ovino.find();
   return res.json(ovinos);

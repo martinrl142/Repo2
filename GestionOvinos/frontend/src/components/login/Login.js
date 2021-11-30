@@ -1,78 +1,90 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+//import axios from 'axios'
+import Popover from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Button from 'react-bootstrap/Button'
+import Alert from 'react-bootstrap/Alert'
+import Nav from 'react-bootstrap/Nav'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Tab from 'react-bootstrap/Tab'
+import LoginComponent from './LoginComponent'
+import HomeComponent from '../home/HomeComponent'
+//import LoginButtonHome from './LoginButtonHome'
 
 export default class Login extends Component {
 
-    state = {
-        email : '',
-        password : '',
-        token: '',
-        message: ''
-    }
-
-    onChangeEmail = e => {
-        this.setState({
-            email: e.target.value
-        })
-    }
-    onChangePassword = e => {
-        this.setState({
-            password: e.target.value
-        })
-    }
-
-    onSubmit = async (e) => {
-        e.preventDefault();
-        await axios
-                .post('http://localhost:4000/api/auth/signin', {
-                    email: this.state.email,
-                    password: this.state.password        
-                })
-                .then(response => {
-                    this.setState({
-                        token: response.data.token, 
-                    });
-                    window.localStorage.setItem(
-                        'loggedAppUser', JSON.stringify(this.state.token)
-                    );
-                    window.location.href = response.data.redirect;
-                }).catch((err) => {
-                    this.setState({
-                        token: err.response.data.token,
-                        message: err.response.data.message   
-                    })
-                });
-    }
-
     render() {
+        const popoverRegistrar = (
+            <Popover id="popover-basic">
+              <Alert variant="danger">
+                <Alert.Heading>No Habilitado</Alert.Heading>
+                <p>
+                  Aún no se pueden crear usuarios.
+                </p>
+              </Alert>
+            </Popover>
+          );
+          
+          const RegistrarButton = () => (
+            <OverlayTrigger trigger="click" rootClose="true" placement="bottom" overlay={popoverRegistrar}>
+              { /*<Button variant="primary" size="lg">Registrar</Button> */ }
+              <Alert variant="danger">
+                <Alert.Heading>Aún no se pueden crear usuarios.</Alert.Heading>
+                <h4></h4>
+              </Alert>
+            </OverlayTrigger>
+          );
+         const popoverEntrar = (
+            <Popover id="popover-basic">
+              <Popover.Header as="h3"></Popover.Header>
+              <Popover.Body>
+                <LoginComponent />
+              </Popover.Body>
+            </Popover>
+          );
+          
+          const EntrarButton = () => (
+            <OverlayTrigger trigger="click" rootClose="true" placement="bottom" overlay={popoverEntrar}>
+              <Button variant="success" size="lg">Entrar</Button>
+            </OverlayTrigger>
+          );
         return (
             <div className="row centrar">
-                <div className="col-md-4">
+                <div className="col-sm-12 col-md-4">
                     <div className="card card-body">
-                        <h3>Login</h3>
-                        <form onSubmit={this.onSubmit}>
-                            <div className="form-group">
-                                <input
-                                    className="form-control"
-                                    value={this.state.email}
-                                    type="email"
-                                    placeholder="Email"
-                                    onChange={this.onChangeEmail}
-                                />
-                                <input
-                                    className="form-control"
-                                    value={this.state.password}
-                                    type="password"
-                                    placeholder="Password"
-                                    onChange={this.onChangePassword}
-                                />
-                            </div>
-                            <button type="submit" className="btn btn-primary">
-                                Guardar
-                            </button>
-                            <h3>{this.state.token}</h3>
-                            <h3>{this.state.message}</h3>
-                        </form>
+                        <Alert variant="danger">
+                            <Alert.Heading>Para ver esta sección tienes que estar registrado e inicia sesión.</Alert.Heading>
+                        </Alert>
+                    </div>
+                    <div>
+                      <br/>
+                      <br/>
+                    </div>
+                    <div className="card card-body">
+                        <Tab.Container id="left-tabs-example" defaultActiveKey="login">
+                        <Row>
+                            <Col sm={12} md={12}>
+                            <Nav justify variant="pills"  >
+                                <Nav.Item>
+                                <Nav.Link eventKey="login"><h7 className="textNegro">Entrar</h7></Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                <Nav.Link eventKey="signup"><h7 className="textNegro">Registrarme</h7></Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                            <br/>
+                            <Tab.Content>
+                                <Tab.Pane eventKey="login">
+                                <LoginComponent />
+                                </Tab.Pane>
+                                <Tab.Pane eventKey="signup">
+                                <RegistrarButton />
+                                </Tab.Pane>
+                            </Tab.Content>
+                            </Col>
+                        </Row>
+                        </Tab.Container>
                     </div>
                 </div>
             </div>

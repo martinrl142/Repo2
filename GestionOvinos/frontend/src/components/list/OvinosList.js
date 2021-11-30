@@ -49,9 +49,6 @@ export default class OvinosList extends Component {
                                 </div>
                                 <div className="card-body">
                                     <p>
-                                        Establecimiento: {ovino.establecimientos}
-                                    </p>
-                                    <p>
                                         Nombre: {ovino.nombre}
                                     </p>
                                     <p>

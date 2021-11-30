@@ -109,7 +109,7 @@ export default class CreateOvEs extends Component {
             <div>
                 <div className="row">
                     <div className="col-md-12 p-12">
-                        <h1 className="textBlanco">Colocar ovino en establecimiento</h1>
+                        <h1 className="textBlanco">Ingresar ovino en establecimiento</h1>
                     </div>
                     <div className="col-md-11 p-11">
                     </div> 

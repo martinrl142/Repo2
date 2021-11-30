@@ -74,7 +74,7 @@ export default class EstablesList extends Component {
                                                 Opciones
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item href="/ovinos">Ovinos</Dropdown.Item>
+                                                <Dropdown.Item href={"/establecimiento/" + estable._id}>Ovinos</Dropdown.Item>
                                                 <Dropdown.Item href="/createOvEs">Agregar ovino</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
