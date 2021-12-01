@@ -62,7 +62,7 @@ export default class LoginButtonHome extends Component {
                 <Row>
                     <Col xs={12}>
                         <br/>
-                        <h2 className="textLeft">Herramienta colaborativa para la gestión de Ovino</h2>
+                        <h2 className="textLeft">Herramienta colaborativa para la gestión de Ovinos</h2>
                         <br/>
                     </Col>
                 </Row>
