@@ -1,7 +1,7 @@
 {
   "name": "gestion-ovinos",
-  "version": "1.0.1",
-  "description": "A Company REST API with authentication and authorization",
+  "version": "2.0.0",
+  "description": "Aplicación de Gestión de Ovinos",
   "main": "dist/index.js",
   "scripts": {
     "babel-node": "babel-node --presets=@babel/preset-env",
@@ -10,17 +10,9 @@
     "start": "node build/index.js",
     "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FaztWeb/company-products-api.git"
-  },
   "keywords": [],
-  "author": "Fazt",
+  "author": "Martín",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/FaztWeb/company-products-api/issues"
-  },
-  "homepage": "https://github.com/FaztWeb/company-products-api#readme",
   "devDependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.11.5",
