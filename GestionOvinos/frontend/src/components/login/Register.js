@@ -23,7 +23,7 @@ export default class Login extends Component {
     onSubmit = async (e) => {
         e.preventDefault();
         await axios
-                .post('http://localhost:4000/api/auth/signin', {
+                .post('http://104.193.108.64:4000/api/auth/signin', {
                     email: this.state.email,
                     password: this.state.password,        
                 })

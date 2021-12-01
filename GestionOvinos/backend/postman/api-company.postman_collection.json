@@ -21,7 +21,7 @@
 					"raw": "{\n    \"name\": \"Aceite cocinero 500CC 24BOT\",\n    \"category\": \"Aceite\",\n    \"price\": 77.21,\n    \"imgURL\": \"https://www.product.img/on/server/29164.jpg\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/products",
+					"raw": "http://104.193.108.64:4000/api/products",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -41,7 +41,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/products/5f4d6359caec1f3208fdbbd3",
+					"raw": "http://104.193.108.64:4000/api/products/5f4d6359caec1f3208fdbbd3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -62,7 +62,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/products/5f4d6359caec1f3208fdbbd3",
+					"raw": "http://104.193.108.64:4000/api/products/5f4d6359caec1f3208fdbbd3",
 					"protocol": "http",
 					"host": [
 						"localhost"

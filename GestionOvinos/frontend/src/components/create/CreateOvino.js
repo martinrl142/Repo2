@@ -25,7 +25,7 @@ export default class CreateOvino extends Component {
     async componentDidMount() {
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const res = await axios.get('http://localhost:4000/api/ovinos/' + this.props.match.params.id, theToken());
+            const res = await axios.get('http://104.193.108.64:4000/api/ovinos/' + this.props.match.params.id, theToken());
             console.log(res.data)
             this.setState({
                 nombre: res.data.nombre,
@@ -65,7 +65,7 @@ export default class CreateOvino extends Component {
                 pesoAlDestete: this.state.pesoAlDestete,
                 nacio: this.state.nacio
             };
-            await axios.put('http://localhost:4000/api/ovinos/' + this.state._id, updatedOvino, theToken());
+            await axios.put('http://104.193.108.64:4000/api/ovinos/' + this.state._id, updatedOvino, theToken());
         } else {
             const newOvino = {
                 nombre: this.state.nombre,
@@ -81,7 +81,7 @@ export default class CreateOvino extends Component {
                 pesoAlDestete: this.state.pesoAlDestete,
                 nacio: this.state.nacio
             };
-            axios.post('http://localhost:4000/api/ovinos', newOvino, theToken());
+            axios.post('http://104.193.108.64:4000/api/ovinos', newOvino, theToken());
         }
         window.location.href = '/createOvino';
 

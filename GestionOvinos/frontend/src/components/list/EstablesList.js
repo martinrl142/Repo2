@@ -20,14 +20,14 @@ export default class EstablesList extends Component {
     }
 
     getEstables = async () => {
-        const res = await axios.get('http://localhost:4000/api/establecimientos', theToken())
+        const res = await axios.get('http://104.193.108.64:4000/api/establecimientos', theToken())
         this.setState({
             estables: res.data
         });
     }
 
     deleteEstable = async (estableId) => {
-        await axios.delete('http://localhost:4000/api/establecimientos/' + estableId, theToken());
+        await axios.delete('http://104.193.108.64:4000/api/establecimientos/' + estableId, theToken());
         this.getEstables();
     }
 

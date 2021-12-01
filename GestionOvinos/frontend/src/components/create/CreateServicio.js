@@ -17,7 +17,7 @@ export default class CreateNote extends Component {
     }
 
     async componentDidMount() {
-        const res = await axios.get('http://localhost:4000/api/ovinos');
+        const res = await axios.get('http://104.193.108.64:4000/api/ovinos');
         if (res.data.length > 0) {
             this.setState({
                 machos: res.data.map(ovino => ovino.numCaravana),
@@ -26,7 +26,7 @@ export default class CreateNote extends Component {
         }
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const res = await axios.get('http://localhost:4000/api/servicios/' + this.props.match.params.id);
+            const res = await axios.get('http://104.193.108.64:4000/api/servicios/' + this.props.match.params.id);
             console.log(res.data)
             this.setState({
                 fechaEventoCelo: new Date(res.data.fechaEventoCelo),
@@ -50,7 +50,7 @@ export default class CreateNote extends Component {
                 tipoServicio: this.state.tipoServicio,
                 tipoInseminacion: this.state.tipoInseminacion
             };
-            await axios.put('http://localhost:4000/api/servicios/' + this.state._id, updatedServicio);
+            await axios.put('http://104.193.108.64:4000/api/servicios/' + this.state._id, updatedServicio);
         } else {
             const newServicio = {
                 fechaEventoCelo: this.state.fechaEventoCelo,
@@ -59,7 +59,7 @@ export default class CreateNote extends Component {
                 tipoServicio: this.state.tipoServicio,
                 tipoInseminacion: this.state.tipoInseminacion
             };
-            axios.post('http://localhost:4000/api/servicios', newServicio);
+            axios.post('http://104.193.108.64:4000/api/servicios', newServicio);
         }
         window.location.href = '/ovinos';
 

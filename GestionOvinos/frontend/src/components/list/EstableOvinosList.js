@@ -43,7 +43,7 @@ export default class createEstable extends Component {
         this.getOvinosEstable();
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const resEs = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
+            const resEs = await axios.get('http://104.193.108.64:4000/api/establecimientos/' + this.props.match.params.id, theToken());
             console.log(resEs.data)
             this.setState({
                 nombreEstable: resEs.data.nombre,
@@ -59,7 +59,7 @@ export default class createEstable extends Component {
     }
 
     getOvinosEstable = async () => {
-        const res = await axios.get('http://localhost:4000/api/ovinos/estable/'+ this.props.match.params.id, theToken())
+        const res = await axios.get('http://104.193.108.64:4000/api/ovinos/estable/'+ this.props.match.params.id, theToken())
         this.setState({
             ovinosList: res.data
         });
