@@ -25,11 +25,11 @@ function App() {
   <Router>
     <Navigation2 />
       <div className="container p-4">
-      <PrivateRoute path="/establecimientos" exact component={EstablesList} />
+      <Route path="/establecimientos" exact component={EstablesList} />
       <Route path="/establecimiento/:id" component={EstableOvinosList} />
       <Route path="/login" exact component={Login} />
       <Route path="/" exact component={Home} />
-      <PrivateRoute path="/ovinos" component={OvinosList} />
+      <Route path="/ovinos" component={OvinosList} />
       <Route path="/editEstable/:id" component={CreateEstable} />
       <Route path="/createEstable" component={CreateEstable} />
       <Route path="/createOvino" component={CreateOvino} />
