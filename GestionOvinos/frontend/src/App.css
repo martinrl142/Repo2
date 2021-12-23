@@ -1,23 +1,97 @@
-body {
+body, html {
     background: #ffffff;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #ffffff, #ffffff);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #ffffff, #ffffff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-image: url("img/fondo.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    width: auto;
-    height: auto;
-    background-size: cover;
+    background: -webkit-linear-gradient(to right, #000000, #0e2d46);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #000000, #0e2d46); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     /*
     background: #141E30; 
 background: -webkit-linear-gradient(to right, #243B55, #141E30);
 background: linear-gradient(to right, #243B55, #141E30);
 */
+}  
+
+.homeContenedor{
+    height: 80%;
 }
+
 .material-icons {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     vertical-align: middle;
+}
+
+.logo{
+    color: #61290f;
+}
+
+.centrar{
+    color: #ffffff;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.backHomeText{
+    background: #00000079;
+    background-size: 24px;
+}
+
+.textGris{
+    color: rgb(26, 25, 25);
+    text-align: left;
+}
+
+.textBlanco{
+    color: rgb(255, 255, 255);
+}
+
+.textNegro{
+    font-weight: bold;  
+}
+
+.btn-verde {
+    background-color: rgb(0, 66, 128);
+    color: white;
+     
+}
+
+.btn-verde:hover {
+    background-color: rgb(0, 128, 17);
+    color: white;
+}
+
+.nav .nav-item.show .nav-link, .nav .nav-link.active {
+    background-color: rgb(0, 128, 17);
+    color: white;
+    border-color: none;
+}
+
+.nav {
+    border-bottom: none;
+}
+
+.nav .nav-link{
+    color:#000000 ;
+}
+
+.nav .nav-link.active:hover{
+    background-color: rgb(0, 128, 17);
+}
+
+.nav .nav-link:hover{
+    background-color: rgba(0, 128, 17, 0.123);
+}
+
+.container{
+    height: 100%;
+}
+
+.fondoBlanco{
+    background: #ffffff;
+}
+
+.textLeft{
+    text-align: left;
 }

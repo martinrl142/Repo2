@@ -2,7 +2,6 @@ import User from "../models/User";
 import Role from "../models/Role";
 import Establecimiento from "../models/Establecimiento";
 
-console.log(authJwt.isUserId);
 export const createUser = async (req, res) => {
   try {
     const { username, email, password, roles, establecimientos } = req.body;
@@ -33,6 +32,18 @@ export const createUser = async (req, res) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const addEstableUser = async (req, res) => {
+  const { establecimientos } = req.body;
+  const updatedUser = await User.findByIdAndUpdate(
+  req.params.userId,
+  { $push: { establecimientos: establecimientos } },
+  {
+    new: true,
+  }
+);
+res.status(204).json(updatedUser);
 };
 
 export const getUsers = async (req, res) => {};

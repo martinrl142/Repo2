@@ -27,9 +27,15 @@ router.put(
 );
 
 router.put(
-  "/addOvino/:estableId",
+  "/addOvinoEstable/:estableId",
   [authJwt.verifyToken, authJwt.isModerator],
   establesCtrl.addOvinoEstable
+);
+
+router.put(
+  "/addUserEstable/:estableId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  establesCtrl.addUserEstable
 );
 
 router.delete(

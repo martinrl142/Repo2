@@ -3,19 +3,35 @@ import Ovino from "../models/Ovino";
 
 export const createOvino = async (req, res) => {
 
-    const { nombre, numCaravana, nacimiento } = req.body;
-    const newOvino = new Ovino({
-        nombre,
-        numCaravana,
-        nacimiento
-    });
-
+    const {
+      nombre,
+      numCaravana,
+      colorCaravana,
+      sexo,
+      raza,
+      cruzamiento,
+      tatuaje,
+      nacimiento,
+      aptoReproduccion,
+      pesoAlNacer,
+      pesoAlDestete,
+      nacio
+    } = req.body;
     //const ovinosFound = await Ovino.find({ name: { $in: ovinos } });
   try {
     const newOvino = new Ovino({
-        nombre,
-        numCaravana,
-        nacimiento
+      nombre,
+      numCaravana,
+      colorCaravana,
+      sexo,
+      raza,
+      cruzamiento,
+      tatuaje,
+      nacimiento,
+      aptoReproduccion,
+      pesoAlNacer,
+      pesoAlDestete,
+      nacio
         //ovinos: ovinosFound.map((ovino) => ovino._id),
     });
 
@@ -33,6 +49,26 @@ export const getOvino = async (req, res) => {
 
   const ovino = await Ovino.findById(ovinoId);
   res.status(200).json(ovino);
+};
+
+export const getOvinosEstable = async (req, res) => {
+  
+  const { estableId } = req.params;
+  const ovinosList = [];
+  const ovinos = await Ovino.find();
+  ovinos.map(ovino => {
+        ovino.establecimientos.map(establecimiento => {
+          
+          if(establecimiento.toString() === estableId){
+            console.log(establecimiento);
+            ovinosList.push(ovino); 
+          }
+      }
+      );
+    }
+  );
+  console.log(ovinosList);
+  return res.json(ovinosList);
 };
 
 export const getOvinos = async (req, res) => {

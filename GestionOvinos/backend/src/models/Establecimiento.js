@@ -5,7 +5,6 @@ const establecimientoSchema = new Schema(
         nombre: String,
         email: String,
         direccion: String,
-        sociedad: String,
         //user: { type: String },
         fechaInauguracion: Date,
         idPropietario: String,
@@ -13,6 +12,12 @@ const establecimientoSchema = new Schema(
             {
               type: Schema.Types.ObjectId,
               ref: "Ovino",
+            },
+        ],
+        users: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: "Users",
             },
         ],
     }, {

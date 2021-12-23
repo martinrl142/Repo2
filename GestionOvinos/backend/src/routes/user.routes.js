@@ -14,4 +14,10 @@ router.post(
   usersCtrl.createUser
 );
 
+router.put(
+  "/addEstableUser/:userId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  usersCtrl.addEstableUser
+);
+
 export default router;
