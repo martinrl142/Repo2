@@ -1,0 +1,36 @@
+{
+  "name": "CuadranteDos",
+  "version": "1.0.0",
+  "description": "Para atender más el Cuadrante Dos",
+  "main": "dist/index.js",
+  "scripts": {
+    "babel-node": "babel-node --presets=@babel/preset-env",
+    "dev": "nodemon --exec npm run babel-node src/index.js",
+    "build": "babel src --out-dir build",
+    "start": "node build/index.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Martín",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.11.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
+    "jest": "^27.2.5",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "babel-node": "^0.0.1-security",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.8",
+    "morgan": "^1.10.0"
+  }
+}

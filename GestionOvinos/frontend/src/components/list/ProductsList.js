@@ -19,14 +19,14 @@ export default class ProductsList extends Component {
     }
 
     getProducts = async () => {
-        const res = await axios.get('http://104.193.108.64:4000/api/products')
+        const res = await axios.get('http://localhost:4000/api/products')
         this.setState({
             products: res.data
         });
     }
 
     deleteProduct = async (productId) => {
-        await axios.delete('http://104.193.108.64:4000/api/products/' + productId);
+        await axios.delete('http://localhost:4000/api/products/' + productId);
         this.getEstables();
     }
 

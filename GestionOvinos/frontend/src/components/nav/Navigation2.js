@@ -22,7 +22,7 @@ export default class Navigation2 extends Component {
     }
 
     getEstables = async () => {
-        const res = await axios.get('http://104.193.108.64:4000/api/establecimientos', theToken())
+        const res = await axios.get('http://localhost:4000/api/establecimientos', theToken())
         this.setState({
             estables: res.data
         });

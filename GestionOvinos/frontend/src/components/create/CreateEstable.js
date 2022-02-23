@@ -16,7 +16,7 @@ export default class createEstable extends Component {
     async componentDidMount() {
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const res = await axios.get('http://104.193.108.64:4000/api/establecimientos/' + this.props.match.params.id, theToken());
+            const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
             console.log(res.data)
             this.setState({
                 nombre: res.data.nombre,
@@ -43,7 +43,7 @@ export default class createEstable extends Component {
             };
             console.log("Actualizando: ", updatedEstable);
             //console.log(this.state.ovinoSelected);
-            await axios.put('http://104.193.108.64:4000/api/establecimientos/' + this.state._id, updatedEstable, theToken());
+            await axios.put('http://localhost:4000/api/establecimientos/' + this.state._id, updatedEstable, theToken());
         } else {
             const newEstable = {
                 nombre: this.state.nombre,
@@ -54,7 +54,7 @@ export default class createEstable extends Component {
             };
             console.log(theToken());
             console.log(newEstable);
-            axios.post('http://104.193.108.64:4000/api/establecimientos', newEstable, theToken());
+            axios.post('http://localhost:4000/api/establecimientos', newEstable, theToken());
         }
         window.location.href = '/establecimientos';
 

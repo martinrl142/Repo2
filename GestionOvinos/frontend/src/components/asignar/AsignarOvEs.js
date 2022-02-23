@@ -26,7 +26,7 @@ export default class CreateOvEs extends Component {
     }
 
     async componentDidMount() {
-        const resOv = await axios.get('http://104.193.108.64:4000/api/ovinos', theToken());
+        const resOv = await axios.get('http://localhost:4000/api/ovinos', theToken());
         
         if (resOv.data.length > 0) {
             this.setState({
@@ -34,7 +34,7 @@ export default class CreateOvEs extends Component {
                 ovinos: resOv.data.map(ovino => [ovino._id, ovino.nombre]),
             })
         }        
-        const resEs = await axios.get('http://104.193.108.64:4000/api/establecimientos', theToken());
+        const resEs = await axios.get('http://localhost:4000/api/establecimientos', theToken());
         if (resEs.data.length > 0) {
             this.setState({
                 establecimientos: resEs.data.map(establecimiento => [establecimiento._id, establecimiento.nombre]),
@@ -43,7 +43,7 @@ export default class CreateOvEs extends Component {
         }
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const res = await axios.get('http://104.193.108.64:4000/api/establecimientos/' + this.props.match.params.id, theToken());
+            const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
             console.log(res.data)
             console.log(this.state.ovino);
             this.setState({
@@ -58,7 +58,7 @@ export default class CreateOvEs extends Component {
         }
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const res = await axios.get('http://104.193.108.64:4000/api/ovinos/' + this.props.match.params.id, theToken());
+            const res = await axios.get('http://localhost:4000/api/ovinos/' + this.props.match.params.id, theToken());
             console.log(res.data)
             console.log(this.state.estableSelected);
             this.setState({
@@ -79,7 +79,7 @@ export default class CreateOvEs extends Component {
                 ovinos: this.state.ovino,
             };
             console.log(addOvinoEstable);
-            await axios.put('http://104.193.108.64:4000/api/establecimientos/addOvinoEstable/' + this.state.estableSelected, addOvinoEstable, theToken());
+            await axios.put('http://localhost:4000/api/establecimientos/addOvinoEstable/' + this.state.estableSelected, addOvinoEstable, theToken());
             console.log(addOvinoEstable);
             //window.location.href = '/';
             console.log(this.state.estableSelected);
@@ -87,7 +87,7 @@ export default class CreateOvEs extends Component {
                 establecimientos: this.state.estableSelected,
             };
             console.log(addEstableOvino);
-            await axios.put('http://104.193.108.64:4000/api/ovinos/addEstableOvino/' + this.state.ovino, addEstableOvino, theToken());
+            await axios.put('http://localhost:4000/api/ovinos/addEstableOvino/' + this.state.ovino, addEstableOvino, theToken());
             console.log(addEstableOvino);
             window.location.href = '/createOvEs';
         }

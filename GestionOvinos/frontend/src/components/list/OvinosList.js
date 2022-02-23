@@ -18,14 +18,14 @@ export default class OvinosList extends Component {
     }
 
     getOvinos = async () => {
-        const res = await axios.get('http://104.193.108.64:4000/api/ovinos', theToken())
+        const res = await axios.get('http://localhost:4000/api/ovinos', theToken())
         this.setState({
             ovinos: res.data
         });
     }
 
     deleteOvino = async (ovinoId) => {
-        await axios.delete('http://104.193.108.64:4000/api/ovinos/' + ovinoId, theToken());
+        await axios.delete('http://localhost:4000/api/ovinos/' + ovinoId, theToken());
         this.getOvinos();
     }
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
 import { format } from 'timeago.js'
@@ -15,7 +14,7 @@ export default class createEstable extends Component {
         email: '',
         direccion: '',
         fechaInauguracion: new Date(),
-        editing: false,
+        editingEstable: false,
         _idEstable: '',
 
         ovinosList: [],
@@ -31,7 +30,7 @@ export default class createEstable extends Component {
         pesoAlNacer: '',
         pesoAlDestete: '',
         nacio: '',
-        editing: false,
+        editingOvino: false,
         _idOvino: ''
     }
 
@@ -43,7 +42,7 @@ export default class createEstable extends Component {
         this.getOvinosEstable();
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const resEs = await axios.get('http://104.193.108.64:4000/api/establecimientos/' + this.props.match.params.id, theToken());
+            const resEs = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
             console.log(resEs.data)
             this.setState({
                 nombreEstable: resEs.data.nombre,
@@ -52,14 +51,14 @@ export default class createEstable extends Component {
                 fechaInauguracion: new Date(resEs.data.fechaInauguracion),
                 ovinos: resEs.data.ovinos,
                 _idEstable: resEs.data._id,
-                editing: true
+                editingEstable: true
             });
         }
         
     }
 
     getOvinosEstable = async () => {
-        const res = await axios.get('http://104.193.108.64:4000/api/ovinos/estable/'+ this.props.match.params.id, theToken())
+        const res = await axios.get('http://localhost:4000/api/ovinos/estable/'+ this.props.match.params.id, theToken())
         this.setState({
             ovinosList: res.data
         });

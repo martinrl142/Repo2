@@ -13,11 +13,11 @@ export default class createProduct extends Component {
     }
 
     async componentDidMount() {
-        const res = await axios.get('http://104.193.108.64:4000/api/products');
+        const res = await axios.get('http://localhost:4000/api/products');
 
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const res = await axios.get('http://104.193.108.64:4000/api/products/' + this.props.match.params.id);
+            const res = await axios.get('http://localhost:4000/api/products/' + this.props.match.params.id);
             console.log(res.data)
             this.setState({
                 name: res.data.name,
@@ -37,7 +37,7 @@ export default class createProduct extends Component {
                 price: this.state.price,
                 imgURL: this.state.imgURL
             };
-            await axios.put('http://104.193.108.64:4000/api/products/' + this.state._id, updatedProduct);
+            await axios.put('http://localhost:4000/api/products/' + this.state._id, updatedProduct);
         } else {
             const newProduct = {
                 name: this.state.name,
@@ -45,7 +45,7 @@ export default class createProduct extends Component {
                 price: this.state.price,
                 imgURL: this.state.imgURL
             };
-            axios.post('http://104.193.108.64:4000/api/products', newProduct);
+            axios.post('http://localhost:4000/api/products', newProduct);
         }
         window.location.href = '/';
 

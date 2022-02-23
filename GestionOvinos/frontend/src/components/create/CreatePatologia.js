@@ -21,7 +21,7 @@ export default class CreatePatologia extends Component {
     }
 
     async componentDidMount() {
-        const res = await axios.get('http://104.193.108.64:4000/api/ovinos');
+        const res = await axios.get('http://localhost:4000/api/ovinos');
         if (res.data.length > 0) {
             this.setState({
                 ovinos: res.data.map(ovino => ovino.numCaravana),
@@ -30,7 +30,7 @@ export default class CreatePatologia extends Component {
         }
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
-            const res = await axios.get('http://104.193.108.64:4000/api/patologias/' + this.props.match.params.id);
+            const res = await axios.get('http://localhost:4000/api/patologias/' + this.props.match.params.id);
             console.log(res.data)
             this.setState({
                 tipoPatologia: res.data.tipoPatologia,
@@ -52,7 +52,7 @@ export default class CreatePatologia extends Component {
                 ovino: this.state.ovinoSelected,
                 fecha: this.state.fecha
             };
-            await axios.put('http://104.193.108.64:4000/api/patologias/' + this.state._id, updatedPatologia);
+            await axios.put('http://localhost:4000/api/patologias/' + this.state._id, updatedPatologia);
         } else {
             const newPatologia = {
                 tipoPatologia: this.state.tipoPatologia,
@@ -60,7 +60,7 @@ export default class CreatePatologia extends Component {
                 ovino: this.state.ovinoSelected,
                 fecha: this.state.fecha
             };
-            axios.post('http://104.193.108.64:4000/api/patologias', newPatologia);
+            axios.post('http://localhost:4000/api/patologias', newPatologia);
         }
         window.location.href = '/patologias';
 

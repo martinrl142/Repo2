@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
-import PrivateRoute from "./components/security/PrivateRoute";
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 //import NavigationLogin from './components/nav/NavigationLogin'
 import Navigation2 from './components/nav/Navigation2'
@@ -17,6 +16,10 @@ import CreateUsEs from './components/asignar/CreateUsEs'
 import CreateServicio from './components/create/CreateServicio'
 import CreatePatologia from './components/create/CreatePatologia'
 import CreateUser from './components/create/CreateUser'
+
+// Gestion equiipo
+import CreateApunte from './components/gestionEquiipo/CreateApunte'
+import ApuntesList from './components/gestionEquiipo/ApuntesList'
 
 import './App.css';
 
@@ -39,6 +42,10 @@ function App() {
       <Route path="/editOvino/:id" component={CreateOvino} />
       <Route path="/createPatologia" component={CreatePatologia} />
       <Route path="/user" component={CreateUser} />
+      {/* Gestión Equiipo */}
+      <Route path="/createApunte" component={CreateApunte} />
+      <Route path="/apuntes" component={ApuntesList} />
+
     </div>
     </Router>
   );

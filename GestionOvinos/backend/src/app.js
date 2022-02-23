@@ -10,6 +10,7 @@ import productRoutes from "./routes/products.routes";
 import ovinoRoutes from "./routes/ovinos.routes";
 import usersRoutes from "./routes/user.routes";
 import authRoutes from "./routes/auth.routes";
+import apuntesRoutes from "./routes/apuntes.routes";
 
 import { createRoles, createAdmin} from "./libs/initialSetup";
 
@@ -49,5 +50,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/ovinos", ovinoRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/apuntes", apuntesRoutes);
+
 
 export default app;
