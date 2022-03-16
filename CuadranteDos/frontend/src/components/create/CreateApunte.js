@@ -14,58 +14,66 @@ registerLocale('es', es)
 
 
 export default function CreateApunte () {
-    
     let authorId = useParams().id;
     
     const [apuntes, setsApuntes] = useState({});
     const [editing, setsEditing] = useState(false);
-        
+    console.log(1, apuntes);    
+    
     useEffect(() => {
+        console.log(2, apuntes);
         const updateApuntes = async () => {
-            await getApuntes(authorId)
-                                .then((newApuntes) => {
-                                        setsApuntes(newApuntes);
-                                        setsEditing(true);
-                                    })
-        }
+            console.log(3, apuntes);
+            
+            if(authorId){
+                console.log(4, apuntes);
 
+                await getApuntes(authorId)
+                                    .then((newApuntes) => {
+                                            setsApuntes(newApuntes);
+                                            setsEditing(true);
+                                            console.log(5, apuntes);
+                                        })
+            }
+        }
+        console.log(6, apuntes);
+        
         updateApuntes()
-    }, [authorId]);
+    }, [authorId, apuntes]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
         if (editing) {
-            setsApuntes({
-                ...apuntes,
-                titulo: apuntes.titulo,
-                descripcion: apuntes.descripcion,
-                contenido: apuntes.contenido,
-                fechaCreacion: apuntes.fechaCreacion
-            }); 
+            console.log(7, apuntes);
+
             console.log("Actualizando: ", apuntes, apuntes._id);
             await axios.put('http://localhost:4000/api/apuntes/' + apuntes._id, apuntes, theToken());
         } else {
+            
+            console.log(8, apuntes);
             setsApuntes({
-                titulo: apuntes.titulo,
-                descripcion: apuntes.descripcion,
-                contenido: apuntes.contenido,
-                fechaCreacion: apuntes.fechaCreacion,
+                ...apuntes,
                 token: theToken()
             });
             console.log(theToken());
-            console.log(apuntes);
+            console.log(9, apuntes);
             axios.post('http://localhost:4000/api/apuntes', apuntes, theToken());
         }
-        alert("El formulario se ha enviado");
         // window.location.href = '/apuntes';
         
     }
     
     const onInputChange = (e) => {
-        setsApuntes({
-          ...apuntes,
-          [e.target.name]: e.target.value,
-        });
+        if(apuntes){
+            setsApuntes({
+                ...apuntes,
+                [e.target.name]: e.target.value,
+            });
+        }else{
+            setsApuntes({
+                [e.target.name]: e.target.value,
+            });
+        }
       };
 
 

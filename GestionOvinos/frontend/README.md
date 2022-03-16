@@ -26,6 +26,7 @@ Fecha de diagnóstico:  DD/MM/AAAA
  
 
 Formulario de Tratamientos Curativos o Paliativos
+
 Tratamientos: Varios en el momento
 Descripción Tratamiento: Texto
 Tipo de tratamiento: Curativo o Paliativos
@@ -33,6 +34,7 @@ Fecha de tratamiento: DD/MM/AAAA
  
  
 Formulario Tratamiento Preventivo
+
 Ovino: Seleccionarlo
 Descripción Tratamiento:
 Fecha de tratamiento: DD/MM/AAAA
@@ -40,6 +42,7 @@ Fecha de tratamiento: DD/MM/AAAA
  
 
 Formulario Servicio
+
 Oveja
 Carnero
 Fecha del servicio
@@ -52,6 +55,7 @@ Vacía
 
 
 Formulario de Parto
+
 Fecha:
 Tipo de parto:
 Normal

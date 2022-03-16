@@ -10,6 +10,7 @@ export const createApunte = async (req, res) => {
     token
   } = req.body;
 
+  console.log(token);
   const user = await infoToken.infoUser(token);
   console.log(user.id);
   try {
