@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { format } from 'timeago.js'
 import { Link } from 'react-router-dom'
-import Moment from 'react-moment';
 import Dropdown from 'react-bootstrap/Dropdown'
+import Badge from 'react-bootstrap/Badge'
 import { AiFillPlusCircle } from "react-icons/ai";
 import theToken from '../Token'
 
@@ -58,14 +57,13 @@ export default class EstablesList extends Component {
                                         </p>
                                         {/*
                                         <p>
-                                            Ovinos: {estable.ovinos}
+                                        Ovinos: {estable.ovinos}
                                         </p>
-                                        */}
+                                    */}
                                         <p>
-                                            Fecha de inauguración: <Moment format="DD/MM/YYYY">{estable.fechaInauguacion}</Moment>
-                                        </p>
-                                        <p>
-                                            Ingresado a Equiipo: {format(estable.createdAt)}
+                                            Total ovinos: <Badge bg="success" pill>
+                                                            {estable.ovinos.length}
+                                                        </Badge>
                                         </p>
                                     </div>
                                     <div className="card-footer d-flex justify-content-between">

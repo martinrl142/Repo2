@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
-import { format } from 'timeago.js'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -110,9 +109,6 @@ export default class createEstable extends Component {
                                     </p>
                                     <p>
                                         Tatuaje: {ovino.aptoReprodruccion}
-                                    </p>
-                                    <p>
-                                        Ingresado a OvinosApp: {format(ovino.createdAt)}
                                     </p>
                                 </div>
                                 <div className="card-footer d-flex justify-content-between">

@@ -72,9 +72,6 @@ export default class OvinosList extends Component {
                                     <p>
                                         Tatuaje: {ovino.aptoReprodruccion}
                                     </p>
-                                    <p>
-                                        Ingresado a OvinosApp: {format(ovino.createdAt)}
-                                    </p>
                                 </div>
                                 <div className="card-footer d-flex justify-content-between">
                                     <Dropdown>
