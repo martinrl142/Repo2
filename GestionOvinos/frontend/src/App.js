@@ -7,6 +7,7 @@ import Navigation2 from './components/nav/Navigation2'
 import Home from './components/home/Home'
 import EstablesList from './components/list/EstablesList'
 import EstableOvinosList from './components/list/EstableOvinosList'
+import PatologiaList from './components/list/PatologiaList'
 import Login from './components/login/Login'
 import OvinosList from './components/list/OvinosList'
 import CreateEstable from './components/create/CreateEstable'
@@ -30,6 +31,7 @@ function App() {
       <div className="container p-4">
       <Route path="/establecimientos" exact component={EstablesList} />
       <Route path="/establecimiento/:id" component={EstableOvinosList} />
+      <Route path="/patologias" component={PatologiaList} />
       <Route path="/login" exact component={Login} />
       <Route path="/" exact component={Home} />
       <Route path="/ovinos" component={OvinosList} />

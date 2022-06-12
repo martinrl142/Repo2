@@ -32,12 +32,12 @@ export default class OvinosList extends Component {
         return (
             <div className="row">
                 <div className="col-md-12 p-12">
-                    <h1>Ovinos</h1>
+                    <h1 className="textBlanco">Patologías de los ovinos</h1>
                 </div>
                 <div className="col-md-11 p-11">
                 </div> 
                 <div className="col-md-1 p-1">
-                    <Link to="/createOvino" className="nav-link"><h1><AiFillPlusCircle/></h1></Link>
+                    <Link to="/createPatologia" className="nav-link"><h1><AiFillPlusCircle/></h1></Link>
                 </div> 
                 {
                     this.state.ovinos.map(ovino => (

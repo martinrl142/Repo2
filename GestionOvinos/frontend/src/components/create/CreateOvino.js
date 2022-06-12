@@ -83,7 +83,7 @@ export default class CreateOvino extends Component {
             };
             axios.post('http://localhost:4000/api/ovinos', newOvino, theToken());
         }
-        window.location.href = '/createOvino';
+        window.location.href = '/createOvEs';
 
     }
 

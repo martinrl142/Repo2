@@ -119,75 +119,75 @@ export default class CreateOvEs extends Component {
                     {
                         this.state.ovinosData.map(ovino => { 
                                 if(ovino.establecimientos.length === 0){
-                                return <div className="col-md-3 p-2" key={ovino._id}>
-                                    <div className="card">
-                                        <div className="card-header d-flex justify-content-between">
-                                            <h5>Nombre: {ovino.nombre}</h5>
-                                        </div>
-                                        <div className="card-body">
-                                            <p>
-                                                Establecimiento: {ovino.establecimientos}
-                                            </p>
-                                            <p>
-                                                Número de caravana: {ovino.numCaravana}
-                                            </p>
-                                            <p>
-                                                Color de caravana: {ovino.colorCaravana}
-                                            </p>
-                                            <p>
-                                                Tatuaje: {ovino.tatuaje}
-                                            </p>
-                                            <p>
-                                                sexo: {ovino.sexo}
-                                            </p>
-                                            <p>
-                                                raza: {ovino.raza}
-                                            </p>
-                                            <p>
-                                                Fecha de nacimiento: <Moment format="DD/MM/YYYY">{ovino.nacimiento}</Moment>
-                                            </p>
-                                            <p>
-                                                Apto para Reproducción: {ovino.aptoReprodruccion}
-                                            </p>
-                                            <p>
-                                                Ingresado a OvinosApp: {format(ovino.createdAt)}
-                                            </p>
-                                        </div>
-                                        <div className="card-footer d-flex justify-content-between">
-                                            <form onSubmit={this.onSubmit}>
-                                                {/* SELECT ESTABLE */}
-                                                <div className="form-group">
-                                                    <p>
-                                                        Seleccionar Establecimiento:
-                                                    </p>
-                                                    <select
-                                                        className="form-control"
-                                                        value={this.state.estableSelected}
-                                                        onChange={this.onInputChange}
-                                                        name="estableSelected"
-                                                        required>
-                                                        {
-                                                            this.state.establecimientos.map(estable => (
-                                                                <option key={estable} value={estable[0]}>
-                                                                    {estable[1]}
-                                                                </option>
-                                                            ))
-                                                        }
-                                                    </select>
-                                                </div>
-                                                <button 
-                                                    className="btn btn-primary"
-                                                    onClick={() => this.setState({ ovino: ovino._id })}
-                                                >
-                                                    Colocar
-                                                    <i className="material-icons">
-                                                        assignment
-                                                    </i>
-                                                </button>
-                                            </form>
+                                    return <div className="col-md-3 p-2" key={ovino._id}>
+                                        <div className="card">
+                                            <div className="card-header d-flex justify-content-between">
+                                                <h5>Nombre: {ovino.nombre}</h5>
+                                            </div>
+                                            <div className="card-body">
+                                                <p>
+                                                    Establecimiento: {ovino.establecimientos}
+                                                </p>
+                                                <p>
+                                                    Número de caravana: {ovino.numCaravana}
+                                                </p>
+                                                <p>
+                                                    Color de caravana: {ovino.colorCaravana}
+                                                </p>
+                                                <p>
+                                                    Tatuaje: {ovino.tatuaje}
+                                                </p>
+                                                <p>
+                                                    sexo: {ovino.sexo}
+                                                </p>
+                                                <p>
+                                                    raza: {ovino.raza}
+                                                </p>
+                                                <p>
+                                                    Fecha de nacimiento: <Moment format="DD/MM/YYYY">{ovino.nacimiento}</Moment>
+                                                </p>
+                                                <p>
+                                                    Apto para Reproducción: {ovino.aptoReprodruccion}
+                                                </p>
+                                                <p>
+                                                    Ingresado a OvinosApp: {format(ovino.createdAt)}
+                                                </p>
+                                            </div>
+                                            <div className="card-footer d-flex justify-content-between">
+                                                <form onSubmit={this.onSubmit}>
+                                                    {/* SELECT ESTABLE */}
+                                                    <div className="form-group">
+                                                        <p>
+                                                            Seleccionar Establecimiento:
+                                                        </p>
+                                                        <select
+                                                            className="form-control"
+                                                            value={this.state.estableSelected}
+                                                            onChange={this.onInputChange}
+                                                            name="estableSelected"
+                                                            required>
+                                                            {
+                                                                this.state.establecimientos.map(estable => (
+                                                                    <option key={estable} value={estable[0]}>
+                                                                        {estable[1]}
+                                                                    </option>
+                                                                ))
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <button 
+                                                        className="btn btn-primary"
+                                                        onClick={() => this.setState({ ovino: ovino._id })}
+                                                    >
+                                                        Colocar
+                                                        <i className="material-icons">
+                                                            assignment
+                                                        </i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 }
                             }
                         )

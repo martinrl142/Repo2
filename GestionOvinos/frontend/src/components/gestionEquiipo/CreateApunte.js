@@ -5,7 +5,6 @@ import axios from 'axios'
 import theToken from '../Token';
 import { registerLocale } from  "react-datepicker";
 import es from 'date-fns/locale/es';
-import Markdown from "react-textarea-markdown";
 
 registerLocale('es', es)
 

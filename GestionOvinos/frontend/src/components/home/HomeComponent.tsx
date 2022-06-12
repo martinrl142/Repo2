@@ -29,7 +29,7 @@ export default function HomeComponent() {
   return (
     <div className={styles.container} onClick={() => set(state => state)}>
       <Trail open={open}>
-        <span>Equiipo</span>
+        <span>UniEquipo</span>
         <p className={styles.pclass}>Conectar para mejorar</p>
       </Trail>
     </div>

@@ -1,144 +1,152 @@
-import React, { useState, useEffect } from 'react'
-// import DatePicker from 'react-datepicker';
+import React, { Component } from 'react'
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
-import { registerLocale } from  "react-datepicker";
-import es from 'date-fns/locale/es';
-import getApuntes from '../../helpers/GetApuntes';
 import theToken from '../Token';
-import { useParams } from 'react-router';
 
-registerLocale('es', es)
-
-
-
-
-export default function CreatePatologia () {
-    
-    let authorId = useParams().id;
-    
-    const [patologia, setsPatologia] = useState({});
-    const [editing, setsEditing] = useState(false);
-        
-    useEffect(() => {
-        const updatePatologia = async () => {
-            await getPatologia(authorId)
-                                .then((newPatologia) => {
-                                        setsApuntes(newPatologia);
-                                        setsEditing(true);
-                                    })
-        }
-
-        updatePatologia()
-    }, [authorId]);
-
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        if (editing) {
-            setsPatologia({
-                ...patologia,
-                ovino: patologia.ovino,
-                nombre: patologia.nombre,
-                tipo: patologia.tipo,
-                descripcionDiagno: patologia.descripcionDiagno,
-                fechaDiagno: patologia.fechaDiagno
-            }); 
-            console.log("Actualizando: ", patologia, patologia._id);
-            await axios.put('http://localhost:4000/api/patologias/' + patologia._id, patologia, theToken());
-        } else {
-            setsPatologia({
-                ovino: patologia.ovino,
-                nombre: patologia.nombre,
-                tipo: patologia.tipo,
-                descripcionDiagno: patologia.descripcionDiagno,
-                fechaDiagno: patologia.fechaDiagno,
-                // token solo llega como params para saber el Autor
-                token: theToken()
-            });
-            console.log(theToken());
-            console.log(patologia);
-            axios.post('http://localhost:4000/api/patologias', patologia, theToken());
-        }
-        alert("El formulario se ha enviado");
-        // window.location.href = '/patologias';
-        
+export default class CreateOvino extends Component {
+    state = {
+        ovinoId: '',
+        ovinosData: [],
+        ovinos: [],
+        nomPatologia: '',
+        fechaDiagn: '',
+        tipoPatologia: '',
+        descripDiagn: '',
+        editing: false,
+        _id: ''
     }
-    
-    const onInputChange = (e) => {
-        setsPatologia({
-          ...patologia,
-          [e.target.name]: e.target.value,
-        });
-      };
 
-
-   /*  onChangeDate = nacimiento => {
-        this.setState({ nacimiento });
-    } */
+    async componentDidMount() {
+        const resOv = await axios.get('http://localhost:4000/api/ovinos', theToken());
         
-    console.log(patologia._id)
+        if (resOv.data.length > 0) {
+            this.setState({
+                ovinosData: resOv.data,
+                ovinos: resOv.data.map(ovino => [ovino._id, ovino.nombre, ovino.numCaravana]),
+            })
+        }
+        if (this.props.match.params.id) {
+            console.log(this.props.match.params.id)
+            const res = await axios.get('http://localhost:4000/api/patologias/' + this.props.match.params.id, theToken());
+            console.log(res.data)
+            this.setState({
+                ovinoId: res.data.ovinoId,
+                nomPatologia: res.data.nomPatologia,
+                fechaDiagn: res.data.fechaDiagn,
+                tipoPatologia: res.data.tipoPatologia,
+                descripDiagn: res.data.descripDiagn,
+                _id: res.data._id,
+                editing: true
+            });
+        }
+    }
 
-    return (
-        <>
+
+
+    onSubmit = async (e) => {
+        e.preventDefault();
+        if (this.state.editing) {
+            const updatedPatologia = {
+                ovinoId: this.state.ovinoId,
+                nomPatologia: this.state.nomPatologia,
+                fechaDiagn: this.state.fechaDiagn,
+                tipoPatologia: this.state.tipoPatologia,
+                descripDiagn: this.state.descripDiagn
+            };
+            await axios.put('http://localhost:4000/api/patologias/' + this.state._id, updatedPatologia, theToken());
+        } else {
+            const newPatologia = {
+                ovinoId: this.state.ovinoId,
+                nomPatologia: this.state.nomPatologia,
+                fechaDiagn: this.state.fechaDiagn,
+                tipoPatologia: this.state.tipoPatologia,
+                descripDiagn: this.state.descripDiagn,
+            };
+            axios.post('http://localhost:4000/api/patologias', newPatologia, theToken());
+        }
+        window.location.href = '/patologias';
+
+    }
+
+    onInputChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    onChangeDate = fechaDiagn => {
+        this.setState({ fechaDiagn });
+    }
+
+    render() {
+        return (
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
-                    <h4>Escribir apunte</h4>
-                    <form onSubmit={onSubmit}>
-                        {/* Seleccionar usuario */}
+                    <h4>Registrar Ovino</h4>
+                    <form onSubmit={this.onSubmit}>
+                        {/* Seleccionar ovino */}
                         <div className="form-group">
-                            <p></p>
+                            <select
+                                className="form-control"
+                                value={this.state.ovinoSelected}
+                                onChange={this.onInputChange}
+                                name="ovinoSelected"
+                                >
+                                {
+                                    this.state.ovinosData.map(ovino => (
+                                        <option key={ovino._id} value={ovino.id}>
+                                            N° de Caravana: {ovino.numCaravana} - Nombre: {ovino.nombre}
+                                        </option>
+                                    ))
+                                }
+                            </select>
                         </div>
-                        {/* Título */}
+                        {/* Nombre patología*/}
                         <div className="form-group">
-                            <h5>Título</h5>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder='Título'
-                                value = {apuntes.titulo || ''}
-                                onChange={onInputChange}
-                                name='titulo'
-                                required />
+                                placeholder="Nombre de patología"
+                                onChange={this.onInputChange}
+                                name="nombrePatologia"
+                                value={this.state.nombrePatologia}
+                            />
                         </div>
-                        {/* Descripción */}
+                        {/* Tipo de patología */}
                         <div className="form-group">
-                            <h5>Descripción</h5>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Descripción"
-                                value = {apuntes.descripcion || ''}
-                                onChange={onInputChange}
-                                name="descripcion"
-                                />
+                                placeholder="Tipo de patología"
+                                onChange={this.onInputChange}
+                                name="tipoPatologia"
+                                value={this.state.tipoPatologia}
+                            required/>
                         </div>
-                        {/* Contenido */}
+                        {/* Descripción del diagnóstico */}
                         <div className="form-group">
-                            <h5>Contenido</h5>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Contenido"
-                                value = {apuntes.contenido || ''}
-                                onChange={onInputChange}
-                                name="contenido"
-                                />
+                                placeholder="Descripción del diagnóstico"
+                                onChange={this.onInputChange}
+                                name="descripDiagn"
+                                value={this.state.descripDiagn}
+                            />
                         </div>
-
-                        {/* Fecha de Creación  */}
-                        <h5>Fecha de creación</h5>{/* 
+                        {/* Fecha de diagnóstico */}
                         <div className="form-group">
-                            <DatePicker locale="es" dateFormat="dd/MM/yyyy" className="form-control" selected={apuntes.fechaCreacion} onChange={this.onChangeDate} />
-                        </div> */}
+                            <DatePicker className="form-control" selected={this.state.fechaDiagn} onChange={this.onChangeDate} />
+                        </div>
                         <button className="btn btn-primary">
-                            Guardar
-                            <i className="material-icons">
+                            Agregar <i className="material-icons">
                                 assignment
-                            </i>
+                                </i>
                         </button>
                     </form>
                 </div>
             </div>
-        </>
-    );
+        )
+    }
 }

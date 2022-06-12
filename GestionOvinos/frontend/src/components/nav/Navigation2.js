@@ -42,7 +42,7 @@ export default class Navigation2 extends Component {
             </Navbar>*/
             <Navbar bg="dark"  variant="dark" expand={false}>
                 <Container fluid>
-                <Navbar.Brand href="/establecimientos">Equiipo</Navbar.Brand>
+                <Navbar.Brand href="/establecimientos">UniEquipo</Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar" />
                     <Navbar.Offcanvas
                         id="offcanvasNavbar"
