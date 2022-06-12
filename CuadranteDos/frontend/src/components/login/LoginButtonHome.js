@@ -8,7 +8,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Tab from 'react-bootstrap/Tab'
 import LoginComponent from './LoginComponent'
-import HomeComponent from '../home/HomeComponent'
 
 export default class LoginButtonHome extends Component {
 
@@ -52,7 +51,6 @@ export default class LoginButtonHome extends Component {
               <Row>
                   <Col xs={12}>
                       <br/>
-                      <HomeComponent />
                       <br/>
                   </Col>
               </Row>
@@ -61,7 +59,7 @@ export default class LoginButtonHome extends Component {
                 <Row>
                     <Col xs={12}>
                         <br/>
-                        <h2 className="textLeft">Herramienta colaborativa para la gestión de Ovinos</h2>
+                          <h2 className="textLeft">Herramienta colaborativa para la gestión de Ovinos</h2>
                         <br/>
                     </Col>
                 </Row>
