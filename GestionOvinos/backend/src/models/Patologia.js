@@ -1,15 +1,19 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model } from "mongoose";
 
-const establecimientoSchema = new Schema(
+const patologiaSchema = new Schema(
     {   
-        nombre: String,
-        email: String,
-        direccion: String,
-        sociedad: String,
-        user: { type: String },
-        fechaInauguracion: Date
+        nomPatologia: String,
+        fechaDiagn: String,
+        tipoPatologia: String,
+        descripDiagn: String,
+        ovinos: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: "Ovino",
+            },
+        ],
     }, {
         timestamps: true
     });
 
-module.exports = model('Establecimiento', establecimientoSchema);
+export default model("Patologia", patologiaSchema);

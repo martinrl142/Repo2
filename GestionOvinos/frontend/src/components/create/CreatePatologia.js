@@ -6,9 +6,9 @@ import theToken from '../Token';
 
 export default class CreateOvino extends Component {
     state = {
-        ovinoId: '',
-        ovinosData: [],
-        ovinos: [],
+        // ovinoId: '',
+        // ovinosData: [],
+        // ovinos: [],
         nomPatologia: '',
         fechaDiagn: '',
         tipoPatologia: '',
@@ -18,6 +18,7 @@ export default class CreateOvino extends Component {
     }
 
     async componentDidMount() {
+    {/*
         const resOv = await axios.get('http://localhost:4000/api/ovinos', theToken());
         
         if (resOv.data.length > 0) {
@@ -26,12 +27,13 @@ export default class CreateOvino extends Component {
                 ovinos: resOv.data.map(ovino => [ovino._id, ovino.nombre, ovino.numCaravana]),
             })
         }
+    */}
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
             const res = await axios.get('http://localhost:4000/api/patologias/' + this.props.match.params.id, theToken());
             console.log(res.data)
             this.setState({
-                ovinoId: res.data.ovinoId,
+                // ovinoId: res.data.ovinoId,
                 nomPatologia: res.data.nomPatologia,
                 fechaDiagn: res.data.fechaDiagn,
                 tipoPatologia: res.data.tipoPatologia,
@@ -48,7 +50,7 @@ export default class CreateOvino extends Component {
         e.preventDefault();
         if (this.state.editing) {
             const updatedPatologia = {
-                ovinoId: this.state.ovinoId,
+                // ovinoId: this.state.ovinoId,
                 nomPatologia: this.state.nomPatologia,
                 fechaDiagn: this.state.fechaDiagn,
                 tipoPatologia: this.state.tipoPatologia,
@@ -57,11 +59,11 @@ export default class CreateOvino extends Component {
             await axios.put('http://localhost:4000/api/patologias/' + this.state._id, updatedPatologia, theToken());
         } else {
             const newPatologia = {
-                ovinoId: this.state.ovinoId,
+                // ovinoId: this.state.ovinoId,
                 nomPatologia: this.state.nomPatologia,
                 fechaDiagn: this.state.fechaDiagn,
                 tipoPatologia: this.state.tipoPatologia,
-                descripDiagn: this.state.descripDiagn,
+                descripDiagn: this.state.descripDiagn
             };
             axios.post('http://localhost:4000/api/patologias', newPatologia, theToken());
         }
@@ -86,6 +88,7 @@ export default class CreateOvino extends Component {
                     <h4>Registrar Ovino</h4>
                     <form onSubmit={this.onSubmit}>
                         {/* Seleccionar ovino */}
+                        {/*
                         <div className="form-group">
                             <select
                                 className="form-control"
@@ -102,6 +105,7 @@ export default class CreateOvino extends Component {
                                 }
                             </select>
                         </div>
+                        */}
                         {/* Nombre patología*/}
                         <div className="form-group">
                             <input
@@ -109,8 +113,8 @@ export default class CreateOvino extends Component {
                                 className="form-control"
                                 placeholder="Nombre de patología"
                                 onChange={this.onInputChange}
-                                name="nombrePatologia"
-                                value={this.state.nombrePatologia}
+                                name="nomPatologia"
+                                value={this.state.nomPatologia}
                             />
                         </div>
                         {/* Tipo de patología */}

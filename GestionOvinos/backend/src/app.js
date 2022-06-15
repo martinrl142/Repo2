@@ -8,6 +8,7 @@ import pkg from "../package.json";
 import establecimientoRoutes from "./routes/establecimientos.routes";
 import productRoutes from "./routes/products.routes";
 import ovinoRoutes from "./routes/ovinos.routes";
+import patologiaRoutes from "./routes/patologias.routes";
 import usersRoutes from "./routes/user.routes";
 import authRoutes from "./routes/auth.routes";
 import apuntesRoutes from "./routes/apuntes.routes";
@@ -48,6 +49,7 @@ app.get("/", (req, res) => {
 app.use("/api/establecimientos", establecimientoRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/ovinos", ovinoRoutes);
+app.use("/api/patologias", patologiaRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/apuntes", apuntesRoutes);
