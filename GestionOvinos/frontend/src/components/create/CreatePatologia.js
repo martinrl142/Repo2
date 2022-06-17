@@ -6,7 +6,7 @@ import theToken from '../Token';
 
 export default class CreateOvino extends Component {
     state = {
-        ovinoId: '',
+        ovino: '',
         ovinoSelected: [],
         ovinos: [],
         nomPatologia: '',
@@ -31,7 +31,7 @@ export default class CreateOvino extends Component {
             const res = await axios.get('http://localhost:4000/api/patologias/' + this.props.match.params.id, theToken());
             console.log(res.data)
             this.setState({
-                ovinoId: res.data.ovinoId,
+                ovino: res.data.ovinoId,
                 nomPatologia: res.data.nomPatologia,
                 fechaDiagn: res.data.fechaDiagn,
                 tipoPatologia: res.data.tipoPatologia,
@@ -49,7 +49,7 @@ export default class CreateOvino extends Component {
         if (this.state.editing) {
             console.log(this.state.ovinoSelected)
             const updatedPatologia = {
-                ovinoId: this.state.ovinoSelected,
+                ovino: this.state.ovinoSelected,
                 nomPatologia: this.state.nomPatologia,
                 fechaDiagn: this.state.fechaDiagn,
                 tipoPatologia: this.state.tipoPatologia,
@@ -58,7 +58,7 @@ export default class CreateOvino extends Component {
             await axios.put('http://localhost:4000/api/patologias/' + this.state._id, updatedPatologia, theToken());
         } else {
             const newPatologia = {
-                ovinoId: this.state.ovinoSelected,
+                ovino: this.state.ovinoSelected,
                 nomPatologia: this.state.nomPatologia,
                 fechaDiagn: this.state.fechaDiagn,
                 tipoPatologia: this.state.tipoPatologia,
