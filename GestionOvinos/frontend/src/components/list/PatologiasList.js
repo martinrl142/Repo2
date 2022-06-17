@@ -1,30 +1,31 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { format } from 'timeago.js'
+//import { format } from 'timeago.js'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
-import Dropdown from 'react-bootstrap/Dropdown'
+//import Dropdown from 'react-bootstrap/Dropdown'
 import { AiFillPlusCircle } from "react-icons/ai"
+import theToken from '../Token'
 
-export default class OvinosList extends Component {
+export default class PatologiasList extends Component {
 
     state = {
-        ovinos: []
+        patologias: []
     }
 
     async componentDidMount() {
-        this.getOvinos();
+        this.getPatologias();
     }
 
-    getOvinos = async () => {
-        const res = await axios.get('http://localhost:4000/api/ovinos')
+    getPatologias = async () => {
+        const res = await axios.get('http://localhost:4000/api/patologias', theToken())
         this.setState({
-            ovinos: res.data
+            patologias: res.data
         });
     }
 
-    deleteOvino = async (ovinoId) => {
-        await axios.delete('http://localhost:4000/api/ovinos/' + ovinoId);
+    deletePatologia = async (patologiaId) => {
+        await axios.delete('http://localhost:4000/api/patologias/' + patologiaId, theToken());
         this.getOvinos();
     }
 
@@ -32,7 +33,7 @@ export default class OvinosList extends Component {
         return (
             <div className="row">
                 <div className="col-md-12 p-12">
-                    <h1 className="textBlanco">Patologías de los ovinos</h1>
+                    <h1 className="textBlanco">Patologias</h1>
                 </div>
                 <div className="col-md-11 p-11">
                 </div> 
@@ -40,49 +41,28 @@ export default class OvinosList extends Component {
                     <Link to="/createPatologia" className="nav-link"><h1><AiFillPlusCircle/></h1></Link>
                 </div> 
                 {
-                    this.state.ovinos.map(ovino => (
-                        <div className="col-md-4 p-2" key={ovino._id}>
+                    this.state.patologias.map(patologia => (
+                        <div className="col-md-3 p-2" key={patologia._id}>
                             <div className="card">
-                                <div className="card-header d-flex justify-content-between">
-                                    <h5>Nombre: {ovino.nombre}</h5>
+                            <div className="card-header d-flex justify-content-between">
+                                    <h5>Nombre: {patologia.nomPatologia}</h5>
                                 </div>
                                 <div className="card-body">
                                     <p>
-                                        Establecimiento: {ovino.estable}
+                                        Ovino: {patologia.ovinoId}
                                     </p>
                                     <p>
-                                        Número de caravana: {ovino.numCaravana}
+                                        Tipo: {patologia.tipoPatologia}
                                     </p>
                                     <p>
-                                        Color de caravana: {ovino.colorCaravana}
+                                        Descripción: {patologia.descripDiagn}
                                     </p>
                                     <p>
-                                        sexo: {ovino.sexo}
-                                    </p>
-                                    <p>
-                                        raza: {ovino.raza}
-                                    </p>
-                                    <p>
-                                        Fecha de nacimiento: <Moment format="DD/MM/YYYY">{ovino.nacimiento}</Moment>
+                                        Fecha de diagnóstico: <Moment format="DD/MM/YYYY">{patologia.fechaDiagn}</Moment>
                                     </p>
                                 </div>
                                 <div className="card-footer d-flex justify-content-between">
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                                            Opciones
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item href="/patologias">Patologías</Dropdown.Item>
-                                            <Dropdown.Item href="/servicios">Servicios</Dropdown.Item>
-                                            <Dropdown.Item href="/createPatologia">Agregar Patología</Dropdown.Item>
-                                            <Dropdown.Item href="/createServicio">Agregar Servicio</Dropdown.Item>
-                                            <Dropdown.Item href={"/ovinos/" + ovino._id}>Sanidades</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                    <Link to={"/editOvino/" + ovino._id} className="btn btn-primary">
-                                        <i className="material-icons">
-                                            border_color</i>
-                                    </Link>
+                                    
                                 </div>
                             </div>
                         </div>
