@@ -9,11 +9,14 @@ import theToken from '../Token';
 
 export default class CreateOvEs extends Component {
     state = {
-        patologia: '',
-        patologiasData: [],
-        patologias: [],
-        //hasta acá
+        ovino: '',
+        // Cargo en la variable ovinosData los datos pelados de todos los ovinos
+        ovinosData: [],
+        // Cargo en en ovinos el id y nombre de los ovinos
+        ovinos: [],
+        // Al seleccionar un establecimiento en el formulario se carga esta variable
         estableSelected: '',
+        // Lista de todos los establecimientos
         establecimientos: [],
         nombreEstable: '',
         nombreOvino: '',
@@ -27,47 +30,28 @@ export default class CreateOvEs extends Component {
     }
 
     async componentDidMount() {
+        // Cargo los datos de todos los ovinos en la constante resOv
         const resOv = await axios.get('http://localhost:4000/api/ovinos', theToken());
         
+        // Si hay ovinos
         if (resOv.data.length > 0) {
             this.setState({
+                // Cargo en la variable ovinosData los datos pelados de todos los ovinos
                 ovinosData: resOv.data,
+                // Cargo en en ovinos el id y nombre de los ovinos
                 ovinos: resOv.data.map(ovino => [ovino._id, ovino.nombre]),
             })
-        }        
+        }
+        // Cargo los datos de todos los establecimietos en resEs        
         const resEs = await axios.get('http://localhost:4000/api/establecimientos', theToken());
+        // Si hay establecimientos
         if (resEs.data.length > 0) {
             this.setState({
+                //Cargo en establecimientos solo la id y nombre de todos los establecimientos
                 establecimientos: resEs.data.map(establecimiento => [establecimiento._id, establecimiento.nombre]),
+                //precargo estableSelect con el primer establecimiento (id del establecimiento)
                 estableSelected: resEs.data[0]._id
             })
-        }
-        if (this.props.match.params.id) {
-            console.log(this.props.match.params.id)
-            const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
-            console.log(res.data)
-            console.log(this.state.ovino);
-            this.setState({
-                nombreEstable: res.data.nombre,
-                email: res.data.email,
-                direccion: res.data.direccion,
-                fechaInauguracion: new Date(res.data.fechaInauguracion),
-                _idEstable: res.data._id,
-                editing: true
-            });
-            console.log(this.state.ovino);
-        }
-        if (this.props.match.params.id) {
-            console.log(this.props.match.params.id)
-            const res = await axios.get('http://localhost:4000/api/ovinos/' + this.props.match.params.id, theToken());
-            console.log(res.data)
-            console.log(this.state.estableSelected);
-            this.setState({
-                nombreOvino: res.data.nombre,
-                _idOvino: res.data._id,
-                editing: true
-            });
-            console.log(this.state.estableSelected);
         }
     }
 

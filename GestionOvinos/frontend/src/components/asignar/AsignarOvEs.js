@@ -41,6 +41,7 @@ export default class CreateOvEs extends Component {
                 estableSelected: resEs.data[0]._id
             })
         }
+        /*
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
             const res = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
@@ -67,7 +68,7 @@ export default class CreateOvEs extends Component {
                 editing: true
             });
             console.log(this.state.estableSelected);
-        }
+        }*/
     }
 
     onSubmit = async (e) => {

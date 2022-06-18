@@ -96,7 +96,21 @@ export const deleteOvino = async (req, res) => {
   res.status(204).json();
 };
 
+// Agregar Establecimiento a Ovino
 export const addEstableOvino = async (req, res) => {
+  const { establecimientos } = req.body;
+  const updatedOvino = await Ovino.findByIdAndUpdate(
+  req.params.ovinoId,
+  { $push: { establecimientos: establecimientos } },
+  {
+    new: true,
+  }
+);
+res.status(204).json(updatedOvino);
+};
+
+// Agregar Patologia a Ovino
+export const addPatologiaOvino = async (req, res) => {
   const { establecimientos } = req.body;
   const updatedOvino = await Ovino.findByIdAndUpdate(
   req.params.ovinoId,

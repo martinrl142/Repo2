@@ -20,6 +20,12 @@ const ovinoSchema = new Schema(
               ref: "Establecimiento",
             },
         ],
+        patologias: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: "Patologia",
+            },
+        ],
     }, {
         timestamps: true
     });
