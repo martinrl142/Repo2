@@ -111,13 +111,13 @@ res.status(204).json(updatedOvino);
 
 // Agregar Patologia a Ovino
 export const addPatologiaOvino = async (req, res) => {
-  const { establecimientos } = req.body;
+  const { patologias } = req.body;
   const updatedOvino = await Ovino.findByIdAndUpdate(
-  req.params.ovinoId,
-  { $push: { establecimientos: establecimientos } },
-  {
-    new: true,
-  }
-);
+    req.params.ovinoId,
+    { $push: { patologias: patologias } },
+    {
+      new: true,
+    }
+  );
 res.status(204).json(updatedOvino);
 };

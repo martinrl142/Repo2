@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { format } from 'timeago.js'
+//import { format } from 'timeago.js'
 import { Link } from 'react-router-dom'
 import Moment from 'react-moment';
 import { AiFillPlusCircle } from "react-icons/ai";
@@ -62,9 +62,6 @@ export default class ApuntesList extends Component {
                                         */}
                                         <p>
                                             Fecha de creación: <Moment format="DD/MM/YYYY">{apunte.fechaCreacion}</Moment>
-                                        </p>
-                                        <p>
-                                            Ingresado a Equiipo: {format(apunte.createdAt)}
                                         </p>
                                     </div>
                                     <div className="card-footer d-flex justify-content-between">

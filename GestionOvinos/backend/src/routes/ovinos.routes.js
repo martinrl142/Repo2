@@ -37,6 +37,12 @@ router.put(
   ovinosCtrl.addEstableOvino
 );
 
+router.put(
+  "/addPatologiaOvino/:ovinoId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  ovinosCtrl.addPatologiaOvino
+);
+
 router.delete(
   "/:ovinoId",
   [authJwt.verifyToken, authJwt.isAdmin],

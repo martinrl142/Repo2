@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
-import { format } from 'timeago.js'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
 import { AiFillPlusCircle } from "react-icons/ai"
@@ -149,9 +148,6 @@ export default class CreateOvEs extends Component {
                                                 </p>
                                                 <p>
                                                     Apto para Reproducción: {ovino.aptoReprodruccion}
-                                                </p>
-                                                <p>
-                                                    Ingresado a OvinosApp: {format(ovino.createdAt)}
                                                 </p>
                                             </div>
                                             <div className="card-footer d-flex justify-content-between">

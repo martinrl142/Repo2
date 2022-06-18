@@ -70,7 +70,9 @@ export default class Navigation2 extends Component {
                             </NavDropdown>
                             <NavDropdown title="Ovinos" id="offcanvasNavbarDropdown"> 
                                 <NavDropdown.Item href="/createOvino">Registrar ovino</NavDropdown.Item>
-                                <NavDropdown.Item href="/createOvEs">Ingresar ovinos a establecimientos</NavDropdown.Item>
+                                <NavDropdown.Item href="/createOvEs">Ingresar ovino a establecimiento</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="/createPaOv">Ingresar patología a ovino</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="/ovinos">Mostrar todos</NavDropdown.Item>
                                 <NavDropdown.Divider />

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
-import { format } from 'timeago.js'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
 import { AiFillPlusCircle } from "react-icons/ai"
@@ -9,72 +8,66 @@ import theToken from '../Token';
 
 export default class CreateOvEs extends Component {
     state = {
-        ovino: '',
-        // Cargo en la variable ovinosData los datos pelados de todos los ovinos
-        ovinosData: [],
-        // Cargo en en ovinos el id y nombre de los ovinos
+        patologia: '',
+        // Cargo en la variable patologiasData los datos pelados de todos los ovinos
+        patologiasData: [],
+        // Cargo en en patologias el id y nombre de los ovinos
+        patologias: [],
+        // Al seleccionar un ovino en el formulario se carga esta variable
+        ovinoSelected: '',
+        // Lista de todos los ovinos
         ovinos: [],
-        // Al seleccionar un establecimiento en el formulario se carga esta variable
-        estableSelected: '',
-        // Lista de todos los establecimientos
-        establecimientos: [],
-        nombreEstable: '',
-        nombreOvino: '',
-        email: '',
-        direccion: '',
-        sociedad: '',
-        fechaInauguracion: new Date(),
         editing: false,
-        _idOvino: '',
-        _idEstable: ''
+        _idPatologia: '',
+        _idOvino: ''
     }
 
     async componentDidMount() {
-        // Cargo los datos de todos los ovinos en la constante resOv
-        const resOv = await axios.get('http://localhost:4000/api/ovinos', theToken());
+        // Cargo los datos de todos los patologias en la constante resOv
+        const resPa = await axios.get('http://localhost:4000/api/patologias', theToken());
         
+        // Si hay patologia/s
+        if (resPa.data.length > 0) {
+            this.setState({
+                // Cargo en la variable patologiasData los datos pelados de todos los ovinos
+                patologiasData: resPa.data,
+                // Cargo en patologias el id y nombre de las patologias
+                patologias: resPa.data.map(patologia => [patologia._id, patologia.nomPatologia]),
+            })
+        }
+        // Cargo los datos de todos los ovinos en resOv        
+        const resOv = await axios.get('http://localhost:4000/api/ovinos', theToken());
         // Si hay ovinos
         if (resOv.data.length > 0) {
             this.setState({
-                // Cargo en la variable ovinosData los datos pelados de todos los ovinos
-                ovinosData: resOv.data,
-                // Cargo en en ovinos el id y nombre de los ovinos
+                //Cargo en ovinos solo la id y nombre de todos los ovinos
                 ovinos: resOv.data.map(ovino => [ovino._id, ovino.nombre]),
-            })
-        }
-        // Cargo los datos de todos los establecimietos en resEs        
-        const resEs = await axios.get('http://localhost:4000/api/establecimientos', theToken());
-        // Si hay establecimientos
-        if (resEs.data.length > 0) {
-            this.setState({
-                //Cargo en establecimientos solo la id y nombre de todos los establecimientos
-                establecimientos: resEs.data.map(establecimiento => [establecimiento._id, establecimiento.nombre]),
-                //precargo estableSelect con el primer establecimiento (id del establecimiento)
-                estableSelected: resEs.data[0]._id
+                //precargo ovinoSelect con el primer ovino (id del ovino)
+                ovinoSelected: resOv.data[0]._id
             })
         }
     }
 
     onSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state.ovino);
-        if (this.state.ovino && this.state.ovino) {
-            console.log(this.state.ovino);
-            const addOvinoEstable = {
-                ovinos: this.state.ovino,
+        console.log(this.state.patologia);
+        if (this.state.patologia && this.state.patologia) {
+            console.log(this.state.patologia);
+            const addPatologiaOvino = {
+                patologias: this.state.patologia,
             };
-            console.log(addOvinoEstable);
-            await axios.put('http://localhost:4000/api/establecimientos/addOvinoEstable/' + this.state.estableSelected, addOvinoEstable, theToken());
-            console.log(addOvinoEstable);
+            console.log('1', 'addPatologiaOvino', this.state.ovinoSelected);
+            //await axios.put('http://localhost:4000/api/ovinos/addPatologiaOvino/' + this.state.ovinoSelected, addPatologiaOvino, theToken());
+            console.log('2', 'addPatologiaOvino', addPatologiaOvino);
             //window.location.href = '/';
-            console.log(this.state.estableSelected);
-            const addEstableOvino = {
-                establecimientos: this.state.estableSelected,
+            console.log(this.state.ovinoSelected);
+            const addOvinoPatologia = {
+                ovinos: this.state.ovinoSelected,
             };
-            console.log(addEstableOvino);
-            await axios.put('http://localhost:4000/api/ovinos/addEstableOvino/' + this.state.ovino, addEstableOvino, theToken());
-            console.log(addEstableOvino);
-            window.location.href = '/createOvEs';
+            console.log('3', 'addOvinoPatologia', this.state.patologia);
+            await axios.put('http://localhost:4000/api/patologias/addOvinoPatologia/' + this.state.patologia, addOvinoPatologia, theToken());
+            console.log('4', 'addOvinoPatologia', addOvinoPatologia);
+            window.location.href = '/createPaOv';
         }
     }
 
@@ -94,7 +87,7 @@ export default class CreateOvEs extends Component {
             <div>
                 <div className="row">
                     <div className="col-md-12 p-12">
-                        <h1 className="textBlanco">Ingresar ovino en establecimiento</h1>
+                        <h1 className="textBlanco">Ingresar patologia en ovino</h1>
                     </div>
                     <div className="col-md-11 p-11">
                     </div> 
@@ -102,59 +95,41 @@ export default class CreateOvEs extends Component {
                         <Link to="/createOvino" className="nav-link"><h1><AiFillPlusCircle/></h1></Link>
                     </div> 
                     {
-                        this.state.ovinosData.map(ovino => { 
-                                if(ovino.establecimientos.length === 0){
-                                    return <div className="col-md-3 p-2" key={ovino._id}>
+                        this.state.patologiasData.map(patologia => { 
+                                if(patologia.ovinos.length === 0){
+                                    return <div className="col-md-3 p-2" key={patologia._id}>
                                         <div className="card">
                                             <div className="card-header d-flex justify-content-between">
-                                                <h5>Nombre: {ovino.nombre}</h5>
+                                                <h5>Nombre: {patologia.nomPatologia}</h5>
                                             </div>
                                             <div className="card-body">
                                                 <p>
-                                                    Establecimiento: {ovino.establecimientos}
+                                                    Tipo: {patologia.tipoPatologia}
                                                 </p>
                                                 <p>
-                                                    Número de caravana: {ovino.numCaravana}
+                                                    Descripción: {patologia.descripDiagn}
                                                 </p>
                                                 <p>
-                                                    Color de caravana: {ovino.colorCaravana}
-                                                </p>
-                                                <p>
-                                                    Tatuaje: {ovino.tatuaje}
-                                                </p>
-                                                <p>
-                                                    sexo: {ovino.sexo}
-                                                </p>
-                                                <p>
-                                                    raza: {ovino.raza}
-                                                </p>
-                                                <p>
-                                                    Fecha de nacimiento: <Moment format="DD/MM/YYYY">{ovino.nacimiento}</Moment>
-                                                </p>
-                                                <p>
-                                                    Apto para Reproducción: {ovino.aptoReprodruccion}
-                                                </p>
-                                                <p>
-                                                    Ingresado a OvinosApp: {format(ovino.createdAt)}
+                                                    Fecha de diagnóstico: <Moment format="DD/MM/YYYY">{patologia.fechaDiagn}</Moment>
                                                 </p>
                                             </div>
                                             <div className="card-footer d-flex justify-content-between">
                                                 <form onSubmit={this.onSubmit}>
-                                                    {/* SELECT ESTABLE */}
+                                                    {/* SELECT OVINO */}
                                                     <div className="form-group">
                                                         <p>
-                                                            Seleccionar Establecimiento:
+                                                            Seleccionar Ovino:
                                                         </p>
                                                         <select
                                                             className="form-control"
-                                                            value={this.state.estableSelected}
+                                                            value={this.state.ovinoSelected}
                                                             onChange={this.onInputChange}
-                                                            name="estableSelected"
+                                                            name="ovinoSelected"
                                                             required>
                                                             {
-                                                                this.state.establecimientos.map(estable => (
-                                                                    <option key={estable} value={estable[0]}>
-                                                                        {estable[1]}
+                                                                this.state.ovinos.map(ovino => (
+                                                                    <option key={ovino} value={ovino[0]}>
+                                                                        {ovino[1]}
                                                                     </option>
                                                                 ))
                                                             }
@@ -162,7 +137,7 @@ export default class CreateOvEs extends Component {
                                                     </div>
                                                     <button 
                                                         className="btn btn-primary"
-                                                        onClick={() => this.setState({ ovino: ovino._id })}
+                                                        onClick={() => this.setState({ patologia: patologia._id })}
                                                     >
                                                         Colocar
                                                         <i className="material-icons">

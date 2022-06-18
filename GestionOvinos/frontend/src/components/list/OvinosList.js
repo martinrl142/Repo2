@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { format } from 'timeago.js'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
