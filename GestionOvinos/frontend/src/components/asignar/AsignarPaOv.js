@@ -56,17 +56,12 @@ export default class CreateOvEs extends Component {
             const addPatologiaOvino = {
                 patologias: this.state.patologia,
             };
-            console.log('1', 'addPatologiaOvino', this.state.ovinoSelected);
             //await axios.put('http://localhost:4000/api/ovinos/addPatologiaOvino/' + this.state.ovinoSelected, addPatologiaOvino, theToken());
-            console.log('2', 'addPatologiaOvino', addPatologiaOvino);
             //window.location.href = '/';
-            console.log(this.state.ovinoSelected);
             const addOvinoPatologia = {
                 ovinos: this.state.ovinoSelected,
             };
-            console.log('3', 'addOvinoPatologia', this.state.patologia);
             await axios.put('http://localhost:4000/api/patologias/addOvinoPatologia/' + this.state.patologia, addOvinoPatologia, theToken());
-            console.log('4', 'addOvinoPatologia', addOvinoPatologia);
             window.location.href = '/createPaOv';
         }
     }

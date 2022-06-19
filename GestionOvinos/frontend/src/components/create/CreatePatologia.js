@@ -7,7 +7,7 @@ import theToken from '../Token';
 export default class CreateOvino extends Component {
     state = {
         nomPatologia: '',
-        fechaDiagn: '',
+        fechaDiagn: new Date(),
         tipoPatologia: '',
         descripDiagn: '',
         editing: false,

@@ -7,7 +7,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { AiFillPlusCircle } from "react-icons/ai"
 import theToken from '../Token';
 
-export default class OvinosList extends Component {
+export default class OvinoPatologiasList extends Component {
     state = {
         nombreEstable: '',
         email: '',

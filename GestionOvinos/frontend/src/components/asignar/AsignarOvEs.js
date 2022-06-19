@@ -75,20 +75,16 @@ export default class CreateOvEs extends Component {
         console.log(this.state.ovino);
         if (this.state.ovino && this.state.ovino) {
             console.log(this.state.ovino);
-            const addOvinoEstable = {
+            /*const addOvinoEstable = {
                 ovinos: this.state.ovino,
             };
-            console.log(addOvinoEstable);
             await axios.put('http://localhost:4000/api/establecimientos/addOvinoEstable/' + this.state.estableSelected, addOvinoEstable, theToken());
-            console.log(addOvinoEstable);
-            //window.location.href = '/';
-            console.log(this.state.estableSelected);
+            window.location.href = '/';
+            */
             const addEstableOvino = {
                 establecimientos: this.state.estableSelected,
             };
-            console.log(addEstableOvino);
             await axios.put('http://localhost:4000/api/ovinos/addEstableOvino/' + this.state.ovino, addEstableOvino, theToken());
-            console.log(addEstableOvino);
             window.location.href = '/createOvEs';
         }
     }

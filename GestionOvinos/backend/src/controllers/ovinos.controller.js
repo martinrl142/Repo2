@@ -52,9 +52,10 @@ export const getOvino = async (req, res) => {
 };
 
 export const getOvinosEstable = async (req, res) => {
-  
+  // Id del establecimiento
   const { estableId } = req.params;
   const ovinosList = [];
+  // Todos los ovinos
   const ovinos = await Ovino.find();
   ovinos.map(ovino => {
         ovino.establecimientos.map(establecimiento => {
