@@ -13,7 +13,6 @@ export default class OvinoPatologiasList extends Component {
         email: '',
         direccion: '',
         fechaInauguracion: new Date(),
-        editingEstable: false,
         _idEstable: '',
 
         ovinosList: [],
@@ -29,7 +28,6 @@ export default class OvinoPatologiasList extends Component {
         pesoAlNacer: '',
         pesoAlDestete: '',
         nacio: '',
-        editingOvino: false,
         _idOvino: ''
     }
 
@@ -50,7 +48,6 @@ export default class OvinoPatologiasList extends Component {
                 fechaInauguracion: new Date(resEs.data.fechaInauguracion),
                 ovinos: resEs.data.ovinos,
                 _idEstable: resEs.data._id,
-                editingEstable: true
             });
         }
         

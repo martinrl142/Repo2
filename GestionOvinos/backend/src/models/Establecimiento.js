@@ -7,19 +7,6 @@ const establecimientoSchema = new Schema(
         direccion: String,
         //user: { type: String },
         fechaInauguracion: Date,
-        idPropietario: String,
-        ovinos: [
-            {
-              type: Schema.Types.ObjectId,
-              ref: "Ovino",
-            },
-        ],
-        users: [
-            {
-              type: Schema.Types.ObjectId,
-              ref: "Users",
-            },
-        ],
     }, {
         timestamps: true,
         versionKey: false

@@ -62,7 +62,7 @@ export default class EstablesList extends Component {
                                     */}
                                         <p>
                                             Total ovinos: <Badge bg="success" pill>
-                                                            {estable.ovinos.length}
+                                                            {/*estable.ovinos.length*/}
                                                         </Badge>
                                         </p>
                                     </div>
