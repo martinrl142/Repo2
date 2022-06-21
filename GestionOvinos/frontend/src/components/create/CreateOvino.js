@@ -39,7 +39,7 @@ export default class CreateOvino extends Component {
                 aptoReproduccion: res.data.aptoReproduccion,
                 pesoAlNacer: res.data.pesoAlNacer,
                 pesoAlDestete: res.data.pesoAlDestete,
-                nacio: res.data.nacimiento,
+                nacio: res.data.nacio,
                 _id: res.data._id,
                 editing: true
             });

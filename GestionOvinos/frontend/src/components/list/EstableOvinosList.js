@@ -117,7 +117,7 @@ export default class OvinosList extends Component {
                                             Opciones
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item href="/patologias">Patologías</Dropdown.Item>
+                                            <Dropdown.Item href={"/ovino/" + ovino._id}>Patologias</Dropdown.Item>
                                             <Dropdown.Item href="/servicios">Servicios</Dropdown.Item>
                                             <Dropdown.Item href="/createPatologia">Agregar Patología</Dropdown.Item>
                                             <Dropdown.Item href="/createServicio">Agregar Servicio</Dropdown.Item>

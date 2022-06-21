@@ -51,7 +51,7 @@ export default class CreateOvino extends Component {
             };
             axios.post('http://localhost:4000/api/patologias', newPatologia, theToken());
         }
-        window.location.href = '/patologias';
+        window.location.href = '/createPaOv';
 
     }
 

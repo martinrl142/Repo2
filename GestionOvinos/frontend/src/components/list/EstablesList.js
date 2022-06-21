@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
-import Badge from 'react-bootstrap/Badge'
+// import Badge from 'react-bootstrap/Badge'
 import { AiFillPlusCircle } from "react-icons/ai";
 import theToken from '../Token'
 
@@ -59,12 +59,12 @@ export default class EstablesList extends Component {
                                         <p>
                                         Ovinos: {estable.ovinos}
                                         </p>
-                                    */}
                                         <p>
                                             Total ovinos: <Badge bg="success" pill>
-                                                            {/*estable.ovinos.length*/}
+                                                            estable.ovinos.length
                                                         </Badge>
                                         </p>
+                                        */}
                                     </div>
                                     <div className="card-footer d-flex justify-content-between">
                                         <Dropdown>
