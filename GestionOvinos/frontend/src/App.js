@@ -45,6 +45,7 @@ function App() {
       <Route path="/createUsEs" component={CreateUsEs} />
       <Route path="/editOvino/:id" component={CreateOvino} />
       <Route path="/createPatologia" component={CreatePatologia} />
+      <Route path="/editPatologia/:id" component={CreatePatologia} />
       <Route path="/user" component={CreateUser} />
       {/* Gestión Equiipo */}
       <Route path="/createApunte" component={CreateApunte} />

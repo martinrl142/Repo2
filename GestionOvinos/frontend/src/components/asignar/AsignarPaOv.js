@@ -87,7 +87,7 @@ export default class CreateOvEs extends Component {
                     <div className="col-md-11 p-11">
                     </div> 
                     <div className="col-md-1 p-1">
-                        <Link to="/createOvino" className="nav-link"><h1><AiFillPlusCircle/></h1></Link>
+                        <Link to="/createPatologia" className="nav-link"><h1><AiFillPlusCircle/></h1></Link>
                     </div> 
                     {
                         this.state.patologiasData.map(patologia => { 

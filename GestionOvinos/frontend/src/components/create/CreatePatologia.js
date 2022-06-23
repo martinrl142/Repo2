@@ -21,16 +21,15 @@ export default class CreateOvino extends Component {
             console.log(res.data)
             this.setState({
                 nomPatologia: res.data.nomPatologia,
-                fechaDiagn: res.data.fechaDiagn,
+                fechaDiagn: new Date(res.data.fechaDiagn),
                 tipoPatologia: res.data.tipoPatologia,
                 descripDiagn: res.data.descripDiagn,
                 _id: res.data._id,
                 editing: true
             });
+            console.log(res.data)
         }
     }
-
-
 
     onSubmit = async (e) => {
         e.preventDefault();
@@ -51,7 +50,7 @@ export default class CreateOvino extends Component {
             };
             axios.post('http://localhost:4000/api/patologias', newPatologia, theToken());
         }
-        window.location.href = '/createPaOv';
+        window.location.href = '/createPatologia';
 
     }
 

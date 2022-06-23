@@ -15,7 +15,7 @@ router.get(
   patologiasCtrl.getPatologia);
 
 router.get(
-  "/patologia/:patologiaId",
+  "/ovino/:ovinoId",
   [authJwt.verifyToken, authJwt.isModerator],
   patologiasCtrl.getPatologiasOvino);
 
