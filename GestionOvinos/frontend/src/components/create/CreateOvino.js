@@ -9,15 +9,19 @@ export default class CreateOvino extends Component {
         nombre: '',
         numCaravana: '',
         colorCaravana: '',
-        sexo: '',
+        sexoSelected: 'Hembra',
+        sexo: ['Hembra', 'Macho'],
         raza: '',
-        cruzamiento: '',
+        cruzamientoSelected: 'PI',
+        cruzamiento: ['PI', 'MO', 'CM'],
         tatuaje: '',
         nacimiento: new Date(),
-        aptoReproduccion: '',
+        aptoReproduccionSelected: 'Si',
+        aptoReproduccion: ['Si', 'No'],
         pesoAlNacer: '',
         pesoAlDestete: '',
-        nacio: '',
+        nacioSelected: 'Vivo',
+        nacio: ['Vivo', 'Muerto'],
         editing: false,
         _id: ''
     }
@@ -31,15 +35,15 @@ export default class CreateOvino extends Component {
                 nombre: res.data.nombre,
                 numCaravana: res.data.numCaravana,
                 colorCaravana: res.data.colorCaravana,
-                sexo: res.data.sexo,
+                sexoSelected: res.data.sexo,
                 raza: res.data.raza,
-                cruzamiento: res.data.cruzamiento,
+                cruzamientoSelected: res.data.cruzamiento,
                 tatuaje: res.data.tatuaje,
                 nacimiento: new Date(res.data.nacimiento),
-                aptoReproduccion: res.data.aptoReproduccion,
+                aptoReproduccionSelected: res.data.aptoReproduccion,
                 pesoAlNacer: res.data.pesoAlNacer,
                 pesoAlDestete: res.data.pesoAlDestete,
-                nacio: res.data.nacio,
+                nacioSelected: res.data.nacio,
                 _id: res.data._id,
                 editing: true
             });
@@ -57,13 +61,13 @@ export default class CreateOvino extends Component {
                 colorCaravana: this.state.colorCaravana,
                 sexo: this.state.sexo,
                 raza: this.state.raza,
-                cruzamiento: this.state.cruzamiento,
+                cruzamiento: this.state.cruzamientoSelected,
                 tatuaje: this.state.tatuaje,
                 nacimiento: this.state.nacimiento,
-                aptoReproduccion: this.state.aptoReproduccion,
+                aptoReproduccion: this.state.aptoReproduccionSelected,
                 pesoAlNacer: this.state.pesoAlNacer,
                 pesoAlDestete: this.state.pesoAlDestete,
-                nacio: this.state.nacio
+                nacio: this.state.nacioSelected
             };
             await axios.put('http://localhost:4000/api/ovinos/' + this.state._id, updatedOvino, theToken());
         } else {
@@ -71,15 +75,15 @@ export default class CreateOvino extends Component {
                 nombre: this.state.nombre,
                 numCaravana: this.state.numCaravana,
                 colorCaravana: this.state.colorCaravana,
-                sexo: this.state.sexo,
+                sexo: this.state.sexoSelected,
                 raza: this.state.raza,
-                cruzamiento: this.state.cruzamiento,
+                cruzamiento: this.state.cruzamientoSelected,
                 tatuaje: this.state.tatuaje,
                 nacimiento: this.state.nacimiento,
-                aptoReproduccion: this.state.aptoReproduccion,
+                aptoReproduccion: this.state.aptoReproduccionSelected,
                 pesoAlNacer: this.state.pesoAlNacer,
                 pesoAlDestete: this.state.pesoAlDestete,
-                nacio: this.state.nacio
+                nacio: this.state.nacioSelected
             };
             axios.post('http://localhost:4000/api/ovinos', newOvino, theToken());
         }
@@ -102,6 +106,7 @@ export default class CreateOvino extends Component {
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
                     <h4>Registrar Ovino</h4>
+                    <br></br>
                     <form onSubmit={this.onSubmit}>
                         {/* Seleccionar establecimiento */}
                         {/*<div className="form-group">
@@ -122,6 +127,7 @@ export default class CreateOvino extends Component {
                         </div>*/}
                         {/* Ovino nombre */}
                         <div className="form-group">
+                            <h6>Nombre</h6>
                             <input
                                 type="text"
                                 className="form-control"
@@ -131,10 +137,12 @@ export default class CreateOvino extends Component {
                                 value={this.state.nombre}
                             />
                         </div>
+                        <br></br>
                         {/* Ovino numCaravana */}
                         <div className="form-group">
+                            <h6>Número de caravana</h6>
                             <input
-                                type="text"
+                                type="number"
                                 className="form-control"
                                 placeholder="Número de caravana"
                                 onChange={this.onInputChange}
@@ -142,8 +150,10 @@ export default class CreateOvino extends Component {
                                 value={this.state.numCaravana}
                             required/>
                         </div>
+                        <br></br>
                         {/* Ovino colorCaravana */}
                         <div className="form-group">
+                            <h6>Color de caravana</h6>
                             <input
                                 type="text"
                                 className="form-control"
@@ -153,6 +163,7 @@ export default class CreateOvino extends Component {
                                 value={this.state.colorCaravana}
                             />
                         </div>
+                        {/* 
                         <div className="form-group">
                             <input
                                 type="text"
@@ -163,8 +174,11 @@ export default class CreateOvino extends Component {
                                 value={this.state.sexo}
                             />
                         </div>
-                        {/* Seleccionar sexo 
+                        */}
+                        {/*Seleccionar sexo*/}
+                        <br></br>
                         <div className="form-group">
+                            <h6>Sexo</h6>    
                             <select
                                 className="form-control"
                                 value={this.state.sexoSelected}
@@ -173,15 +187,17 @@ export default class CreateOvino extends Component {
                                 >
                                 {   
                                     this.state.sexo.map(sexo => (
-                                        <option key={sexo[1]} value={sexo[1]}>
-                                            {sexo[0]}
+                                        <option key={sexo} value={sexo}>
+                                            {sexo}
                                         </option>
                                     ))
                                 }
                             </select>
-                        </div>*/}
+                        </div>
+                        <br></br>
                         {/* Ovino raza */}
                         <div className="form-group">
+                            <h6>Raza</h6>
                             <input
                                 type="text"
                                 className="form-control"
@@ -191,6 +207,7 @@ export default class CreateOvino extends Component {
                                 value={this.state.raza}
                             />
                         </div>
+                            {/* 
                         <div className="form-group">
                             <input
                                 type="text"
@@ -201,8 +218,11 @@ export default class CreateOvino extends Component {
                                 value={this.state.cruzamiento}
                             />
                         </div>
-                        {/* Seleccionar cruzamiento 
+                            */}
+                        {/*Seleccionar cruzamiento*/}
+                        <br></br>
                         <div className="form-group">
+                            <h6>Cruzamiento</h6>
                             <select
                                 className="form-control"
                                 value={this.state.cruzamientoSelected}
@@ -211,15 +231,17 @@ export default class CreateOvino extends Component {
                                 >
                                 {
                                     this.state.cruzamiento.map(cruzamiento => (
-                                        <option key={cruzamiento[1]} value={cruzamiento[1]}>
-                                            {cruzamiento[0]}
+                                        <option key={cruzamiento} value={cruzamiento}>
+                                            {cruzamiento}
                                         </option>
                                     ))
                                 }
                             </select>
-                        </div>*/}
+                        </div>
+                        <br></br>
                         {/* Ovino tatuaje */}
                         <div className="form-group">
+                            <h6>Tatuaje</h6>
                             <input
                                 type="text"
                                 className="form-control"
@@ -229,10 +251,12 @@ export default class CreateOvino extends Component {
                                 value={this.state.tatuaje}
                             />
                         </div>
+                        <br></br>
                         {/* Ovino pesoAlNacer */}
                         <div className="form-group">
+                            <h6>Peso al nacer</h6>
                             <input
-                                type="text"
+                                type="number"
                                 className="form-control"
                                 placeholder="Peso al Nacer"
                                 onChange={this.onInputChange}
@@ -240,8 +264,10 @@ export default class CreateOvino extends Component {
                                 value={this.state.pesoAlNacer}
                             />
                         </div>
+                        <br></br>
                         {/* Ovino pesoAlDestete */}
                         <div className="form-group">
+                            <h6>Peso al destete</h6>
                             <input
                                 type="text"
                                 className="form-control"
@@ -251,6 +277,7 @@ export default class CreateOvino extends Component {
                                 value={this.state.pesoAlDestete}
                             />
                         </div>
+                            {/*
                         <div className="form-group">
                             <input
                                 type="text"
@@ -261,8 +288,11 @@ export default class CreateOvino extends Component {
                                 value={this.state.aptoReproduccion}
                             />
                         </div>
-                        {/* Seleccionar aptoReproduccion 
+                        */}
+                        <br></br>
+                        {/* Seleccionar aptoReproduccion */} 
                         <div className="form-group">
+                            <h6>Apto para reproducción</h6>
                             <select
                                 className="form-control"
                                 value={this.state.aptoReproduccionSelected}
@@ -271,13 +301,14 @@ export default class CreateOvino extends Component {
                                 >
                                 {
                                     this.state.aptoReproduccion.map(aptoReproduccion => (
-                                        <option key={aptoReproduccion[1]} value={aptoReproduccion[1]}>
-                                            {aptoReproduccion[0]}
+                                        <option key={aptoReproduccion} value={aptoReproduccion}>
+                                            {aptoReproduccion}
                                         </option>
                                     ))
                                 }
                             </select>
-                        </div>*/}
+                        </div>
+                        {/*
                         <div className="form-group">
                             <input
                                 type="text"
@@ -288,8 +319,11 @@ export default class CreateOvino extends Component {
                                 value={this.state.nacio}
                             />
                         </div>
-                        {/* Seleccionar nacio 
+                            */}
+                        {/* Seleccionar nacio */} 
+                        <br></br>
                         <div className="form-group">
+                            <h6>Nacio</h6>
                             <select
                                 className="form-control"
                                 value={this.state.nacioSelected}
@@ -298,15 +332,17 @@ export default class CreateOvino extends Component {
                                 >
                                 {
                                     this.state.nacio.map(nacio => (
-                                        <option key={nacio[1]} value={nacio[1]}>
-                                            {nacio[0]}
+                                        <option key={nacio} value={nacio}>
+                                            {nacio}
                                         </option>
                                     ))
                                 }
                             </select>
-                        </div>*/}
+                        </div>
                         {/* Ovino Nacimiento */}
+                        <br></br>
                         <div className="form-group">
+                            <h6>Fecha de nacimiento</h6>
                             <DatePicker className="form-control" selected={this.state.nacimiento} onChange={this.onChangeDate} />
                         </div>
                         <button className="btn btn-primary">
