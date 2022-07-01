@@ -19,6 +19,11 @@ router.get(
   [authJwt.verifyToken, authJwt.isModerator],
   ovinosCtrl.getOvinosEstable);
 
+  router.get(
+    "/ovino/:padreId",
+    [authJwt.verifyToken, authJwt.isModerator],
+    ovinosCtrl.getOvinosEstable);
+  
 router.post(
   "/",
   [authJwt.verifyToken, authJwt.isModerator],
@@ -41,6 +46,12 @@ router.put(
   "/addPatologiaOvino/:ovinoId",
   [authJwt.verifyToken, authJwt.isModerator],
   ovinosCtrl.addPatologiaOvino
+);
+
+router.put(
+  "/addPadreOvino/:ovinoId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  ovinosCtrl.addPadreOvino
 );
 
 router.delete(

@@ -26,6 +26,18 @@ const ovinoSchema = new Schema(
               ref: "Patologia",
             },
         ],
+        elPadre: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: "Padre",
+            },
+        ],
+        laMadre: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: "Madre",
+            },
+        ],
     }, {
         timestamps: true
     });

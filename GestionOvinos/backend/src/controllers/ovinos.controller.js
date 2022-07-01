@@ -122,3 +122,16 @@ export const addPatologiaOvino = async (req, res) => {
   );
 res.status(204).json(updatedOvino);
 };
+
+// Agregar Padre a Ovino
+export const addPadreOvino = async (req, res) => {
+  const { elPadre } = req.body;
+  const updatedOvino = await Ovino.findByIdAndUpdate(
+  req.params.ovinoId,
+  { $push: { elPadre: elPadre } },
+  {
+    new: true,
+  }
+);
+res.status(204).json(updatedOvino);
+};
