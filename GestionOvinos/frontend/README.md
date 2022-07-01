@@ -1,3 +1,5 @@
+# Pronto
+
 Formulario Ovinos
  
 Nombre: Letras y números
@@ -19,11 +21,11 @@ Formulario Patologías
  
 Ovino: Seleccionarlo
 Nombre patología: Texto
-Fecha de diagnóstico: DD/MM/AAAA
 Tipo de patología: Texto
 Descripción del diagnóstico: Texto
 Fecha de diagnóstico:  DD/MM/AAAA
  
+# Falta
 
 Formulario de Tratamientos Curativos o Paliativos
 
