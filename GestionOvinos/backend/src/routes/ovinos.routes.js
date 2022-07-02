@@ -19,10 +19,20 @@ router.get(
   [authJwt.verifyToken, authJwt.isModerator],
   ovinosCtrl.getOvinosEstable);
 
-  router.get(
-    "/ovino/:padreId",
-    [authJwt.verifyToken, authJwt.isModerator],
-    ovinosCtrl.getOvinosEstable);
+router.get(
+  "/machos/padres",
+  [authJwt.verifyToken, authJwt.isModerator],
+  ovinosCtrl.getOvinosMachos);  
+
+router.get(
+  "/hembras/madres",
+  [authJwt.verifyToken, authJwt.isModerator],
+  ovinosCtrl.getOvinosHembras); 
+  
+router.get(
+  "/ovino/:padreId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  ovinosCtrl.getOvinosEstable);
   
 router.post(
   "/",
@@ -52,6 +62,12 @@ router.put(
   "/addPadreOvino/:ovinoId",
   [authJwt.verifyToken, authJwt.isModerator],
   ovinosCtrl.addPadreOvino
+);
+
+router.put(
+  "/addMadreOvino/:ovinoId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  ovinosCtrl.addMadreOvino
 );
 
 router.delete(

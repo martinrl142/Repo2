@@ -72,6 +72,36 @@ export const getOvinosEstable = async (req, res) => {
   return res.json(ovinosList);
 };
 
+export const getOvinosMachos = async (req, res) => {
+  const ovinosList = [];
+  // Todos los ovinos
+  const ovinos = await Ovino.find();
+  ovinos.map(ovino => {
+      if(ovino.sexo.toString() === 'Macho'){
+        console.log(ovino);
+        ovinosList.push(ovino); 
+      }
+    }
+  );
+  console.log(ovinosList);
+  return res.json(ovinosList);
+};
+
+export const getOvinosHembras = async (req, res) => {
+  const ovinosList = [];
+  // Todos los ovinos
+  const ovinos = await Ovino.find();
+  ovinos.map(ovino => {
+      if(ovino.sexo.toString() === 'Hembra'){
+        console.log(ovino);
+        ovinosList.push(ovino); 
+      }
+    }
+  );
+  console.log(ovinosList);
+  return res.json(ovinosList);
+};
+
 export const getOvinos = async (req, res) => {
   const ovinos = await Ovino.find();
   return res.json(ovinos);
@@ -127,11 +157,24 @@ res.status(204).json(updatedOvino);
 export const addPadreOvino = async (req, res) => {
   const { elPadre } = req.body;
   const updatedOvino = await Ovino.findByIdAndUpdate(
-  req.params.ovinoId,
-  { $push: { elPadre: elPadre } },
-  {
-    new: true,
-  }
-);
+    req.params.ovinoId,
+    { $push: { elPadre: elPadre } },
+    {
+      new: true,
+    }
+  );
 res.status(204).json(updatedOvino);
+};
+
+// Agregar Madre a Ovino
+export const addMadreOvino = async (req, res) => {
+  const { laMadre } = req.body;
+  const updatedOvino = await Ovino.findByIdAndUpdate(
+    req.params.ovinoId,
+    { $push: { laMadre: laMadre } },
+    {
+      new: true,
+    }
+  );
+  res.status(204).json(updatedOvino);
 };

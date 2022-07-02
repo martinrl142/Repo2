@@ -29,13 +29,13 @@ const ovinoSchema = new Schema(
         elPadre: [
             {
               type: Schema.Types.ObjectId,
-              ref: "Padre",
+              ref: "Ovino",
             },
         ],
         laMadre: [
             {
               type: Schema.Types.ObjectId,
-              ref: "Madre",
+              ref: "Ovino",
             },
         ],
     }, {

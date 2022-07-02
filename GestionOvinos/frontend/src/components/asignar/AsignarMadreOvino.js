@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { AiFillPlusCircle } from "react-icons/ai"
 import theToken from '../Token';
 
-export default class asignarPadreOvino extends Component {
+export default class AsignarMadreOvino extends Component {
     state = {
         ovino: '',
         // Cargo en la variable patologiasData los datos pelados de todos los ovinos
@@ -14,12 +14,12 @@ export default class asignarPadreOvino extends Component {
         // Cargo en patologias el id y nombre de los ovinos
         ovinos: [],
         // Al seleccionar un ovino en el formulario se carga esta variable
-        padreSelected: '',
+        madreSelected: '',
         // Lista de todos los ovinos
-        elPadre: [],
+        laMadre: [],
         editing: false,
         _idOvino: '',
-        _idPadre: ''
+        _idMadre: ''
     }
 
     async componentDidMount() {
@@ -36,17 +36,16 @@ export default class asignarPadreOvino extends Component {
             })
         }
         // Cargo los datos de todos los ovinos en resOv        
-        const resPa = await axios.get('http://localhost:4000/api/ovinos/machos/padres', theToken());
-        // Si hay ovinos
-        if (resPa.data.length > 0) {
+        const resMa = await axios.get('http://localhost:4000/api/ovinos/hembras/madres', theToken());
+            // Si hay ovinos
+        if (resMa.data.length > 0) {
             this.setState({
                 //Cargo en ovinos solo la id y nombre de todos los ovinos
-                elPadre: resPa.data.map(padre => [padre._id, padre.nombre, padre.numCaravana]),
+                laMadre: resMa.data.map(madre => [madre._id, madre.nombre, madre.numCaravana]),
                 //precargo ovinoSelect con el primer ovino (id del ovino)
-                padreSelected: resPa.data[0]._id
+                madreSelected: resMa.data[0]._id
             })
         }
-        
     }
 
     onSubmit = async (e) => {
@@ -59,12 +58,12 @@ export default class asignarPadreOvino extends Component {
             };
             await axios.put('http://localhost:4000/api/ovinos/addOvinoPadre/' + this.state.padreSelected, addOvinoPadre, theToken());
             window.location.href = '/';*/
-            const addPadreOvino = {
+            const addMadreOvino = {
                 //Lista de mayores en controllers
-                elPadre: this.state.padreSelected,
+                laMadre: this.state.madreSelected,
             };
-            await axios.put('http://localhost:4000/api/ovinos/addPadreOvino/' + this.state.ovino, addPadreOvino, theToken());
-            window.location.href = '/asignarPadreOvino';
+            await axios.put('http://localhost:4000/api/ovinos/addMadreOvino/' + this.state.ovino, addMadreOvino, theToken());
+            window.location.href = '/asignarMadreOvino';
         }
     }
 
@@ -84,7 +83,7 @@ export default class asignarPadreOvino extends Component {
             <div>
                 <div className="row">
                     <div className="col-md-12 p-12">
-                        <h1 className="textBlanco">Asociar Padre a un Ovino</h1>
+                        <h1 className="textBlanco">Asociar Madre a un Ovino</h1>
                     </div>
                     <div className="col-md-11 p-11">
                     </div> 
@@ -93,7 +92,7 @@ export default class asignarPadreOvino extends Component {
                     </div> 
                     {
                         this.state.ovinosData.map(ovino => { 
-                                if(ovino.elPadre.length === 0){
+                                if(ovino.laMadre.length === 0){
                                     return <div className="col-md-3 p-2" key={ovino._id}>
                                         <div className="card">
                                             <div className="card-header d-flex justify-content-between">
@@ -106,21 +105,21 @@ export default class asignarPadreOvino extends Component {
                                             </div>
                                             <div className="card-footer d-flex justify-content-between">
                                                 <form onSubmit={this.onSubmit}>
-                                                    {/* SELECT PADRE */}
+                                                    {/* SELECT MADRE */}
                                                     <div className="form-group">
                                                         <p>
-                                                            Seleccionar Padre:
+                                                            Seleccionar Madre:
                                                         </p>
                                                         <select
                                                             className="form-control"
-                                                            value={this.state.padreSelected}
+                                                            value={this.state.madreSelected}
                                                             onChange={this.onInputChange}
-                                                            name="padreSelected"
+                                                            name="madreSelected"
                                                             required>
                                                             {
-                                                                this.state.elPadre.map(padre => (
-                                                                    <option key={padre} value={padre[0]}>
-                                                                        {padre[1] + ' - ' + padre[2]}
+                                                                this.state.laMadre.map(madre => (
+                                                                    <option key={madre} value={madre[0]}>
+                                                                        {madre[1] + ' - ' + madre[2]}
                                                                     </option>
                                                                 ))
                                                             }
