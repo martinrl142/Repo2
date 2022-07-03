@@ -6,64 +6,64 @@ import { Link } from 'react-router-dom'
 import { AiFillPlusCircle } from "react-icons/ai"
 import theToken from '../Token';
 
-export default class AsignarMadreOvino extends Component {
+export default class AsignarMayorMenor extends Component {
     state = {
-        ovino: '',
+        menor: '',
         // Cargo en la variable patologiasData los datos pelados de todos los ovinos
-        ovinosData: [],
+        menoresData: [],
         // Cargo en patologias el id y nombre de los ovinos
-        ovinos: [],
+        menores: [],
         // Al seleccionar un ovino en el formulario se carga esta variable
-        madreSelected: '',
+        mayorSelected: '',
         // Lista de todos los ovinos
-        laMadre: [],
+        mayores: [],
         editing: false,
-        _idOvino: '',
-        _idMadre: ''
+        _idMenor: '',
+        _idMayor: ''
     }
 
     async componentDidMount() {
         // Cargo los datos de todos los patologias en la constante resOv
-        const resOv = await axios.get('http://localhost:4000/api/ovinos', theToken());
+        const resMe = await axios.get('http://localhost:4000/api/menores', theToken());
         
         // Si hay patologia/s
-        if (resOv.data.length > 0) {
+        if (resMe.data.length > 0) {
             this.setState({
                 // Cargo en la variable patologiasData los datos pelados de todos los ovinos
-                ovinosData: resOv.data,
+                menoresData: resMe.data,
                 // Cargo en patologias el id y nombre de las patologias
-                ovinos: resOv.data.map(ovino => [ovino._id, ovino.nombre]),
+                menores: resMe.data.map(menor => [menor._id, menor.nomMenor]),
             })
         }
         // Cargo los datos de todos los ovinos en resOv        
-        const resMa = await axios.get('http://localhost:4000/api/ovinos/hembras/madres', theToken());
-            // Si hay ovinos
+        const resMa = await axios.get('http://localhost:4000/api/mayores', theToken());
+        // Si hay ovinos
         if (resMa.data.length > 0) {
             this.setState({
                 //Cargo en ovinos solo la id y nombre de todos los ovinos
-                laMadre: resMa.data.map(madre => [madre._id, madre.nombre, madre.numCaravana]),
+                mayores: resMa.data.map(mayor => [mayor._id, mayor.nombre]),
                 //precargo ovinoSelect con el primer ovino (id del ovino)
-                madreSelected: resMa.data[0]._id
+                mayorSelected: resMa.data[0]._id
             })
         }
     }
 
     onSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state.ovino);
-        if (this.state.ovino && this.state.ovino) {
-            console.log(this.state.ovino);
-            /*const addOvinoPadre = {
-                ovinos: this.state.ovino,
+        console.log(this.state.menor);
+        if (this.state.menor && this.state.menor) {
+            console.log(this.state.menor);
+            const addMenorMayor = {
+                menores: this.state.menor,
             };
-            await axios.put('http://localhost:4000/api/ovinos/addOvinoPadre/' + this.state.padreSelected, addOvinoPadre, theToken());
-            window.location.href = '/';*/
-            const addMadreOvino = {
+            //await axios.put('http://localhost:4000/api/mayores/addMenorMayor/' + this.state.mayorSelected, addMenorMayor, theToken());
+            //window.location.href = '/';
+            const addMayorMenor = {
                 //Lista de mayores en controllers
-                laMadre: this.state.madreSelected,
+                mayores: this.state.mayorSelected,
             };
-            await axios.put('http://localhost:4000/api/ovinos/addMadreOvino/' + this.state.ovino, addMadreOvino, theToken());
-            window.location.href = '/asignarMadreOvino';
+            await axios.put('http://localhost:4000/api/menores/addMayorMenor/' + this.state.ovino, addPadreOvino, theToken());
+            window.location.href = '/createMeMa';
         }
     }
 
@@ -83,43 +83,43 @@ export default class AsignarMadreOvino extends Component {
             <div>
                 <div className="row">
                     <div className="col-md-12 p-12">
-                        <h1 className="textBlanco">Asociar Madre a un Ovino</h1>
+                        <h1 className="textBlanco">Asociar al mayor un menor</h1>
                     </div>
                     <div className="col-md-11 p-11">
                     </div> 
                     <div className="col-md-1 p-1">
-                        <Link to="/createOvino" className="nav-link"><h1><AiFillPlusCircle/></h1></Link>
+                        <Link to="/createMenor" className="nav-link"><h1><AiFillPlusCircle/></h1></Link>
                     </div> 
                     {
-                        this.state.ovinosData.map(ovino => { 
-                                if(ovino.laMadre === undefined){
-                                    return <div className="col-md-3 p-2" key={ovino._id}>
+                        this.state.menoresData.map(menor => { 
+                                if(menor.mayor.length === 0){
+                                    return <div className="col-md-3 p-2" key={menor._id}>
                                         <div className="card">
                                             <div className="card-header d-flex justify-content-between">
-                                                <h5>Nombre: {ovino.nombre}</h5>
+                                                <h5>Nombre: {menor.nomMenor}</h5>
                                             </div>
                                             <div className="card-body">
                                                 <p>
-                                                    Número de caravana: {ovino.numCaravana}
+                                                    Tipo: {menor.tipoMenor}
                                                 </p>
                                             </div>
                                             <div className="card-footer d-flex justify-content-between">
                                                 <form onSubmit={this.onSubmit}>
-                                                    {/* SELECT MADRE */}
+                                                    {/* SELECT MAYOR */}
                                                     <div className="form-group">
                                                         <p>
-                                                            Seleccionar Madre:
+                                                            Seleccionar Mayor:
                                                         </p>
                                                         <select
                                                             className="form-control"
-                                                            value={this.state.madreSelected}
+                                                            value={this.state.mayorSelected}
                                                             onChange={this.onInputChange}
-                                                            name="madreSelected"
+                                                            name="mayorSelected"
                                                             required>
                                                             {
-                                                                this.state.laMadre.map(madre => (
-                                                                    <option key={madre} value={madre[0]}>
-                                                                        {madre[1] + ' - ' + madre[2]}
+                                                                this.state.mayores.map(mayor => (
+                                                                    <option key={mayor} value={mayor[0]}>
+                                                                        {mayor[1]}
                                                                     </option>
                                                                 ))
                                                             }
@@ -127,7 +127,7 @@ export default class AsignarMadreOvino extends Component {
                                                     </div>
                                                     <button 
                                                         className="btn btn-primary"
-                                                        onClick={() => this.setState({ ovino: ovino._id })}
+                                                        onClick={() => this.setState({ menor: menor._id })}
                                                     >
                                                         Colocar
                                                         <i className="material-icons">

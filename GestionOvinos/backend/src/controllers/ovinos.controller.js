@@ -129,10 +129,10 @@ export const deleteOvino = async (req, res) => {
 
 // Agregar Establecimiento a Ovino
 export const addEstableOvino = async (req, res) => {
-  const { establecimientos } = req.body;
+  const { establecimiento } = req.body;
   const updatedOvino = await Ovino.findByIdAndUpdate(
   req.params.ovinoId,
-  { $push: { establecimientos: establecimientos } },
+  { establecimiento: establecimiento },
   {
     new: true,
   }
@@ -158,7 +158,7 @@ export const addPadreOvino = async (req, res) => {
   const { elPadre } = req.body;
   const updatedOvino = await Ovino.findByIdAndUpdate(
     req.params.ovinoId,
-    { $push: { elPadre: elPadre } },
+    { elPadre: elPadre },
     {
       new: true,
     }
@@ -171,7 +171,7 @@ export const addMadreOvino = async (req, res) => {
   const { laMadre } = req.body;
   const updatedOvino = await Ovino.findByIdAndUpdate(
     req.params.ovinoId,
-    { $push: { laMadre: laMadre } },
+    { laMadre: laMadre },
     {
       new: true,
     }

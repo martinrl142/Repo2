@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const patologiaSchema = new Schema(
     {   
         nomPatologia: String,
-        fechaDiagn: String,
+        fechaDiagn:  Date,
         tipoPatologia: String,
         descripDiagn: String,
         ovinos: [

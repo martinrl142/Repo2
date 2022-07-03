@@ -13,6 +13,7 @@ export default class AsignarOvEs extends Component {
         ovinos: [],
         estableSelected: '',
         establecimientos: [],
+        establecimiento: '',
         nombreEstable: '',
         nombreOvino: '',
         email: '',
@@ -82,7 +83,7 @@ export default class AsignarOvEs extends Component {
             window.location.href = '/';
             */
             const addEstableOvino = {
-                establecimientos: this.state.estableSelected,
+                establecimiento: this.state.estableSelected,
             };
             await axios.put('http://localhost:4000/api/ovinos/addEstableOvino/' + this.state.ovino, addEstableOvino, theToken());
             window.location.href = '/createOvEs';
@@ -114,7 +115,8 @@ export default class AsignarOvEs extends Component {
                     </div> 
                     {
                         this.state.ovinosData.map(ovino => { 
-                                if(ovino.establecimientos.length === 0){
+                                console.log(ovino.establecimiento)
+                                if(ovino.establecimiento === undefined){
                                     return <div className="col-md-3 p-2" key={ovino._id}>
                                         <div className="card">
                                             <div className="card-header d-flex justify-content-between">
@@ -122,7 +124,7 @@ export default class AsignarOvEs extends Component {
                                             </div>
                                             <div className="card-body">
                                                 <p>
-                                                    Establecimiento: {ovino.establecimientos}
+                                                    Establecimiento: {ovino.establecimiento}
                                                 </p>
                                                 <p>
                                                     Número de caravana: {ovino.numCaravana}

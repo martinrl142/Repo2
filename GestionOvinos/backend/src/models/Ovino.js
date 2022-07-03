@@ -14,30 +14,27 @@ const ovinoSchema = new Schema(
         pesoAlNacer: String,
         pesoAlDestete: String,
         nacio: String,
-        establecimientos: [
+        establecimiento:
             {
               type: Schema.Types.ObjectId,
               ref: "Establecimiento",
             },
-        ],
         patologias: [
             {
               type: Schema.Types.ObjectId,
               ref: "Patologia",
             },
         ],
-        elPadre: [
+        elPadre:
             {
               type: Schema.Types.ObjectId,
               ref: "Ovino",
             },
-        ],
-        laMadre: [
+        laMadre:
             {
               type: Schema.Types.ObjectId,
               ref: "Ovino",
             },
-        ],
     }, {
         timestamps: true
     });

@@ -93,7 +93,7 @@ export default class asignarPadreOvino extends Component {
                     </div> 
                     {
                         this.state.ovinosData.map(ovino => { 
-                                if(ovino.elPadre.length === 0){
+                                if(ovino.elPadre === undefined){
                                     return <div className="col-md-3 p-2" key={ovino._id}>
                                         <div className="card">
                                             <div className="card-header d-flex justify-content-between">
