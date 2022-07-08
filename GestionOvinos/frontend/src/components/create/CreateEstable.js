@@ -10,6 +10,7 @@ export default class createEstable extends Component {
         email: '',
         direccion: '',
         fechaInauguracion: new Date(),
+        token: '',
         editing: false,
         _id: ''
     }
@@ -50,7 +51,8 @@ export default class createEstable extends Component {
                 email: this.state.email,
                 direccion: this.state.direccion,
                 //ovinos: this.state.ovinoSelected,
-                fechaInauguracion: this.state.fechaInauguracion
+                fechaInauguracion: this.state.fechaInauguracion,
+                token: theToken()
             };
             console.log(theToken());
             console.log(newEstable);

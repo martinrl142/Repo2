@@ -27,10 +27,11 @@ export default class OvinosList extends Component {
         await axios.delete('http://localhost:4000/api/ovinos/' + ovinoId, theToken());
         this.getOvinos();
     }
-
-    render() {
-        return (
-            <div className="row">
+      
+      
+      render() {
+          return (
+              <div className="row">
                 <div className="col-md-12 p-12">
                     <h1 className="textBlanco">Ovinos</h1>
                 </div>

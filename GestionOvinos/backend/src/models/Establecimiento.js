@@ -5,7 +5,11 @@ const establecimientoSchema = new Schema(
         nombre: String,
         email: String,
         direccion: String,
-        //user: { type: String },
+        user:
+            {
+              type: Schema.Types.ObjectId,
+              ref: "User",
+            },
         fechaInauguracion: Date,
     }, {
         timestamps: true,

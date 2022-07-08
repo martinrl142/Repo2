@@ -1,16 +1,18 @@
 import Establecimiento from "../models/Establecimiento";
 //import Ovino from "../models/Ovino";
 //import User from "../models/User";
-// import { authJwt } from "../middlewares";
+import { userOfToken } from "../middlewares/userMiddleware";
 
 export const createEstable = async (req, res) => {
-    const { nombre, email, direccion, fechaInauguracion } = req.body;
+    const { nombre, email, direccion, fechaInauguracion, token } = req.body;
+    const user = userOfToken(token)
   try {
     const newEstable = new Establecimiento({
         nombre,
         email,
         direccion,
-        fechaInauguracion
+        fechaInauguracion,
+        user
     });
     const estableSaved = await newEstable.save();
 
