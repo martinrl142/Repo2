@@ -5,7 +5,7 @@ const establecimientoSchema = new Schema(
         nombre: String,
         email: String,
         direccion: String,
-        user:
+        creador:
             {
               type: Schema.Types.ObjectId,
               ref: "User",

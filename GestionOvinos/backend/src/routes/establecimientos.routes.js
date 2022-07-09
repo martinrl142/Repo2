@@ -14,6 +14,11 @@ router.get(
   [authJwt.verifyToken, authJwt.isModerator],
   establesCtrl.getEstable);
 
+router.get(
+  "/creador/:creadorId",
+  [authJwt.verifyToken, authJwt.isModerator],
+  establesCtrl.getEstablesUser);
+  
 router.post(
   "/",
   [authJwt.verifyToken, authJwt.isModerator],

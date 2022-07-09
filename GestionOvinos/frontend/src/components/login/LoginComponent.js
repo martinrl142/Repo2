@@ -57,6 +57,7 @@ export default class LoginComponent extends Component {
                                 value={this.state.email}
                                 type="email"
                                 placeholder="Correo"
+                                name="email"
                                 onChange={this.onChangeEmail}
                             />
                             <br/>

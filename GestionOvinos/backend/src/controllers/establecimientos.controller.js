@@ -5,14 +5,14 @@ import { userOfToken } from "../middlewares/userMiddleware";
 
 export const createEstable = async (req, res) => {
     const { nombre, email, direccion, fechaInauguracion, token } = req.body;
-    const user = userOfToken(token)
+    const creador = userOfToken(token);
   try {
     const newEstable = new Establecimiento({
         nombre,
         email,
         direccion,
         fechaInauguracion,
-        user
+        creador
     });
     const estableSaved = await newEstable.save();
 
@@ -33,6 +33,23 @@ export const getEstable = async (req, res) => {
 export const getEstables = async (req, res) => {
   const estables = await Establecimiento.find();
   return res.json(estables);
+};
+
+export const getEstablesUser = async (req, res) => {
+  // Id del user  
+  const creadorId = userOfToken(req.params['creadorId']);
+  const establesList = [];
+  // Todos los ovinos
+  const estables = await Establecimiento.find();
+  estables.map(estable => {          
+      if(estable.creador.toString() === creadorId){
+        console.log(establecimiento);
+        establesList.push(estable); 
+      }
+    }
+  );
+  console.log(establesList);
+  return res.json(establesList);
 };
 
 export const updateEstable = async (req, res) => {
