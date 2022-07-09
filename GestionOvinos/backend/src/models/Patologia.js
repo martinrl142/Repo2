@@ -6,6 +6,11 @@ const patologiaSchema = new Schema(
         fechaDiagn:  Date,
         tipoPatologia: String,
         descripDiagn: String,
+        creador:
+            {
+              type: Schema.Types.ObjectId,
+              ref: "User",
+            },
         ovinos: [
             {
               type: Schema.Types.ObjectId,

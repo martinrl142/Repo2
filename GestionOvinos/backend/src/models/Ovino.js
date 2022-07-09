@@ -14,6 +14,11 @@ const ovinoSchema = new Schema(
         pesoAlNacer: String,
         pesoAlDestete: String,
         nacio: String,
+        creador:
+            {
+              type: Schema.Types.ObjectId,
+              ref: "User",
+            },
         establecimiento:
             {
               type: Schema.Types.ObjectId,

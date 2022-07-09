@@ -4,6 +4,11 @@ const patologiaSchema = new Schema(
     {   
         tipoParto: String,
         fechaParto: Date,
+        creador:
+            {
+              type: Schema.Types.ObjectId,
+              ref: "User",
+            },
         nacidos: [
             {
               type: Schema.Types.ObjectId,

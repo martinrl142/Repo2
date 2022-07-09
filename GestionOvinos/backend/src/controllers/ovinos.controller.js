@@ -1,5 +1,6 @@
 import Ovino from "../models/Ovino";
 //import Ovino from "../models/Ovino";
+import { userOfToken } from "../middlewares/userMiddleware";
 
 export const createOvino = async (req, res) => {
 
@@ -15,8 +16,10 @@ export const createOvino = async (req, res) => {
       aptoReproduccion,
       pesoAlNacer,
       pesoAlDestete,
-      nacio
+      nacio,
+      token
     } = req.body;
+    const creador = userOfToken(token);
     //const ovinosFound = await Ovino.find({ name: { $in: ovinos } });
   try {
     const newOvino = new Ovino({
@@ -31,7 +34,8 @@ export const createOvino = async (req, res) => {
       aptoReproduccion,
       pesoAlNacer,
       pesoAlDestete,
-      nacio
+      nacio,
+      creador
         //ovinos: ovinosFound.map((ovino) => ovino._id),
     });
 

@@ -22,6 +22,7 @@ export default class CreateOvino extends Component {
         pesoAlDestete: '',
         nacioSelected: 'Vivo',
         nacio: ['Vivo', 'Muerto'],
+        token: '',
         editing: false,
         _id: ''
     }
@@ -83,7 +84,8 @@ export default class CreateOvino extends Component {
                 aptoReproduccion: this.state.aptoReproduccionSelected,
                 pesoAlNacer: this.state.pesoAlNacer,
                 pesoAlDestete: this.state.pesoAlDestete,
-                nacio: this.state.nacioSelected
+                nacio: this.state.nacioSelected,
+                token: theToken()
             };
             axios.post('http://localhost:4000/api/ovinos', newOvino, theToken());
         }

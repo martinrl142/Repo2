@@ -1,5 +1,6 @@
 import Patologia from "../models/Patologia";
 //import Ovino from "../models/Ovino";
+import { userOfToken } from "../middlewares/userMiddleware";
 
 export const createPatologia = async (req, res) => {
 
@@ -7,15 +8,18 @@ export const createPatologia = async (req, res) => {
         nomPatologia,
         fechaDiagn,
         tipoPatologia,
-        descripDiagn
+        descripDiagn,
+        token
     } = req.body;
+    const creador = userOfToken(token);
     //const ovinosFound = await Ovino.find({ name: { $in: ovinos } });
   try {
     const newPatologia = new Patologia({
         nomPatologia,
         fechaDiagn,
         tipoPatologia,
-        descripDiagn
+        descripDiagn,
+        token
         //ovinos: ovinosFound.map((ovino) => ovino._id),
     });
 

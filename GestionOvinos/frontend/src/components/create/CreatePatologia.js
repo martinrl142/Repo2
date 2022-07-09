@@ -10,6 +10,7 @@ export default class CreateOvino extends Component {
         fechaDiagn: new Date(),
         tipoPatologia: '',
         descripDiagn: '',
+        token: '',
         editing: false,
         _id: ''
     }
@@ -46,7 +47,8 @@ export default class CreateOvino extends Component {
                 nomPatologia: this.state.nomPatologia,
                 fechaDiagn: this.state.fechaDiagn,
                 tipoPatologia: this.state.tipoPatologia,
-                descripDiagn: this.state.descripDiagn
+                descripDiagn: this.state.descripDiagn,
+                token: theToken()
             };
             axios.post('http://localhost:4000/api/patologias', newPatologia, theToken());
         }
