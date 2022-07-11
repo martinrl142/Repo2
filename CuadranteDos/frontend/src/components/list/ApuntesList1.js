@@ -1,26 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React, { Component } from 'react'
+import axios from 'axios'
 import { format } from 'timeago.js'
 import { Link } from 'react-router-dom'
 import Moment from 'react-moment';
 import { AiFillPlusCircle } from "react-icons/ai";
-import axios from 'axios';
-import theToken from '../Token';
+import theToken from '../Token'
 
-export default function ApuntesList () {
-    
-    const [apuntes, setsApuntes] = useState([]);
-   
-    useEffect(() => {
-        const getApuntes = async () => {    
-        const res = await axios.get('http://localhost:4000/api/apuntes', theToken());
-        setsApuntes(res.data);
-        }
-        getApuntes();
-    },[]);
 
-    console.log(apuntes);
-    return (
-        <> 
+
+export default class ApuntesList extends Component {
+
+    state = {
+        apuntes: []
+    }
+
+    async componentDidMount() {
+        this.getApuntes();
+    }
+
+    getApuntes = async () => {
+        const res = await axios.get('http://localhost:4000/api/apuntes', theToken())
+        this.setState({
+            apuntes: res.data
+        });
+    }
+
+    deleteApunte = async (apunteId) => {
+        await axios.delete('http://localhost:4000/api/apuntes/' + apunteId, theToken());
+        this.getApuntes();
+    }
+
+    render() {
+        return (
             <div className="row">
                 <div className="col-md-12 p-9">
                     <h1 className="textBlanco">Apuntes</h1>
@@ -31,7 +42,7 @@ export default function ApuntesList () {
                     <Link to="/createApunte" className="nav-link"><h1 to="/createApunte"><AiFillPlusCircle/></h1></Link>
                 </div> 
                 {
-                    apuntes.map(apunte => (
+                    this.state.apuntes.map(apunte => (
                             <div className="col-md-3 p-2" key={apunte._id}>
                                 <div className="card">
                                     <div className="card-header d-flex justify-content-between">
@@ -43,7 +54,12 @@ export default function ApuntesList () {
                                         </p>
                                         <p>
                                             Contenido: {apunte.contenido}
-                                        </p>                                        
+                                        </p>
+                                        {/*
+                                        <p>
+                                            Ovinos: {estable.ovinos}
+                                        </p>
+                                        */}
                                         <p>
                                             Fecha de creación: <Moment format="DD/MM/YYYY">{apunte.fechaCreacion}</Moment>
                                         </p>
@@ -62,6 +78,6 @@ export default function ApuntesList () {
                     ))
                 }               
             </div>
-        </>
-    );
+        )
+    }
 }

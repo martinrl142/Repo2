@@ -9,13 +9,7 @@ import axios from 'axios'
 
 
 export default class Navigation2 extends Component {
-    async componentDidMount() {
-        const newApunte = {
-            token: theToken()
-        };
-
-        await axios.post('http://localhost:4000/api/token', newApunte);
-    }
+ 
 
     render() {
         return ( 

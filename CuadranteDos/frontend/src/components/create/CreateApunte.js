@@ -4,19 +4,23 @@ import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
 import { registerLocale } from  "react-datepicker";
 import es from 'date-fns/locale/es';
-import getApuntes from '../../helpers/GetApuntes';
+import getApunte from '../../helpers/GetApunte';
 import theToken from '../Token';
 import { useParams } from 'react-router';
 
 registerLocale('es', es)
 
-
+const initialApunte = {
+    titulo: "",
+    descripcion: "",
+    contenido: ""
+}
 
 
 export default function CreateApunte () {
     let authorId = useParams().id;
     
-    const [apuntes, setsApuntes] = useState({});
+    const [apuntes, setsApuntes] = useState(initialApunte);
     const [editing, setsEditing] = useState(false);
     console.log(1, apuntes);    
     
@@ -28,7 +32,7 @@ export default function CreateApunte () {
             if(authorId){
                 console.log(4, apuntes);
 
-                await getApuntes(authorId)
+                await getApunte(authorId)
                                     .then((newApuntes) => {
                                             setsApuntes(newApuntes);
                                             setsEditing(true);
@@ -39,7 +43,7 @@ export default function CreateApunte () {
         console.log(6, apuntes);
         
         updateApuntes()
-    }, [authorId, apuntes]);
+    }, [editing]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -53,7 +57,6 @@ export default function CreateApunte () {
             console.log(8, apuntes);
             setsApuntes({
                 ...apuntes,
-                token: theToken()
             });
             console.log(theToken());
             console.log(9, apuntes);

@@ -8,8 +8,6 @@ import pkg from "../package.json";
 import usersRoutes from "./routes/user.routes";
 import authRoutes from "./routes/auth.routes";
 import apuntesRoutes from "./routes/apuntes.routes";
-import tokenRoutes from "./routes/token.routes";
-
 
 import { createRoles, createAdmin} from "./libs/initialSetup";
 
@@ -47,7 +45,5 @@ app.get("/", (req, res) => {
 app.use("/api/users", usersRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/apuntes", apuntesRoutes);
-app.use("/api/token", tokenRoutes);
-
 
 export default app;

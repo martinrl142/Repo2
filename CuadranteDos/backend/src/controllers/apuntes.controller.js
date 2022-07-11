@@ -1,25 +1,18 @@
 import Apunte from "../models/Apunte";
-import { infoToken } from "../middlewares";
 
 export const createApunte = async (req, res) => {
   const {
     titulo,
     descripcion,
     contenido,
-    fechaCreacion,
-    token
+    fechaCreacion
   } = req.body;
-
-  console.log(token);
-  const user = await infoToken.infoUser(token);
-  console.log(user.id);
   try {
     const newApunte = new Apunte({
       titulo,
       descripcion,
       contenido,
-      fechaCreacion,
-      autor: user.id,
+      fechaCreacion
     });
 
     const apunteSaved = await newApunte.save();

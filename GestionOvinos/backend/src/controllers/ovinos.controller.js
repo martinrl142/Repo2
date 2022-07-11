@@ -17,6 +17,7 @@ export const createOvino = async (req, res) => {
       pesoAlNacer,
       pesoAlDestete,
       nacio,
+      establecimiento,
       token
     } = req.body;
     const creador = userOfToken(token);
@@ -35,6 +36,7 @@ export const createOvino = async (req, res) => {
       pesoAlNacer,
       pesoAlDestete,
       nacio,
+      establecimiento,
       creador
         //ovinos: ovinosFound.map((ovino) => ovino._id),
     });

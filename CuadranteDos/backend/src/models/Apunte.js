@@ -7,11 +7,6 @@ const apunteSchema = new Schema(
         contenido: String,
         //user: { type: String },
         fechaCreacion: Date,
-        autor:
-            {
-              type: Schema.Types.ObjectId,
-              ref: "User",
-            },
     }, {
         timestamps: true,
         versionKey: false
