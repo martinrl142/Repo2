@@ -22,13 +22,8 @@ export default class CreateOvino extends Component {
         pesoAlDestete: '',
         nacioSelected: 'Vivo',
         nacio: ['Vivo', 'Muerto'],
-        estableSelected: '',
-        establecimientos: [],
-        establecimiento: '',
-        nombreEstable: '',
         token: '',
         editing: false,
-        _idEstable: '',
         _id: ''
     }
 
@@ -54,13 +49,6 @@ export default class CreateOvino extends Component {
                 editing: true
             });
         }
-        const resEs = await axios.get('http://localhost:4000/api/establecimientos', theToken());
-        if (resEs.data.length > 0) {
-            this.setState({
-                establecimientos: resEs.data.map(establecimiento => [establecimiento._id, establecimiento.nombre]),
-                estableSelected: resEs.data[0]._id
-            })
-        }
     }
 
 
@@ -80,7 +68,6 @@ export default class CreateOvino extends Component {
                 aptoReproduccion: this.state.aptoReproduccionSelected,
                 pesoAlNacer: this.state.pesoAlNacer,
                 pesoAlDestete: this.state.pesoAlDestete,
-                establecimiento: this.state.estableSelected,
                 nacio: this.state.nacioSelected
             };
             await axios.put('http://localhost:4000/api/ovinos/' + this.state._id, updatedOvino, theToken());
@@ -98,7 +85,6 @@ export default class CreateOvino extends Component {
                 pesoAlNacer: this.state.pesoAlNacer,
                 pesoAlDestete: this.state.pesoAlDestete,
                 nacio: this.state.nacioSelected,
-                establecimiento: this.state.estableSelected,
                 token: theToken()
             };
             axios.post('http://localhost:4000/api/ovinos', newOvino, theToken());
@@ -155,6 +141,7 @@ export default class CreateOvino extends Component {
                         </div>
                         <br></br>
                         {/* SELECT ESTABLE */}
+                        {/*
                         <div className="form-group">
                             <h6>
                                 Seleccionar Establecimiento:
@@ -175,6 +162,7 @@ export default class CreateOvino extends Component {
                             </select>
                         </div>
                         <br></br>
+                            */}
                         {/* Ovino numCaravana */}
                         <div className="form-group">
                             <h6>Número de caravana</h6>
