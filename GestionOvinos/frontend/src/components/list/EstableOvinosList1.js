@@ -1,45 +1,75 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import React, { Component } from 'react'
+import 'react-datepicker/dist/react-datepicker.css'
+import axios from 'axios'
 import Moment from 'react-moment'
-import { AiFillPlusCircle } from "react-icons/ai";
+import { Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
-import axios from 'axios';
+import { AiFillPlusCircle } from "react-icons/ai"
 import theToken from '../Token';
 
-export default function EstablesList () {
-    
-    const [estable, setsEstable] = useState([]);
-    const [ovinosList, setsOvinosList] = useState([]);
-    const estableId = useParams().id;
+export default class OvinosList extends Component {
+    state = {
+        nombreEstable: '',
+        email: '',
+        direccion: '',
+        fechaInauguracion: new Date(),
+        editingEstable: false,
+        _idEstable: '',
 
-    useEffect(() => {
-        const getEstable = async () => {
-            if (estableId) {
-                console.log(estableId)
-                const resEs = await axios.get('http://localhost:4000/api/establecimientos/' + estableId, theToken());
-                setsEstable(resEs.data);
-            }
-        }
-        const getOvinosEstable = async () => {
-            if (estableId) {
-                console.log("hola");
-                const resOv = await axios.get('http://localhost:4000/api/ovinos/estable/'+ estableId, theToken())
-                console.log(resOv.data);
-                setsOvinosList(resOv.data);
-            }
-        }
-        getOvinosEstable();
-        getEstable();
-    },[]);
+        ovinosList: [],
+        nombreOvino: '',
+        numCaravana: '',
+        colorCaravana: '',
+        sexo: '',
+        raza: '',
+        cruzamiento: '',
+        tatuaje: '',
+        nacimiento: new Date(),
+        aptoReproduccion: '',
+        pesoAlNacer: '',
+        pesoAlDestete: '',
+        nacio: '',
+        editingOvino: false,
+        _idOvino: ''
+    }
 
-    console.log(estable);
-    console.log(ovinosList);
-    return (
-        <> 
-        <div className="row">
+
+
+
+
+    async componentDidMount() {
+        this.getOvinosEstable();
+        if (this.props.match.params.id) {
+            console.log(this.props.match.params.id)
+            const resEs = await axios.get('http://localhost:4000/api/establecimientos/' + this.props.match.params.id, theToken());
+            console.log(resEs.data)
+            this.setState({
+                nombreEstable: resEs.data.nombre,
+                email: resEs.data.email,
+                direccion: resEs.data.direccion,
+                fechaInauguracion: new Date(resEs.data.fechaInauguracion),
+                ovinos: resEs.data.ovinos,
+                _idEstable: resEs.data._id,
+                editingEstable: true
+            });
+        }
+        
+        
+    }
+    getOvinosEstable = async () => {
+        const res = await axios.get('http://localhost:4000/api/ovinos/estable/'+ this.props.match.params.id, theToken())
+        this.setState({
+            ovinosList: res.data
+        });
+        console.log(res.data);
+    }
+
+    render() {
+        return (
+            <div className="row">
                 <div className="col-md-12 p-12">
                     <h2 className="textBlanco">Ovinos en</h2>
-                    <h1 className="textBlanco">Establecimiento { estable.nombre }</h1>
+                    <h1 className="textBlanco">Establecimiento { this.state.nombreEstable}</h1>
 
                 </div>
                 <div className="col-md-11 p-11">
@@ -49,7 +79,7 @@ export default function EstablesList () {
                 </div> 
                 {
                     
-                    ovinosList.map(ovino => (
+                    this.state.ovinosList.map(ovino => (
                         <div className="col-md-3 p-2" key={ovino._id}>
                             <div className="card">
                                 <div className="card-header d-flex justify-content-between">
@@ -101,6 +131,6 @@ export default function EstablesList () {
                     ))
                 }                
             </div>
-        </>
-    );
+        )
+    }
 }
