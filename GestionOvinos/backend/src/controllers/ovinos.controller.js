@@ -61,20 +61,16 @@ export const getOvinosEstable = async (req, res) => {
   // Id del establecimiento
   const { estableId } = req.params;
   const ovinosList = [];
+
   // Todos los ovinos
   const ovinos = await Ovino.find();
   ovinos.map(ovino => {
-        ovino.establecimientos.map(establecimiento => {
-          
-          if(establecimiento.toString() === estableId){
-            console.log(establecimiento);
-            ovinosList.push(ovino); 
-          }
+      if(ovino.establecimiento.toString() === estableId){
+        ovinosList.push(ovino); 
       }
-      );
     }
   );
-  console.log(ovinosList);
+  console.log(ovinosList)
   return res.json(ovinosList);
 };
 
