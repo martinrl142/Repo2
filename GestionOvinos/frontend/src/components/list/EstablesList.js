@@ -22,7 +22,7 @@ export default function EstablesList () {
         <> 
             <div className="row">
                 <div className="col-md-12 p-9">
-                    <h1 className="textBlanco">Estables</h1>
+                    <h1 className="textBlanco">Establecimientos</h1>
                 </div>
                 <div className="col-md-11 p-11">
                 </div> 

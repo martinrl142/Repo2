@@ -46,7 +46,7 @@ export default class CreateOvino extends Component {
                 tatuaje: res.data.tatuaje,
                 nacimiento: new Date(res.data.nacimiento),
                 aptoReproduccionSelected: res.data.aptoReproduccion,
-                establecimiento: res.data.establecimiento,
+                estableSelected: res.data.establecimiento,
                 nacioSelected: res.data.nacio,
                 _id: res.data._id,
                 editing: true
@@ -131,9 +131,7 @@ export default class CreateOvino extends Component {
                         <br></br>
                         {/* SELECT ESTABLE */}
                         <div className="form-group">
-                            <p>
-                                Seleccionar Establecimiento:
-                            </p>
+                            <h6>Seleccionar Establecimiento:</h6>
                             <select
                                 className="form-control"
                                 value={this.state.estableSelected}
