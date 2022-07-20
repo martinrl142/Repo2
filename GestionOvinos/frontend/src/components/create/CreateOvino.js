@@ -18,13 +18,17 @@ export default class CreateOvino extends Component {
         nacimiento: new Date(),
         aptoReproduccionSelected: 'Si',
         aptoReproduccion: ['Si', 'No'],
-        pesoAlNacer: '',
-        pesoAlDestete: '',
         nacioSelected: 'Vivo',
         nacio: ['Vivo', 'Muerto'],
         token: '',
         editing: false,
-        _id: ''
+        _id: '',
+
+        estableSelected: '',
+        establecimientos: [],
+        establecimiento: '',
+        nombreEstable: '',
+        _idEstable: ''
     }
 
     async componentDidMount() {
@@ -42,12 +46,18 @@ export default class CreateOvino extends Component {
                 tatuaje: res.data.tatuaje,
                 nacimiento: new Date(res.data.nacimiento),
                 aptoReproduccionSelected: res.data.aptoReproduccion,
-                pesoAlNacer: res.data.pesoAlNacer,
-                pesoAlDestete: res.data.pesoAlDestete,
+                establecimiento: res.data.establecimiento,
                 nacioSelected: res.data.nacio,
                 _id: res.data._id,
                 editing: true
             });
+        }
+        const resEs = await axios.get('http://localhost:4000/api/establecimientos', theToken());
+        if (resEs.data.length > 0) {
+            this.setState({
+                establecimientos: resEs.data.map(establecimiento => [establecimiento._id, establecimiento.nombre]),
+                estableSelected: resEs.data[0]._id
+            })
         }
     }
 
@@ -66,8 +76,7 @@ export default class CreateOvino extends Component {
                 tatuaje: this.state.tatuaje,
                 nacimiento: this.state.nacimiento,
                 aptoReproduccion: this.state.aptoReproduccionSelected,
-                pesoAlNacer: this.state.pesoAlNacer,
-                pesoAlDestete: this.state.pesoAlDestete,
+                establecimiento: this.state.estableSelected,
                 nacio: this.state.nacioSelected
             };
             await axios.put('http://localhost:4000/api/ovinos/' + this.state._id, updatedOvino, theToken());
@@ -82,15 +91,12 @@ export default class CreateOvino extends Component {
                 tatuaje: this.state.tatuaje,
                 nacimiento: this.state.nacimiento,
                 aptoReproduccion: this.state.aptoReproduccionSelected,
-                pesoAlNacer: this.state.pesoAlNacer,
-                pesoAlDestete: this.state.pesoAlDestete,
                 nacio: this.state.nacioSelected,
+                establecimiento: this.state.estableSelected,
                 token: theToken()
             };
             axios.post('http://localhost:4000/api/ovinos', newOvino, theToken());
         }
-        window.location.href = '/createOvEs';
-
     }
 
     onInputChange = (e) => {
@@ -110,23 +116,6 @@ export default class CreateOvino extends Component {
                     <h4>Registrar Ovino</h4>
                     <br></br>
                     <form onSubmit={this.onSubmit}>
-                        {/* Seleccionar establecimiento */}
-                        {/*<div className="form-group">
-                            <select
-                                className="form-control"
-                                value={this.state.estableSelected}
-                                onChange={this.onInputChange}
-                                name=   "estableSelected"
-                                >
-                                {
-                                    this.state.estables.map(estable => (
-                                        <option key={estable[1]} value={estable[1]}>
-                                            {estable[0]}
-                                        </option>
-                                    ))
-                                }
-                            </select>
-                        </div>*/}
                         {/* Ovino nombre */}
                         <div className="form-group">
                             <h6>Nombre</h6>
@@ -141,11 +130,10 @@ export default class CreateOvino extends Component {
                         </div>
                         <br></br>
                         {/* SELECT ESTABLE */}
-                        {/*
                         <div className="form-group">
-                            <h6>
+                            <p>
                                 Seleccionar Establecimiento:
-                            </h6>
+                            </p>
                             <select
                                 className="form-control"
                                 value={this.state.estableSelected}
@@ -162,7 +150,6 @@ export default class CreateOvino extends Component {
                             </select>
                         </div>
                         <br></br>
-                            */}
                         {/* Ovino numCaravana */}
                         <div className="form-group">
                             <h6>Número de caravana</h6>
@@ -277,31 +264,6 @@ export default class CreateOvino extends Component {
                             />
                         </div>
                         <br></br>
-                        {/* Ovino pesoAlNacer */}
-                        <div className="form-group">
-                            <h6>Peso al nacer</h6>
-                            <input
-                                type="number"
-                                className="form-control"
-                                placeholder="Peso al Nacer"
-                                onChange={this.onInputChange}
-                                name="pesoAlNacer"
-                                value={this.state.pesoAlNacer}
-                            />
-                        </div>
-                        <br></br>
-                        {/* Ovino pesoAlDestete */}
-                        <div className="form-group">
-                            <h6>Peso al destete</h6>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Peso al destete"
-                                onChange={this.onInputChange}
-                                name="pesoAlDestete"
-                                value={this.state.pesoAlDestete}
-                            />
-                        </div>
                             {/*
                         <div className="form-group">
                             <input

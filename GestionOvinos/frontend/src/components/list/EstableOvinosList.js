@@ -57,6 +57,9 @@ export default function EstablesList () {
                                 </div>
                                 <div className="card-body">
                                     <p>
+                                        Establecimiento: {ovino.establecimiento}
+                                    </p>
+                                    <p>
                                         Número de caravana: {ovino.numCaravana}
                                     </p>
                                     <p>
