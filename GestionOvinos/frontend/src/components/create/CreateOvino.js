@@ -23,7 +23,6 @@ export default class CreateOvino extends Component {
         token: '',
         editing: false,
         _id: '',
-
         estableSelected: '',
         establecimientos: [],
         establecimiento: '',
@@ -32,6 +31,13 @@ export default class CreateOvino extends Component {
     }
 
     async componentDidMount() {
+        const resEs = await axios.get('http://localhost:4000/api/establecimientos', theToken());
+        if (resEs.data.length > 0) {
+            this.setState({
+                establecimientos: resEs.data.map(establecimiento => [establecimiento._id, establecimiento.nombre]),
+                estableSelected: resEs.data[0]._id
+            })
+        }
         if (this.props.match.params.id) {
             console.log(this.props.match.params.id)
             const res = await axios.get('http://localhost:4000/api/ovinos/' + this.props.match.params.id, theToken());
@@ -52,13 +58,6 @@ export default class CreateOvino extends Component {
                 editing: true
             });
         }
-        const resEs = await axios.get('http://localhost:4000/api/establecimientos', theToken());
-        if (resEs.data.length > 0) {
-            this.setState({
-                establecimientos: resEs.data.map(establecimiento => [establecimiento._id, establecimiento.nombre]),
-                estableSelected: resEs.data[0]._id
-            })
-        }
     }
 
 
@@ -70,7 +69,7 @@ export default class CreateOvino extends Component {
                 nombre: this.state.nombre,
                 numCaravana: this.state.numCaravana,
                 colorCaravana: this.state.colorCaravana,
-                sexo: this.state.sexo,
+                sexo: this.state.sexoSelected,
                 raza: this.state.raza,
                 cruzamiento: this.state.cruzamientoSelected,
                 tatuaje: this.state.tatuaje,
@@ -79,6 +78,7 @@ export default class CreateOvino extends Component {
                 establecimiento: this.state.estableSelected,
                 nacio: this.state.nacioSelected
             };
+            console.log(updatedOvino);
             await axios.put('http://localhost:4000/api/ovinos/' + this.state._id, updatedOvino, theToken());
         } else {
             const newOvino = {
@@ -134,9 +134,9 @@ export default class CreateOvino extends Component {
                             <h6>Seleccionar Establecimiento:</h6>
                             <select
                                 className="form-control"
-                                value={this.state.estableSelected}
                                 onChange={this.onInputChange}
                                 name="estableSelected"
+                                value={this.state.estableSelected}
                                 required>
                                 {
                                     this.state.establecimientos.map(estable => (
@@ -191,9 +191,9 @@ export default class CreateOvino extends Component {
                             <h6>Sexo</h6>    
                             <select
                                 className="form-control"
-                                value={this.state.sexoSelected}
                                 onChange={this.onInputChange}
                                 name="sexoSelected"
+                                value={this.state.sexoSelected}
                                 >
                                 {   
                                     this.state.sexo.map(sexo => (
@@ -235,9 +235,9 @@ export default class CreateOvino extends Component {
                             <h6>Cruzamiento</h6>
                             <select
                                 className="form-control"
-                                value={this.state.cruzamientoSelected}
                                 onChange={this.onInputChange}
                                 name="cruzamientoSelected"
+                                value={this.state.cruzamientoSelected}
                                 >
                                 {
                                     this.state.cruzamiento.map(cruzamiento => (
@@ -280,9 +280,9 @@ export default class CreateOvino extends Component {
                             <h6>Apto para reproducción</h6>
                             <select
                                 className="form-control"
-                                value={this.state.aptoReproduccionSelected}
                                 onChange={this.onInputChange}
                                 name="aptoReproduccionSelected"
+                                value={this.state.aptoReproduccionSelected}
                                 >
                                 {
                                     this.state.aptoReproduccion.map(aptoReproduccion => (

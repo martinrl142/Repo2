@@ -61,7 +61,7 @@ export default function EstablesList () {
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         <Dropdown.Item href={"/establecimiento/" + estable._id}>Ovinos</Dropdown.Item>
-                                        <Dropdown.Item href="/createOvEs">Agregar ovino</Dropdown.Item>
+                                        <Dropdown.Item href="/createOvino">Agregar ovino</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                                 <Link to={"/editEstable/" + estable._id} className="btn btn-primary">

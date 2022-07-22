@@ -52,12 +52,9 @@ export default function EstablesList () {
                     ovinosList.map(ovino => (
                         <div className="col-md-3 p-2" key={ovino._id}>
                             <div className="card">
-                                <div className="card-header d-flex justify-content-between">
-                                    <h5>Nombre: {ovino.nombre}</h5>
-                                </div>
                                 <div className="card-body">
                                     <p>
-                                        Establecimiento: {ovino.establecimiento}
+                                        Nombre: {ovino.nombre}
                                     </p>
                                     <p>
                                         Número de caravana: {ovino.numCaravana}
