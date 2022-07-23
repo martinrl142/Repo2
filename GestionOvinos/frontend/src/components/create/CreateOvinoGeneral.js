@@ -23,20 +23,23 @@ export default class CreateOvino extends Component {
         token: '',
         editing: false,
         _id: '',
+        estableSelected: '',
+        establecimientos: [],
         establecimiento: '',
         nombreEstable: '',
         _idEstable: ''
     }
 
     async componentDidMount() {
-        const estableId = this.props.match.params.id;
-        if (estableId) {
+        const resEs = await axios.get('http://localhost:4000/api/establecimientos', theToken());
+        if (resEs.data.length > 0) {
             this.setState({
-                establecimiento: estableId
+                establecimientos: resEs.data.map(establecimiento => [establecimiento._id, establecimiento.nombre]),
+                estableSelected: resEs.data[0]._id
             })
         }
-        if (estableId) {
-            console.log(estableId)
+        if (this.props.match.params.id) {
+            console.log(this.props.match.params.id)
             const res = await axios.get('http://localhost:4000/api/ovinos/' + this.props.match.params.id, theToken());
             console.log(res.data)
             this.setState({
@@ -72,7 +75,7 @@ export default class CreateOvino extends Component {
                 tatuaje: this.state.tatuaje,
                 nacimiento: this.state.nacimiento,
                 aptoReproduccion: this.state.aptoReproduccionSelected,
-                establecimiento: this.state.establecimiento,
+                establecimiento: this.state.estableSelected,
                 nacio: this.state.nacioSelected
             };
             console.log(updatedOvino);
@@ -89,7 +92,7 @@ export default class CreateOvino extends Component {
                 nacimiento: this.state.nacimiento,
                 aptoReproduccion: this.state.aptoReproduccionSelected,
                 nacio: this.state.nacioSelected,
-                establecimiento: this.state.establecimiento,
+                establecimiento: this.state.estableSelected,
                 token: theToken()
             };
             axios.post('http://localhost:4000/api/ovinos', newOvino, theToken());
@@ -110,7 +113,7 @@ export default class CreateOvino extends Component {
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
-                    <h4>Registrar Ovino en Establecimiento "{this.state.establecimiento}"</h4>
+                    <h4>Registrar Ovino</h4>
                     <br></br>
                     <form onSubmit={this.onSubmit}>
                         {/* Ovino nombre */}
@@ -124,6 +127,25 @@ export default class CreateOvino extends Component {
                                 name="nombre"
                                 value={this.state.nombre}
                             />
+                        </div>
+                        <br></br>
+                        {/* SELECT ESTABLE */}
+                        <div className="form-group">
+                            <h6>Seleccionar Establecimiento:</h6>
+                            <select
+                                className="form-control"
+                                onChange={this.onInputChange}
+                                name="estableSelected"
+                                value={this.state.estableSelected}
+                                required>
+                                {
+                                    this.state.establecimientos.map(estable => (
+                                        <option key={estable} value={estable[0]}>
+                                            {estable[1]}
+                                        </option>
+                                    ))
+                                }
+                            </select>
                         </div>
                         <br></br>
                         {/* Ovino numCaravana */}

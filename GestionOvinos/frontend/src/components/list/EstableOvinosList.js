@@ -88,7 +88,7 @@ export default function EstablesList () {
                                             <Dropdown.Item href={"/createPatologia/" + ovino._id}>Agregar Patología</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
-                                    <Link to={"/editOvino/" + ovino._id} className="btn btn-primary">
+                                    <Link to={"/editOvEs/" + ovino._id} className="btn btn-primary">
                                         <i className="material-icons">
                                             border_color</i>
                                     </Link>

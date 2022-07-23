@@ -12,6 +12,7 @@ import PatologiasList from './components/list/PatologiasList'
 import Login from './components/login/Login'
 import OvinosList from './components/list/OvinosList'
 import CreateEstable from './components/create/CreateEstable'
+import CreateOvinoGeneral from './components/create/CreateOvinoGeneral'
 import CreateOvino from './components/create/CreateOvino'
 import AsignarOvEs from './components/asignar/AsignarOvEs'
 import AsignarPadreOvino from './components/asignar/AsignarPadreOvino'
@@ -42,13 +43,15 @@ function App() {
       <Route path="/ovinos" component={OvinosList} />
       <Route path="/editEstable/:id" component={CreateEstable} />
       <Route path="/createEstable" component={CreateEstable} />
-      <Route path="/createOvino" component={CreateOvino} />
+      <Route path="/createOvino" component={CreateOvinoGeneral} />
+      <Route path="/createOvEs/:id" component={CreateOvino} />
       <Route path="/createOvEs" component={AsignarOvEs} />
       <Route path="/createPaOv" component={AsignarPaOv} />
       <Route path="/asignarPadreOvino" component={AsignarPadreOvino} />
       <Route path="/asignarMadreOvino" component={AsignarMadreOvino} />
       <Route path="/createUsEs" component={CreateUsEs} />
-      <Route path="/editOvino/:id" component={CreateOvino} />
+      <Route path="/editOvino/:id" component={CreateOvinoGeneral} />
+      <Route path="/editOvEs/:id" component={CreateOvino} />
       <Route path="/createPatologia/:id" component={CreatePatologiaOvino} />
       <Route path="/createPatologia" component={CreatePatologiaGeneral} />
       <Route path="/editPaOv/:id" component={CreatePatologiaOvino} />
