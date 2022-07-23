@@ -12,12 +12,19 @@ export default class CreateOvino extends Component {
         descripDiagn: '',
         token: '',
         editing: false,
-        _id: ''
+        _id: '',
+        ovino: '',
     }
 
     async componentDidMount() {
-        if (this.props.match.params.id) {
-            console.log(this.props.match.params.id)
+        const ovinoId = this.props.match.params.id;
+        if (ovinoId) {
+            this.setState({
+                ovino: ovinoId
+            })
+        }
+        if (ovinoId) {
+            console.log(ovinoId)
             const res = await axios.get('http://localhost:4000/api/patologias/' + this.props.match.params.id, theToken());
             console.log(res.data)
             this.setState({
@@ -25,6 +32,7 @@ export default class CreateOvino extends Component {
                 fechaDiagn: new Date(res.data.fechaDiagn),
                 tipoPatologia: res.data.tipoPatologia,
                 descripDiagn: res.data.descripDiagn,
+                ovino: res.data.ovino,
                 _id: res.data._id,
                 editing: true
             });
@@ -39,7 +47,8 @@ export default class CreateOvino extends Component {
                 nomPatologia: this.state.nomPatologia,
                 fechaDiagn: this.state.fechaDiagn,
                 tipoPatologia: this.state.tipoPatologia,
-                descripDiagn: this.state.descripDiagn
+                descripDiagn: this.state.descripDiagn,
+                ovino: this.state.ovino,
             };
             await axios.put('http://localhost:4000/api/patologias/' + this.state._id, updatedPatologia, theToken());
         } else {
@@ -48,11 +57,13 @@ export default class CreateOvino extends Component {
                 fechaDiagn: this.state.fechaDiagn,
                 tipoPatologia: this.state.tipoPatologia,
                 descripDiagn: this.state.descripDiagn,
+                ovino: this.state.ovino,
                 token: theToken()
             };
+            console.log(newPatologia);
             axios.post('http://localhost:4000/api/patologias', newPatologia, theToken());
         }
-        window.location.href = '/createPatologia';
+        //window.location.href = '/createPatologia';
 
     }
 
@@ -70,10 +81,12 @@ export default class CreateOvino extends Component {
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
-                    <h4>Registrar Ovino</h4>
+                    <h4>Registrar Patología en Ovino "{this.state.ovino}"</h4>
+                    <br></br>
                     <form onSubmit={this.onSubmit}>
                         {/* Nombre patología*/}
                         <div className="form-group">
+                            <h6>Nombre de patología</h6>
                             <input
                                 type="text"
                                 className="form-control"
@@ -83,8 +96,10 @@ export default class CreateOvino extends Component {
                                 value={this.state.nomPatologia}
                             />
                         </div>
+                        <br></br>
                         {/* Tipo de patología */}
                         <div className="form-group">
+                            <h6>Tipo</h6>
                             <input
                                 type="text"
                                 className="form-control"
@@ -94,8 +109,10 @@ export default class CreateOvino extends Component {
                                 value={this.state.tipoPatologia}
                             required/>
                         </div>
+                        <br></br>
                         {/* Descripción del diagnóstico */}
                         <div className="form-group">
+                            <h6>Descripción de diagnóstico</h6>
                             <input
                                 type="text"
                                 className="form-control"
@@ -105,6 +122,8 @@ export default class CreateOvino extends Component {
                                 value={this.state.descripDiagn}
                             />
                         </div>
+                        <br></br>
+                        <h6>Fecha de diagnóstico</h6>
                         {/* Fecha de diagnóstico */}
                         <div className="form-group">
                             <DatePicker className="form-control" selected={this.state.fechaDiagn} onChange={this.onChangeDate} />

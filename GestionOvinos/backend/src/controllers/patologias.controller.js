@@ -9,6 +9,7 @@ export const createPatologia = async (req, res) => {
         fechaDiagn,
         tipoPatologia,
         descripDiagn,
+        ovino,
         token
     } = req.body;
     const creador = userOfToken(token);
@@ -19,7 +20,8 @@ export const createPatologia = async (req, res) => {
         fechaDiagn,
         tipoPatologia,
         descripDiagn,
-        token
+        ovino,
+        creador
         //ovinos: ovinosFound.map((ovino) => ovino._id),
     });
 
@@ -45,14 +47,11 @@ export const getPatologiasOvino = async (req, res) => {
   const patologiasList = [];
   const patologias = await Patologia.find();
   patologias.map(patologia => {
-        patologia.ovinos.map(ovino => {
-          
-          if(ovino.toString() === ovinoId){
-            console.log(ovino);
-            patologiasList.push(patologia); 
-          }
+    if (patologia.ovino != undefined){
+      if (ovinoId === patologia.ovino.toString()){
+        patologiasList.push(patologia);
       }
-      );
+    }
     }
   );
   console.log(patologiasList);

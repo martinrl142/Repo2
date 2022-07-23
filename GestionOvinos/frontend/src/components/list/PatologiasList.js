@@ -49,7 +49,7 @@ export default class PatologiasList extends Component {
                                 </div>
                                 <div className="card-body">
                                     <p>
-                                        Ovino: {patologia.ovinos}
+                                        Ovino: {patologia.ovino}
                                     </p>
                                     <p>
                                         Tipo: {patologia.tipoPatologia}

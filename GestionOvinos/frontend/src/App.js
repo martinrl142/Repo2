@@ -18,7 +18,8 @@ import AsignarPadreOvino from './components/asignar/AsignarPadreOvino'
 import AsignarMadreOvino from './components/asignar/AsignarMadreOvino'
 import AsignarPaOv from './components/asignar/AsignarPaOv'
 import CreateUsEs from './components/asignar/CreateUsEs'
-import CreatePatologia from './components/create/CreatePatologia'
+import CreatePatologiaOvino from './components/create/CreatePatologiaOvino'
+import CreatePatologiaGeneral from './components/create/CreatePatologiaGeneral'
 import CreateUser from './components/create/CreateUser'
 
 // Gestion equiipo
@@ -34,7 +35,7 @@ function App() {
       <div className="container p-4">
       <Route path="/establecimientos" exact component={EstablesList} />
       <Route path="/establecimiento/:id" component={EstableOvinosList} />
-      <Route path="/ovino/:id" component={OvinoPatologiasList} />
+      <Route path="/ovino/patologias/:id" component={OvinoPatologiasList} />
       <Route path="/patologias" component={PatologiasList} />
       <Route path="/login" exact component={Login} />
       <Route path="/" exact component={Home} />
@@ -48,8 +49,10 @@ function App() {
       <Route path="/asignarMadreOvino" component={AsignarMadreOvino} />
       <Route path="/createUsEs" component={CreateUsEs} />
       <Route path="/editOvino/:id" component={CreateOvino} />
-      <Route path="/createPatologia" component={CreatePatologia} />
-      <Route path="/editPatologia/:id" component={CreatePatologia} />
+      <Route path="/createPatologia/:id" component={CreatePatologiaOvino} />
+      <Route path="/createPatologia" component={CreatePatologiaGeneral} />
+      <Route path="/editPaOv/:id" component={CreatePatologiaOvino} />
+      <Route path="/editPatologia/:id" component={CreatePatologiaGeneral} />
       <Route path="/user" component={CreateUser} />
       {/* Gestión Equiipo */}
       <Route path="/createApunte" component={CreateApunte} />

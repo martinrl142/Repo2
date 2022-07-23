@@ -84,11 +84,8 @@ export default function EstablesList () {
                                             Opciones
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item href={"/ovino/" + ovino._id}>Patologias</Dropdown.Item>
-                                            <Dropdown.Item href="/servicios">Servicios</Dropdown.Item>
-                                            <Dropdown.Item href="/createPatologia">Agregar Patología</Dropdown.Item>
-                                            <Dropdown.Item href="/createServicio">Agregar Servicio</Dropdown.Item>
-                                            <Dropdown.Item href={"/ovinos/" + ovino._id}>Sanidades</Dropdown.Item>
+                                            <Dropdown.Item href={"/ovino/patologias/" + ovino._id}>Patologias</Dropdown.Item>
+                                            <Dropdown.Item href={"/createPatologia/" + ovino._id}>Agregar Patología</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                     <Link to={"/editOvino/" + ovino._id} className="btn btn-primary">

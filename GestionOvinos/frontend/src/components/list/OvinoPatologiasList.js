@@ -1,62 +1,45 @@
-import React, { Component } from 'react'
-import 'react-datepicker/dist/react-datepicker.css'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
 import Moment from 'react-moment'
-import { Link } from 'react-router-dom'
-// import Dropdown from 'react-bootstrap/Dropdown'
-import { AiFillPlusCircle } from "react-icons/ai"
+import { AiFillPlusCircle } from "react-icons/ai";
+import Dropdown from 'react-bootstrap/Dropdown'
+import axios from 'axios';
 import theToken from '../Token';
 
-export default class OvinoPatologiasList extends Component {
-    state = {
-        patologiasList: [],
-        nombreOvino: '',
-        numCaravana: '',
-        editingOvino: false,
-        _idOvino: '',
-        nomPatologia: '',
-        fechaDiagn: new Date(),
-        tipoPatologia: '',
-        descripDiagn: '',
-        editingPatologia: false,
-        _idPatologia: '',
-    }
+export default function PatologiasList () {
+    
+    const [ovino, setsOvino] = useState([]);
+    const [patologiasList, setsPatologiasList] = useState([]);
+    const ovinoId = useParams().id;
 
-
-
-
-
-    async componentDidMount() {
-        this.getPatologiasOvino();
-        if (this.props.match.params.id) {
-            console.log(this.props.match.params.id)
-            const resOv = await axios.get('http://localhost:4000/api/ovinos/' + this.props.match.params.id, theToken());
-            console.log(resOv.data)
-            this.setState({
-                nombreOvino: resOv.data.nombre,
-                numCaravana: resOv.data.numCaravana,
-                _idOvino: resOv.data._id,
-                editingOvino: true
-            });
+    useEffect(() => {
+        const getOvino = async () => {
+            if (ovinoId) {
+                console.log(ovinoId)
+                const resOv = await axios.get('http://localhost:4000/api/ovinos/' + ovinoId, theToken());
+                setsOvino(resOv.data);
+            }
         }
-        
-        
-    }
-    getPatologiasOvino = async () => {
-        const res = await axios.get('http://localhost:4000/api/patologias/ovino/'+ this.props.match.params.id, theToken())
-        this.setState({
-            patologiasList: res.data
-        });
-        console.log(res.data);
-    }
+        const getPatologiasOvino = async () => {
+            if (ovinoId) {
+                console.log("hola");
+                const resPa = await axios.get('http://localhost:4000/api/patologias/ovino/'+ ovinoId, theToken())
+                console.log(resPa.data);
+                setsPatologiasList(resPa.data);
+            }
+        }
+        getPatologiasOvino();
+        getOvino();
+    },[]);
 
-    render() {
-        return (
-            <div className="row">
+    console.log(ovino);
+    console.log(patologiasList);
+    return (
+        <> 
+        <div className="row">
                 <div className="col-md-12 p-12">
-                    <h2 className="textBlanco">Patologias en Ovino</h2>
-                    <h4 className="textBlanco">Nombre: {this.state.nombreOvino}</h4>
-                    <h4 className="textBlanco">Número de caravana: {this.state.numCaravana}</h4>
+                    <h2 className="textBlanco">Patologias en</h2>
+                    <h1 className="textBlanco">Ovino { ovino.nombre }</h1>
 
                 </div>
                 <div className="col-md-11 p-11">
@@ -66,13 +49,13 @@ export default class OvinoPatologiasList extends Component {
                 </div> 
                 {
                     
-                    this.state.patologiasList.map(patologia => (
+                    patologiasList.map(patologia => (
                         <div className="col-md-3 p-2" key={patologia._id}>
                             <div className="card">
-                                <div className="card-header d-flex justify-content-between">
-                                    <h5>Nombre: {patologia.nomPatologia}</h5>
-                                </div>
                                 <div className="card-body">
+                                    <p>
+                                        Nombre de patologia: {patologia.nomPatologia}
+                                    </p>
                                     <p>
                                         Tipo: {patologia.tipoPatologia}
                                     </p>
@@ -84,7 +67,7 @@ export default class OvinoPatologiasList extends Component {
                                     </p>
                                 </div>
                                 <div className="card-footer d-flex justify-content-between">
-                                    <Link to={"/editPatologia/" + patologia._id} className="btn btn-primary">
+                                    <Link to={"/editPaOv/" + patologia._id} className="btn btn-primary">
                                         <i className="material-icons">
                                             border_color</i>
                                     </Link>
@@ -94,6 +77,6 @@ export default class OvinoPatologiasList extends Component {
                     ))
                 }                
             </div>
-        )
-    }
+        </>
+    );
 }

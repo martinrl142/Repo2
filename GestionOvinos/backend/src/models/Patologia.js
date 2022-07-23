@@ -11,12 +11,11 @@ const patologiaSchema = new Schema(
               type: Schema.Types.ObjectId,
               ref: "User",
             },
-        ovinos: [
+        ovino:
             {
               type: Schema.Types.ObjectId,
               ref: "Ovino",
             },
-        ],
     }, {
         timestamps: true
     });
